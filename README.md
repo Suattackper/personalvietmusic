@@ -1,4 +1,4 @@
-# 🎵 VietMusic — Web nghe nhạc Việt
+# 🎵 AnhTanMusic — Web nghe nhạc Việt
 
 Ứng dụng web nghe nhạc Việt hiện đại, responsive, xây dựng hoàn toàn phía frontend bằng **Blazor WebAssembly Standalone**. Tìm kiếm bài hát qua **YouTube Data API v3** và phát nhạc qua **YouTube IFrame Player API**. Có thể deploy miễn phí dưới dạng static website (Cloudflare Pages, GitHub Pages...).
 
@@ -56,7 +56,7 @@ Dev server được cấu hình lắng nghe trên mọi địa chỉ IP (`http:/
 3. Nếu không vào được, mở port 5098 trên Windows Firewall (chạy PowerShell **với quyền Administrator**):
 
 ```bash
-netsh advfirewall firewall add rule name="VietMusic Dev 5098" dir=in action=allow protocol=TCP localport=5098
+netsh advfirewall firewall add rule name="AnhTanMusic Dev 5098" dir=in action=allow protocol=TCP localport=5098
 ```
 
 Lưu ý:
@@ -151,7 +151,7 @@ Project đã có sẵn workflow `.github/workflows/deploy.yml` lo hết phần k
    ```bash
    git init
    git add .
-   git commit -m "VietMusic"
+   git commit -m "AnhTanMusic"
    git branch -M main
    git remote add origin https://github.com/<username>/<ten-repo>.git
    git push -u origin main

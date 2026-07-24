@@ -1,4 +1,4 @@
-name: Deploy VietMusic to GitHub Pages
+name: Deploy AnhTanMusic to GitHub Pages
 
 on:
   push:

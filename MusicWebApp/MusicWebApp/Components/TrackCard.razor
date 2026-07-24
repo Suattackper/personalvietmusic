@@ -5,7 +5,7 @@
 <div class="track-card @(IsActive ? "active" : null)"
      role="button"
      tabindex="0"
-     aria-label="Phát @Track.Title"
+     aria-label="@((IsActive && PlayerState.IsPlaying ? "Tạm dừng " : "Phát ") + Track.Title)"
      @onclick="PlayAsync"
      @onkeydown="HandleKeyDown">
     <div class="track-card-thumb">
@@ -76,7 +76,18 @@
 
     private bool IsFavorite => Favorites.IsFavorite(Track.VideoId);
 
-    private Task PlayAsync() => OnPlay.InvokeAsync(Track);
+    private Task PlayAsync()
+    {
+        // Nếu đây đã là bài đang phát: bấm để tạm dừng / phát tiếp (không nạp lại từ đầu).
+        // Nếu là bài khác: phát bài đó.
+        if (IsActive)
+        {
+            PlayerState.RequestPlayPause(!PlayerState.IsPlaying);
+            return Task.CompletedTask;
+        }
+
+        return OnPlay.InvokeAsync(Track);
+    }
 
     private Task HandleKeyDown(KeyboardEventArgs e)
         => e.Key is "Enter" or " " ? PlayAsync() : Task.CompletedTask;

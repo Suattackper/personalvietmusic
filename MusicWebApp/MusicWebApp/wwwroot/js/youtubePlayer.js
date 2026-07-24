@@ -3,7 +3,7 @@
 // qua DotNetObjectReference.
 window.vietmusicPlayer = (function () {
     const IFRAME_API_SRC = "https://www.youtube.com/iframe_api";
-    const PROGRESS_INTERVAL_MS = 1000;
+    const PROGRESS_INTERVAL_MS = 500;
     // Chất lượng thấp nhất để tiết kiệm băng thông (app chủ yếu để nghe nhạc).
     // "tiny" = 144p; YouTube hiện ưu tiên tự chọn theo kích thước player,
     // player nhỏ (~360x204) nên thực tế sẽ ở mức 144p-240p.

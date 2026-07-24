@@ -5,11 +5,19 @@
 @inject IJSRuntime JS
 @implements IAsyncDisposable
 
-@* Hộp video nhỏ nổi phía trên player — iframe YouTube duy nhất nằm ở đây,
-   luôn tồn tại trong DOM và hiển thị hợp lệ khi đang phát. *@
-<div class="player-video-box @(PlayerState.CurrentTrack is null ? "empty" : null)" style="display: none">
+@* Khung video YouTube nổi (iframe duy nhất, luôn tồn tại trong DOM).
+   Nút tròn kiểu chatbot bên cạnh để ẩn/hiện. Khi ẩn dùng opacity:0 (KHÔNG
+   display:none) để giữ kích thước hợp lệ -> nhạc vẫn phát. *@
+<div class="player-video-box @(PlayerState.CurrentTrack is null ? "empty" : null) @(_videoVisible ? null : "collapsed")">
     <div id="youtube-player-host"></div>
 </div>
+<button class="video-toggle-btn @(_videoVisible ? "is-open" : null)"
+        title="@(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
+        aria-label="@(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
+        aria-pressed="@_videoVisible"
+        @onclick="ToggleVideo">
+    <Icon Name="@(_videoVisible ? "chevron-down" : "video")" Size="22" />
+</button>
 
 <footer class="player-bar" aria-label="Trình phát nhạc">
     <div class="player-info">
@@ -94,9 +102,9 @@
             <input type="range"
                    class="progress-slider"
                    min="0"
-                   max="@FormatSliderMax()"
-                   step="1"
-                   value="@((int)DisplayTime)"
+                   max="@Inv(SliderMax)"
+                   step="any"
+                   value="@Inv(Math.Clamp(DisplayTime, 0, SliderMax))"
                    aria-label="Thanh tiến trình bài hát"
                    disabled="@(PlayerState.CurrentTrack is null || PlayerState.Duration <= 0)"
                    @oninput="OnSeekInput"
@@ -127,6 +135,7 @@
     private string? _pendingVideoId;
     private bool _isSeeking;
     private double _seekValue;
+    private bool _videoVisible = true;
 
     // YT.PlayerState
     private const int StateEnded = 0;
@@ -152,6 +161,8 @@
         PlayerState.OnPlayPauseRequested += HandlePlayPauseRequested;
         Favorites.OnChange += HandleStateChanged;
     }
+
+    private void ToggleVideo() => _videoVisible = !_videoVisible;
 
     private async Task ToggleCurrentFavoriteAsync()
     {
@@ -258,7 +269,7 @@
     private void OnSeekInput(ChangeEventArgs e)
     {
         _isSeeking = true;
-        if (double.TryParse(e.Value?.ToString(), out var value))
+        if (TryParseSlider(e.Value, out var value))
         {
             _seekValue = value;
         }
@@ -266,12 +277,20 @@
 
     private async Task OnSeekCommitAsync(ChangeEventArgs e)
     {
-        if (double.TryParse(e.Value?.ToString(), out var value) && _playerReady)
+        if (TryParseSlider(e.Value, out var value) && _playerReady)
         {
             await JS.InvokeVoidAsync("vietmusicPlayer.seekTo", value);
         }
         _isSeeking = false;
     }
+
+    // Trình duyệt gửi giá trị range dạng "31.5" (dấu chấm) — parse theo
+    // InvariantCulture để không lỗi ở máy dùng dấu phẩy thập phân.
+    private static bool TryParseSlider(object? raw, out double value)
+        => double.TryParse(raw?.ToString(),
+            System.Globalization.NumberStyles.Any,
+            System.Globalization.CultureInfo.InvariantCulture,
+            out value);
 
     private async Task OnVolumeChangedAsync(ChangeEventArgs e)
     {
@@ -285,8 +304,11 @@
         }
     }
 
-    private string FormatSliderMax()
-        => PlayerState.Duration > 0 ? ((int)PlayerState.Duration).ToString() : "100";
+    private double SliderMax => PlayerState.Duration > 0 ? PlayerState.Duration : 100;
+
+    // Render số cho thuộc tính value/max của input range (luôn dùng dấu chấm).
+    private static string Inv(double v)
+        => v.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture);
 
     private static string FormatTime(double seconds)
     {

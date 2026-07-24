@@ -1,0 +1,69 @@
+@page "/about"
+
+<PageTitle>Giới thiệu - VietMusic</PageTitle>
+
+<section class="page-section about-page">
+    <h1 class="page-heading">
+        <span class="page-heading-icon" aria-hidden="true"><Icon Name="info" Size="22" /></span>
+        Giới thiệu VietMusic
+    </h1>
+
+    <div class="about-hero">
+        <span class="about-hero-icon" aria-hidden="true">🎵</span>
+        <p>
+            <strong>VietMusic</strong> là web nghe nhạc Việt miễn phí, tìm kiếm bằng
+            YouTube và phát trực tiếp qua trình phát YouTube nhúng. Toàn bộ chạy trên
+            trình duyệt của bạn — không cần đăng nhập, dữ liệu yêu thích/hàng đợi lưu
+            ngay trên máy.
+        </p>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-card">
+            <h2>✨ Tính năng chính</h2>
+            <ul>
+                <li>Tìm kiếm bài hát, nghệ sĩ theo thời gian thực.</li>
+                <li>Playlist có sẵn — bấm là phát cả list ngay.</li>
+                <li>Yêu thích, Hàng đợi, Nghe gần đây (lưu trên máy).</li>
+                <li>Trình phát: phát/dừng, chuyển bài, lặp, phát ngẫu nhiên, tua, âm lượng.</li>
+                <li>Giao diện sáng/tối, responsive cho điện thoại.</li>
+            </ul>
+        </div>
+
+        <div class="about-card">
+            <h2>📖 Cách dùng</h2>
+            <ol>
+                <li><strong>Nghe nhanh:</strong> vào Trang chủ hoặc mục Playlist, bấm một playlist là phát luôn.</li>
+                <li><strong>Tìm bài:</strong> gõ tên bài/ca sĩ ở ô tìm kiếm trên đầu, nhấn Enter.</li>
+                <li><strong>Phát:</strong> bấm vào một thẻ bài hát để phát; bấm lại vào bài đang phát để tạm dừng / phát tiếp.</li>
+                <li><strong>Yêu thích:</strong> bấm biểu tượng ♥ trên bài hát hoặc trên thanh phát.</li>
+                <li><strong>Hàng đợi:</strong> bấm dấu ＋ để thêm bài vào hàng đợi.</li>
+                <li><strong>Khung video:</strong> dùng nút tròn góc phải dưới để ẩn/hiện khung video YouTube.</li>
+                <li><strong>Đổi giao diện:</strong> bấm biểu tượng mặt trời/mặt trăng trên đầu.</li>
+            </ol>
+        </div>
+
+        <div class="about-card">
+            <h2>🛠️ Công nghệ</h2>
+            <ul>
+                <li>Blazor WebAssembly (.NET 8), chạy 100% phía trình duyệt.</li>
+                <li>YouTube Data API v3 để tìm kiếm.</li>
+                <li>YouTube IFrame Player API để phát nhạc.</li>
+                <li>localStorage để lưu yêu thích, hàng đợi, lịch sử, giao diện.</li>
+            </ul>
+        </div>
+
+        <div class="about-card">
+            <h2>⚠️ Lưu ý &amp; giới hạn</h2>
+            <ul>
+                <li>Nhạc phát qua YouTube nên <strong>có thể có quảng cáo</strong> (tùy video), không thể tắt.</li>
+                <li>Một số video bị chặn nhúng sẽ không phát được — app tự chuyển bài kế tiếp.</li>
+                <li>Trên điện thoại, phát nền khi khóa màn hình/đổi tab bị hạn chế bởi YouTube.</li>
+                <li>Cần có kết nối mạng để nghe.</li>
+                <li>Dữ liệu lưu theo trình duyệt — xóa dữ liệu duyệt web sẽ mất.</li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="about-footer">Chúc bạn nghe nhạc vui vẻ! 💜</p>
+</section>

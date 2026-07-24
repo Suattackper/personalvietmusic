@@ -619,6 +619,74 @@ button {
 }
 
 /* ==========================================================================
+   Trang Giới thiệu (About)
+   ========================================================================== */
+
+.about-hero {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+    border-radius: 16px;
+    background: var(--accent-gradient);
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.about-hero-icon {
+    font-size: 2.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.about-hero p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.about-hero strong {
+    font-weight: 700;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+}
+
+.about-card h2 {
+    margin: 0 0 12px;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.about-card ul,
+.about-card ol {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+.about-card li {
+    margin-bottom: 4px;
+}
+
+.about-footer {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 24px;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
    Danh sách bài hát (cards)
    ========================================================================== */
 
@@ -938,7 +1006,9 @@ button {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    flex: 1;
+    /* Không dùng flex:1 để nút yêu thích nằm sát ngay sau tên bài,
+       không bị đẩy ra giữa thanh player. */
+    flex: 0 1 auto;
 }
 
 .player-fav-button {
@@ -1068,15 +1138,15 @@ input[type="range"]:disabled {
     opacity: 0.5;
 }
 
-/* Hộp video YouTube nổi phía trên player.
-   YouTube yêu cầu player nhúng tối thiểu 200x200px — nhỏ hơn sẽ bị YouTube
-   coi là "player ẩn" và tự tạm dừng phát khi tab mất focus.
-   Không được dùng display:none / visibility:hidden / opacity:0 / kích thước 1px
-   hoặc đẩy ra ngoài màn hình. */
+/* Khung video YouTube nổi phía trên player, đặt ngay trên nút toggle.
+   YouTube yêu cầu player nhúng tối thiểu 200x200px — nhỏ hơn sẽ bị coi là
+   "player ẩn" và tự tạm dừng khi tab mất focus.
+   Khi người dùng ẩn: dùng .collapsed (opacity:0) chứ KHÔNG display:none,
+   để iframe vẫn giữ kích thước hợp lệ và nhạc tiếp tục phát. */
 .player-video-box {
     position: fixed;
-    right: 16px;
-    bottom: calc(var(--player-height) + 14px);
+    right: 20px;
+    bottom: calc(var(--player-height) + 76px);
     /* 360x204 trừ border 1px mỗi cạnh => iframe bên trong 358x202, vẫn >= 200x200 */
     width: 360px;
     height: 204px;
@@ -1086,10 +1156,45 @@ input[type="range"]:disabled {
     box-shadow: var(--shadow);
     background: #000;
     z-index: 105;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .player-video-box.empty {
     border-style: dashed;
+}
+
+.player-video-box.collapsed {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    pointer-events: none;
+}
+
+/* Nút tròn kiểu chatbot để ẩn/hiện khung video */
+.video-toggle-btn {
+    position: fixed;
+    right: 20px;
+    bottom: calc(var(--player-height) + 18px);
+    z-index: 106;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.video-toggle-btn:hover {
+    transform: scale(1.08);
+}
+
+.video-toggle-btn:active {
+    transform: scale(0.94);
 }
 
 .player-video-box iframe,
@@ -1485,10 +1590,17 @@ input[type="range"]:disabled {
 
     /* Vẫn giữ iframe tối thiểu 200x200 trên mobile để YouTube không coi là player ẩn */
     .player-video-box {
-        width: min(360px, calc(100vw - 16px));
+        width: min(320px, calc(100vw - 24px));
         height: 204px;
-        right: 8px;
+        right: 12px;
+        bottom: calc(var(--player-height) + 66px);
+    }
+
+    .video-toggle-btn {
+        right: 12px;
         bottom: calc(var(--player-height) + 10px);
+        width: 46px;
+        height: 46px;
     }
 
     .queue-item-thumb {

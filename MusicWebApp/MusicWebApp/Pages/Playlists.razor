@@ -1,0 +1,41 @@
+@page "/playlists"
+@inject PlaylistService PlaylistSvc
+
+<PageTitle>Playlist - VietMusic</PageTitle>
+
+<section class="page-section">
+    <h1 class="page-heading">
+        <span class="page-heading-icon" aria-hidden="true"><Icon Name="disc" Size="22" /></span>
+        Playlist có sẵn
+    </h1>
+    <p class="page-subtitle">Bấm vào một playlist để phát ngay — không tốn quota tìm kiếm.</p>
+
+    @if (_playlists is null)
+    {
+        <LoadingIndicator Text="Đang tải playlist..." />
+    }
+    else if (_playlists.Count == 0)
+    {
+        <EmptyState IconName="disc"
+                    Title="Chưa có playlist"
+                    Description="Không tìm thấy dữ liệu playlist (data/playlists.json)." />
+    }
+    else
+    {
+        <div class="playlist-grid">
+            @foreach (var playlist in _playlists)
+            {
+                <PlaylistCard Playlist="playlist" @key="playlist.Id" />
+            }
+        </div>
+    }
+</section>
+
+@code {
+    private IReadOnlyList<CuratedPlaylist>? _playlists;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _playlists = await PlaylistSvc.GetPlaylistsAsync();
+    }
+}

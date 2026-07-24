@@ -1,0 +1,397 @@
+@inject MusicPlayerState PlayerState
+@inject RecentlyPlayedService Recent
+@inject FavoritesService Favorites
+@inject ToastService Toasts
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+@* Hộp video nhỏ nổi phía trên player — iframe YouTube duy nhất nằm ở đây,
+   luôn tồn tại trong DOM và hiển thị hợp lệ khi đang phát. *@
+<div class="player-video-box @(PlayerState.CurrentTrack is null ? "empty" : null)" style="display: none">
+    <div id="youtube-player-host"></div>
+</div>
+
+<footer class="player-bar" aria-label="Trình phát nhạc">
+    <div class="player-info">
+        @if (PlayerState.CurrentTrack is not null)
+        {
+            @if (!string.IsNullOrEmpty(PlayerState.CurrentTrack.ThumbnailUrl))
+            {
+                <img class="player-thumb"
+                     src="@PlayerState.CurrentTrack.ThumbnailUrl"
+                     alt="Ảnh bìa @PlayerState.CurrentTrack.Title" />
+            }
+            <div class="player-track-meta">
+                <span class="player-track-title" title="@PlayerState.CurrentTrack.Title">
+                    @PlayerState.CurrentTrack.Title
+                </span>
+                <span class="player-track-artist" title="@PlayerState.CurrentTrack.Artist">
+                    @PlayerState.CurrentTrack.Artist
+                </span>
+            </div>
+            <button class="icon-button player-fav-button @(IsCurrentFavorite ? "is-favorite" : null)"
+                    title="@(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
+                    aria-label="@(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
+                    @onclick="ToggleCurrentFavoriteAsync">
+                <Icon Name="@(IsCurrentFavorite ? "heart-filled" : "heart")" Size="18" />
+            </button>
+        }
+        else
+        {
+            <div class="player-thumb player-thumb-placeholder" aria-hidden="true">
+                <Icon Name="music" Size="24" />
+            </div>
+            <div class="player-track-meta">
+                <span class="player-track-title muted">Chưa phát bài nào</span>
+                <span class="player-track-artist muted">Chọn một bài hát để bắt đầu</span>
+            </div>
+        }
+    </div>
+
+    <div class="player-center">
+        <div class="player-controls">
+            <button class="icon-button @(PlayerState.IsShuffle ? "control-active" : null)"
+                    title="@(PlayerState.IsShuffle ? "Tắt phát ngẫu nhiên" : "Bật phát ngẫu nhiên")"
+                    aria-label="@(PlayerState.IsShuffle ? "Tắt phát ngẫu nhiên" : "Bật phát ngẫu nhiên")"
+                    aria-pressed="@PlayerState.IsShuffle"
+                    @onclick="PlayerState.ToggleShuffle">
+                <Icon Name="shuffle" Size="18" />
+            </button>
+            <button class="icon-button"
+                    title="Bài trước"
+                    aria-label="Bài trước"
+                    disabled="@(PlayerState.Queue.Count == 0)"
+                    @onclick="PlayPrevious">
+                <Icon Name="previous" Size="20" />
+            </button>
+            <button class="play-button"
+                    title="@(PlayerState.IsPlaying ? "Tạm dừng" : "Phát")"
+                    aria-label="@(PlayerState.IsPlaying ? "Tạm dừng" : "Phát")"
+                    disabled="@(PlayerState.CurrentTrack is null)"
+                    @onclick="TogglePlayPause">
+                <Icon Name="@(PlayerState.IsPlaying ? "pause" : "play")" Size="22" />
+            </button>
+            <button class="icon-button"
+                    title="Bài tiếp theo"
+                    aria-label="Bài tiếp theo"
+                    disabled="@(PlayerState.Queue.Count == 0)"
+                    @onclick="PlayNext">
+                <Icon Name="next" Size="20" />
+            </button>
+            <button class="icon-button repeat-button @(PlayerState.RepeatMode != RepeatMode.None ? "control-active" : null)"
+                    title="@RepeatTitle"
+                    aria-label="@RepeatTitle"
+                    @onclick="PlayerState.ChangeRepeatMode">
+                <Icon Name="repeat" Size="18" />
+                @if (PlayerState.RepeatMode == RepeatMode.One)
+                {
+                    <span class="repeat-one-badge" aria-hidden="true">1</span>
+                }
+            </button>
+        </div>
+        <div class="player-progress">
+            <span class="player-time" aria-label="Thời gian hiện tại">@FormatTime(DisplayTime)</span>
+            <input type="range"
+                   class="progress-slider"
+                   min="0"
+                   max="@FormatSliderMax()"
+                   step="1"
+                   value="@((int)DisplayTime)"
+                   aria-label="Thanh tiến trình bài hát"
+                   disabled="@(PlayerState.CurrentTrack is null || PlayerState.Duration <= 0)"
+                   @oninput="OnSeekInput"
+                   @onchange="OnSeekCommitAsync" />
+            <span class="player-time" aria-label="Tổng thời lượng">@FormatTime(PlayerState.Duration)</span>
+        </div>
+    </div>
+
+    <div class="player-extras">
+        <span class="volume-icon" aria-hidden="true">
+            <Icon Name="@(PlayerState.Volume == 0 ? "volume-mute" : "volume")" Size="18" />
+        </span>
+        <input type="range"
+               class="volume-slider"
+               min="0"
+               max="100"
+               step="1"
+               value="@PlayerState.Volume"
+               aria-label="Âm lượng"
+               @oninput="OnVolumeChangedAsync" />
+    </div>
+</footer>
+
+@code {
+    private DotNetObjectReference<MusicPlayer>? _dotNetRef;
+    private bool _playerReady;
+    private string? _loadedVideoId;
+    private string? _pendingVideoId;
+    private bool _isSeeking;
+    private double _seekValue;
+
+    // YT.PlayerState
+    private const int StateEnded = 0;
+    private const int StatePlaying = 1;
+    private const int StatePaused = 2;
+
+    private double DisplayTime => _isSeeking ? _seekValue : PlayerState.CurrentTime;
+
+    private string RepeatTitle => PlayerState.RepeatMode switch
+    {
+        RepeatMode.None => "Bật lặp lại danh sách",
+        RepeatMode.All => "Bật lặp lại một bài",
+        _ => "Tắt lặp lại"
+    };
+
+    private bool IsCurrentFavorite =>
+        PlayerState.CurrentTrack is not null && Favorites.IsFavorite(PlayerState.CurrentTrack.VideoId);
+
+    protected override void OnInitialized()
+    {
+        PlayerState.OnChange += HandleStateChanged;
+        PlayerState.OnTrackChanged += HandleTrackChanged;
+        PlayerState.OnPlayPauseRequested += HandlePlayPauseRequested;
+        Favorites.OnChange += HandleStateChanged;
+    }
+
+    private async Task ToggleCurrentFavoriteAsync()
+    {
+        var track = PlayerState.CurrentTrack;
+        if (track is null)
+        {
+            return;
+        }
+
+        var added = await Favorites.ToggleFavoriteAsync(track);
+        Toasts.ShowSuccess(added
+            ? $"Đã thêm \"{track.Title}\" vào yêu thích."
+            : $"Đã xóa \"{track.Title}\" khỏi yêu thích.");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _dotNetRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("vietmusicPlayer.initializePlayer", "youtube-player-host", _dotNetRef);
+        }
+    }
+
+    private void HandleStateChanged()
+    {
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleTrackChanged(MusicTrack track)
+    {
+        _ = InvokeAsync(async () =>
+        {
+            await LoadTrackAsync(track);
+            _ = Recent.AddAsync(track);
+        });
+    }
+
+    private void HandlePlayPauseRequested(bool play)
+    {
+        _ = InvokeAsync(async () =>
+        {
+            if (!_playerReady)
+            {
+                return;
+            }
+            await JS.InvokeVoidAsync(play ? "vietmusicPlayer.playVideo" : "vietmusicPlayer.pauseVideo");
+        });
+    }
+
+    private async Task LoadTrackAsync(MusicTrack track)
+    {
+        if (!_playerReady)
+        {
+            // Player chưa sẵn sàng — ghi nhớ để nạp khi onReady.
+            _pendingVideoId = track.VideoId;
+            return;
+        }
+
+        if (_loadedVideoId == track.VideoId)
+        {
+            // Bấm phát lại cùng một bài: phát tiếp thay vì nạp lại video.
+            await JS.InvokeVoidAsync("vietmusicPlayer.playVideo");
+            return;
+        }
+
+        _loadedVideoId = track.VideoId;
+        await JS.InvokeVoidAsync("vietmusicPlayer.loadVideo", track.VideoId);
+    }
+
+    private async Task TogglePlayPause()
+    {
+        if (PlayerState.CurrentTrack is null || !_playerReady)
+        {
+            return;
+        }
+
+        if (PlayerState.IsPlaying)
+        {
+            await JS.InvokeVoidAsync("vietmusicPlayer.pauseVideo");
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("vietmusicPlayer.playVideo");
+        }
+    }
+
+    private void PlayNext()
+    {
+        if (!PlayerState.PlayNext())
+        {
+            Toasts.ShowInfo("Không có bài tiếp theo trong hàng đợi.");
+        }
+    }
+
+    private void PlayPrevious()
+    {
+        if (!PlayerState.PlayPrevious())
+        {
+            Toasts.ShowInfo("Không có bài trước đó trong hàng đợi.");
+        }
+    }
+
+    private void OnSeekInput(ChangeEventArgs e)
+    {
+        _isSeeking = true;
+        if (double.TryParse(e.Value?.ToString(), out var value))
+        {
+            _seekValue = value;
+        }
+    }
+
+    private async Task OnSeekCommitAsync(ChangeEventArgs e)
+    {
+        if (double.TryParse(e.Value?.ToString(), out var value) && _playerReady)
+        {
+            await JS.InvokeVoidAsync("vietmusicPlayer.seekTo", value);
+        }
+        _isSeeking = false;
+    }
+
+    private async Task OnVolumeChangedAsync(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var volume))
+        {
+            PlayerState.SetVolume(volume);
+            if (_playerReady)
+            {
+                await JS.InvokeVoidAsync("vietmusicPlayer.setVolume", volume);
+            }
+        }
+    }
+
+    private string FormatSliderMax()
+        => PlayerState.Duration > 0 ? ((int)PlayerState.Duration).ToString() : "100";
+
+    private static string FormatTime(double seconds)
+    {
+        if (seconds <= 0 || double.IsNaN(seconds))
+        {
+            return "0:00";
+        }
+
+        var time = TimeSpan.FromSeconds(seconds);
+        return time.TotalHours >= 1
+            ? $"{(int)time.TotalHours}:{time.Minutes:00}:{time.Seconds:00}"
+            : $"{time.Minutes}:{time.Seconds:00}";
+    }
+
+    [JSInvokable]
+    public async Task OnPlayerReady()
+    {
+        _playerReady = true;
+        await JS.InvokeVoidAsync("vietmusicPlayer.setVolume", PlayerState.Volume);
+
+        if (_pendingVideoId is not null)
+        {
+            _loadedVideoId = _pendingVideoId;
+            _pendingVideoId = null;
+            await JS.InvokeVoidAsync("vietmusicPlayer.loadVideo", _loadedVideoId);
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnPlayerStateChanged(int state)
+    {
+        switch (state)
+        {
+            case StatePlaying:
+                PlayerState.SetPlaying(true);
+                break;
+            case StatePaused:
+                PlayerState.SetPlaying(false);
+                break;
+            case StateEnded:
+                await HandleTrackEndedAsync();
+                break;
+        }
+    }
+
+    private async Task HandleTrackEndedAsync()
+    {
+        if (PlayerState.RepeatMode == RepeatMode.One)
+        {
+            await JS.InvokeVoidAsync("vietmusicPlayer.seekTo", 0d);
+            await JS.InvokeVoidAsync("vietmusicPlayer.playVideo");
+            return;
+        }
+
+        if (!PlayerState.PlayNext())
+        {
+            PlayerState.SetPlaying(false);
+        }
+    }
+
+    [JSInvokable]
+    public void OnPlayerError(int errorCode)
+    {
+        var message = errorCode switch
+        {
+            101 or 150 => "Video này không cho phép phát nhúng.",
+            100 => "Video không tồn tại hoặc đã bị xóa.",
+            2 => "Video không hợp lệ.",
+            _ => "Không phát được video này."
+        };
+
+        var trackTitle = PlayerState.CurrentTrack?.Title;
+        Toasts.ShowError(trackTitle is null ? message : $"{message} ({trackTitle})");
+
+        // Tự chuyển bài tiếp theo nếu có.
+        if (!PlayerState.PlayNext())
+        {
+            PlayerState.SetPlaying(false);
+        }
+    }
+
+    [JSInvokable]
+    public void OnPlayerProgress(double currentTime, double duration)
+    {
+        PlayerState.SetProgress(currentTime, duration);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        PlayerState.OnChange -= HandleStateChanged;
+        PlayerState.OnTrackChanged -= HandleTrackChanged;
+        PlayerState.OnPlayPauseRequested -= HandlePlayPauseRequested;
+        Favorites.OnChange -= HandleStateChanged;
+
+        try
+        {
+            await JS.InvokeVoidAsync("vietmusicPlayer.destroyPlayer");
+        }
+        catch (JSException)
+        {
+        }
+        catch (JSDisconnectedException)
+        {
+        }
+
+        _dotNetRef?.Dispose();
+    }
+}

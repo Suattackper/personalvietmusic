@@ -1,0 +1,65 @@
+@inherits LayoutComponentBase
+@inject MusicPlayerState PlayerState
+@inject FavoritesService Favorites
+@inject RecentlyPlayedService Recent
+@inject NavigationManager Nav
+@implements IDisposable
+
+<div class="app-shell">
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+
+    <NavMenu IsOpen="_navOpen" OnClose="CloseNav" />
+
+    <div class="app-main">
+        <header class="app-header">
+            <button class="icon-button menu-toggle"
+                    title="Mở menu điều hướng"
+                    aria-label="Mở menu điều hướng"
+                    @onclick="ToggleNav">
+                <Icon Name="menu" Size="22" />
+            </button>
+            <SearchBox />
+            <ThemeToggle />
+        </header>
+
+        <main id="main-content" class="app-content">
+            @Body
+        </main>
+    </div>
+
+    <MusicPlayer />
+    <ToastContainer />
+</div>
+
+@code {
+    private bool _navOpen;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Nav.LocationChanged += HandleLocationChanged;
+
+        // Khôi phục dữ liệu người dùng từ localStorage khi app khởi động.
+        await Favorites.InitializeAsync();
+        await Recent.InitializeAsync();
+        await PlayerState.InitializeAsync();
+    }
+
+    private void HandleLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        // Đóng drawer khi điều hướng (mobile).
+        if (_navOpen)
+        {
+            _navOpen = false;
+            _ = InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void ToggleNav() => _navOpen = !_navOpen;
+
+    private void CloseNav() => _navOpen = false;
+
+    public void Dispose()
+    {
+        Nav.LocationChanged -= HandleLocationChanged;
+    }
+}

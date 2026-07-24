@@ -1,0 +1,54 @@
+@page "/queue"
+@inject MusicPlayerState PlayerState
+@inject ToastService Toasts
+@implements IDisposable
+
+<PageTitle>Hàng đợi - VietMusic</PageTitle>
+
+<section class="page-section">
+    <div class="page-heading-row">
+        <h1 class="page-heading">
+            <span class="page-heading-icon" aria-hidden="true"><Icon Name="queue" Size="22" /></span>
+            Hàng đợi phát
+        </h1>
+        @if (PlayerState.Queue.Count > 0)
+        {
+            <button class="button-secondary" @onclick="ClearQueue">
+                <Icon Name="trash" Size="16" />
+                Xóa toàn bộ
+            </button>
+        }
+    </div>
+
+    @if (PlayerState.Queue.Count == 0)
+    {
+        <EmptyState IconName="queue"
+                    Title="Hàng đợi trống"
+                    Description="Thêm bài hát vào hàng đợi từ kết quả tìm kiếm hoặc danh sách yêu thích." />
+    }
+    else
+    {
+        <p class="page-subtitle">@PlayerState.Queue.Count bài hát trong hàng đợi</p>
+        <QueuePanel />
+    }
+</section>
+
+@code {
+    protected override void OnInitialized()
+    {
+        PlayerState.OnChange += HandleChanged;
+    }
+
+    private void HandleChanged() => _ = InvokeAsync(StateHasChanged);
+
+    private void ClearQueue()
+    {
+        PlayerState.ClearQueue();
+        Toasts.ShowInfo("Đã xóa toàn bộ hàng đợi.");
+    }
+
+    public void Dispose()
+    {
+        PlayerState.OnChange -= HandleChanged;
+    }
+}

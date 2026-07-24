@@ -1,0 +1,49 @@
+@* Sidebar điều hướng: cố định trên desktop, drawer trên mobile. *@
+
+@if (IsOpen)
+{
+    <div class="sidebar-overlay" @onclick="CloseAsync" aria-hidden="true"></div>
+}
+
+<aside class="sidebar @(IsOpen ? "open" : null)" aria-label="Điều hướng chính">
+    <a class="sidebar-logo" href="" title="VietMusic - Trang chủ">
+        <span class="sidebar-logo-icon" aria-hidden="true">
+            <Icon Name="music" Size="26" />
+        </span>
+        <span class="sidebar-logo-text">VietMusic</span>
+    </a>
+
+    <nav class="sidebar-nav">
+        <NavLink class="sidebar-link" href="" Match="NavLinkMatch.All">
+            <Icon Name="home" Size="20" />
+            <span class="sidebar-link-text">Trang chủ</span>
+        </NavLink>
+        <NavLink class="sidebar-link" href="search">
+            <Icon Name="search" Size="20" />
+            <span class="sidebar-link-text">Tìm kiếm</span>
+        </NavLink>
+        <NavLink class="sidebar-link" href="playlists">
+            <Icon Name="disc" Size="20" />
+            <span class="sidebar-link-text">Playlist</span>
+        </NavLink>
+        <NavLink class="sidebar-link" href="favorites">
+            <Icon Name="heart" Size="20" />
+            <span class="sidebar-link-text">Yêu thích</span>
+        </NavLink>
+        <NavLink class="sidebar-link" href="recent">
+            <Icon Name="clock" Size="20" />
+            <span class="sidebar-link-text">Nghe gần đây</span>
+        </NavLink>
+        <NavLink class="sidebar-link" href="queue">
+            <Icon Name="queue" Size="20" />
+            <span class="sidebar-link-text">Hàng đợi</span>
+        </NavLink>
+    </nav>
+</aside>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private Task CloseAsync() => OnClose.InvokeAsync();
+}

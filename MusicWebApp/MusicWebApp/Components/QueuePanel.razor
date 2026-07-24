@@ -1,0 +1,69 @@
+@inject MusicPlayerState PlayerState
+@inject ToastService Toasts
+@implements IDisposable
+
+<ul class="queue-list">
+    @for (var i = 0; i < PlayerState.Queue.Count; i++)
+    {
+        var index = i;
+        var track = PlayerState.Queue[i];
+        var isCurrent = PlayerState.CurrentTrack?.VideoId == track.VideoId && PlayerState.CurrentIndex == index;
+
+        <li class="queue-item @(isCurrent ? "active" : null)" @key="@($"{track.VideoId}-{index}")">
+            <span class="queue-item-index" aria-hidden="true">
+                @if (isCurrent)
+                {
+                    <span class="eq-bars" aria-hidden="true">
+                        <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+                    </span>
+                }
+                else
+                {
+                    @(index + 1)
+                }
+            </span>
+            @if (!string.IsNullOrEmpty(track.ThumbnailUrl))
+            {
+                <img class="queue-item-thumb" src="@track.ThumbnailUrl" alt="Ảnh bìa @track.Title" loading="lazy" />
+            }
+            <div class="queue-item-meta">
+                <span class="queue-item-title" title="@track.Title">@track.Title</span>
+                <span class="queue-item-artist" title="@track.Artist">@track.Artist</span>
+            </div>
+            <div class="queue-item-actions">
+                <button class="icon-button"
+                        title="Phát bài này"
+                        aria-label="Phát @track.Title"
+                        @onclick="() => PlayerState.PlayTrackAt(index)">
+                    <Icon Name="play" Size="16" />
+                </button>
+                <button class="icon-button"
+                        title="Xóa khỏi hàng đợi"
+                        aria-label="Xóa @track.Title khỏi hàng đợi"
+                        @onclick="() => Remove(track)">
+                    <Icon Name="close" Size="16" />
+                </button>
+            </div>
+        </li>
+    }
+</ul>
+
+@code {
+    protected override void OnInitialized()
+    {
+        PlayerState.OnChange += HandleChanged;
+    }
+
+    private void HandleChanged() => _ = InvokeAsync(StateHasChanged);
+
+    private void Remove(MusicTrack track)
+    {
+        PlayerState.RemoveFromQueue(track.VideoId);
+        Toasts.ShowInfo($"Đã xóa \"{track.Title}\" khỏi hàng đợi.");
+    }
+
+    public void Dispose()
+    {
+        PlayerState.OnChange -= HandleChanged;
+    }
+}

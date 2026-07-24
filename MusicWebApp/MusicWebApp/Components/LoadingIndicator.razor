@@ -1,0 +1,8 @@
+<div class="loading-indicator" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <span>@Text</span>
+</div>
+
+@code {
+    [Parameter] public string Text { get; set; } = "Đang tải...";
+}

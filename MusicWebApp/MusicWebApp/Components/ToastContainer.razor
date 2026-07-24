@@ -1,0 +1,53 @@
+@inject ToastService Toasts
+@implements IDisposable
+
+<div class="toast-container" aria-live="polite" aria-atomic="false">
+    @foreach (var toast in _toasts)
+    {
+        <div class="toast toast-@toast.Level.ToString().ToLowerInvariant()" role="alert">
+            <span class="toast-message">@toast.Message</span>
+            <button class="toast-close" title="Đóng thông báo" aria-label="Đóng thông báo"
+                    @onclick="() => Remove(toast.Id)">
+                <Icon Name="close" Size="16" />
+            </button>
+        </div>
+    }
+</div>
+
+@code {
+    private const int AutoDismissMs = 5000;
+
+    private readonly List<ToastMessage> _toasts = new();
+
+    protected override void OnInitialized()
+    {
+        Toasts.OnToast += HandleToast;
+    }
+
+    private void HandleToast(ToastMessage toast)
+    {
+        _toasts.Add(toast);
+        StateHasChanged();
+        _ = AutoDismissAsync(toast.Id);
+    }
+
+    private async Task AutoDismissAsync(Guid id)
+    {
+        await Task.Delay(AutoDismissMs);
+        Remove(id);
+    }
+
+    private void Remove(Guid id)
+    {
+        var removed = _toasts.RemoveAll(t => t.Id == id) > 0;
+        if (removed)
+        {
+            StateHasChanged();
+        }
+    }
+
+    public void Dispose()
+    {
+        Toasts.OnToast -= HandleToast;
+    }
+}

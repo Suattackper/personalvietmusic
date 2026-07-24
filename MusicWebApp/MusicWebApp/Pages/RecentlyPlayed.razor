@@ -1,0 +1,54 @@
+@page "/recent"
+@inject RecentlyPlayedService Recent
+@inject ToastService Toasts
+@implements IDisposable
+
+<PageTitle>Nghe gần đây - VietMusic</PageTitle>
+
+<section class="page-section">
+    <div class="page-heading-row">
+        <h1 class="page-heading">
+            <span class="page-heading-icon" aria-hidden="true"><Icon Name="clock" Size="22" /></span>
+            Nghe gần đây
+        </h1>
+        @if (Recent.History.Count > 0)
+        {
+            <button class="button-secondary" @onclick="ClearHistoryAsync">
+                <Icon Name="trash" Size="16" />
+                Xóa lịch sử
+            </button>
+        }
+    </div>
+
+    @if (Recent.History.Count == 0)
+    {
+        <EmptyState IconName="clock"
+                    Title="Chưa có lịch sử nghe"
+                    Description="Các bài hát bạn phát sẽ xuất hiện ở đây (tối đa 50 bài)." />
+    }
+    else
+    {
+        <p class="page-subtitle">@Recent.History.Count bài hát đã nghe gần đây</p>
+        <TrackList Tracks="Recent.History" />
+    }
+</section>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Recent.OnChange += HandleChanged;
+    }
+
+    private void HandleChanged() => _ = InvokeAsync(StateHasChanged);
+
+    private async Task ClearHistoryAsync()
+    {
+        await Recent.ClearAsync();
+        Toasts.ShowInfo("Đã xóa lịch sử nghe.");
+    }
+
+    public void Dispose()
+    {
+        Recent.OnChange -= HandleChanged;
+    }
+}

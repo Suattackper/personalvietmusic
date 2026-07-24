@@ -1,0 +1,35 @@
+@inject NavigationManager Nav
+
+<form class="search-box" role="search" @onsubmit="Submit" @onsubmit:preventDefault="true">
+    <span class="search-box-icon" aria-hidden="true">
+        <Icon Name="search" Size="18" />
+    </span>
+    <input type="search"
+           class="search-box-input"
+           placeholder="Tìm bài hát, nghệ sĩ..."
+           aria-label="Tìm kiếm bài hát"
+           @bind="_keyword"
+           @bind:event="oninput" />
+    <button type="submit"
+            class="search-box-button"
+            title="Tìm kiếm"
+            aria-label="Tìm kiếm"
+            disabled="@(string.IsNullOrWhiteSpace(_keyword))">
+        Tìm
+    </button>
+</form>
+
+@code {
+    private string _keyword = string.Empty;
+
+    private void Submit()
+    {
+        var keyword = _keyword?.Trim();
+        if (string.IsNullOrEmpty(keyword))
+        {
+            return;
+        }
+
+        Nav.NavigateTo($"search?q={Uri.EscapeDataString(keyword)}");
+    }
+}

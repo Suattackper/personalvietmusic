@@ -1,0 +1,174 @@
+@page "/search"
+@inject IYouTubeMusicService YouTube
+@inject ToastService Toasts
+@implements IDisposable
+
+<PageTitle>Tìm kiếm - VietMusic</PageTitle>
+
+<section class="page-section">
+    @if (string.IsNullOrEmpty(_currentKeyword))
+    {
+        <h1 class="page-heading">
+            <span class="page-heading-icon" aria-hidden="true"><Icon Name="search" Size="22" /></span>
+            Tìm kiếm
+        </h1>
+        <EmptyState IconName="search"
+                    Title="Bắt đầu tìm kiếm"
+                    Description="Nhập tên bài hát hoặc nghệ sĩ vào ô tìm kiếm phía trên." />
+    }
+    else
+    {
+        <h1 class="page-heading">
+            <span class="page-heading-icon" aria-hidden="true"><Icon Name="search" Size="22" /></span>
+            Kết quả cho "@_currentKeyword"
+        </h1>
+
+        @if (_isLoading)
+        {
+            <LoadingIndicator Text="Đang tìm kiếm..." />
+        }
+        else if (_errorMessage is not null)
+        {
+            <EmptyState IconName="close" Title="Đã xảy ra lỗi" Description="@_errorMessage">
+                <button class="button-primary" @onclick="RetryAsync">Thử lại</button>
+            </EmptyState>
+        }
+        else if (_tracks.Count == 0)
+        {
+            <EmptyState IconName="search"
+                        Title="Không tìm thấy kết quả"
+                        Description="Không có bài hát nào khớp với từ khóa. Hãy thử từ khóa khác." />
+        }
+        else
+        {
+            <TrackList Tracks="_tracks" />
+
+            @if (_nextPageToken is not null)
+            {
+                <div class="load-more">
+                    @if (_isLoadingMore)
+                    {
+                        <LoadingIndicator Text="Đang tải thêm..." />
+                    }
+                    else
+                    {
+                        <button class="button-secondary" @onclick="LoadMoreAsync">Tải thêm kết quả</button>
+                    }
+                </div>
+            }
+        }
+    }
+</section>
+
+@code {
+    [SupplyParameterFromQuery(Name = "q")]
+    public string? Query { get; set; }
+
+    private readonly List<MusicTrack> _tracks = new();
+    private string _currentKeyword = string.Empty;
+    private string? _nextPageToken;
+    private string? _errorMessage;
+    private bool _isLoading;
+    private bool _isLoadingMore;
+    private CancellationTokenSource? _cts;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var keyword = Query?.Trim() ?? string.Empty;
+        if (keyword == _currentKeyword)
+        {
+            return;
+        }
+
+        _currentKeyword = keyword;
+        if (!string.IsNullOrEmpty(keyword))
+        {
+            await SearchAsync();
+        }
+    }
+
+    private async Task SearchAsync()
+    {
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
+        var token = _cts.Token;
+
+        _isLoading = true;
+        _errorMessage = null;
+        _tracks.Clear();
+        _nextPageToken = null;
+
+        try
+        {
+            var result = await YouTube.SearchAsync(_currentKeyword, cancellationToken: token);
+            if (token.IsCancellationRequested)
+            {
+                return;
+            }
+
+            _tracks.AddRange(result.Tracks);
+            _nextPageToken = result.NextPageToken;
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+        catch (YouTubeApiException ex)
+        {
+            _errorMessage = ex.Message;
+            Toasts.ShowError(ex.Message);
+        }
+        finally
+        {
+            if (!token.IsCancellationRequested)
+            {
+                _isLoading = false;
+            }
+        }
+    }
+
+    private async Task LoadMoreAsync()
+    {
+        if (_nextPageToken is null || _isLoadingMore)
+        {
+            return;
+        }
+
+        var token = _cts?.Token ?? CancellationToken.None;
+        _isLoadingMore = true;
+
+        try
+        {
+            var result = await YouTube.SearchAsync(_currentKeyword, _nextPageToken, token);
+            if (token.IsCancellationRequested)
+            {
+                return;
+            }
+
+            // Nối kết quả mới, bỏ những video đã có trong danh sách.
+            var existingIds = _tracks.Select(t => t.VideoId).ToHashSet();
+            _tracks.AddRange(result.Tracks.Where(t => !existingIds.Contains(t.VideoId)));
+            _nextPageToken = result.NextPageToken;
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+        catch (YouTubeApiException ex)
+        {
+            Toasts.ShowError(ex.Message);
+        }
+        finally
+        {
+            _isLoadingMore = false;
+        }
+    }
+
+    private Task RetryAsync() => SearchAsync();
+
+    public void Dispose()
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
+    }
+}

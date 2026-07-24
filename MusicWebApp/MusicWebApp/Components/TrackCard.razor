@@ -1,0 +1,104 @@
+@inject MusicPlayerState PlayerState
+@inject FavoritesService Favorites
+@inject ToastService Toasts
+
+<div class="track-card @(IsActive ? "active" : null)"
+     role="button"
+     tabindex="0"
+     aria-label="Phát @Track.Title"
+     @onclick="PlayAsync"
+     @onkeydown="HandleKeyDown">
+    <div class="track-card-thumb">
+        @if (!string.IsNullOrEmpty(Track.ThumbnailUrl))
+        {
+            <img src="@Track.ThumbnailUrl" alt="Ảnh bìa @Track.Title" loading="lazy" />
+        }
+        else
+        {
+            <div class="track-card-thumb-fallback" aria-hidden="true">
+                <Icon Name="music" Size="32" />
+            </div>
+        }
+        <span class="track-card-play" aria-hidden="true">
+            <Icon Name="@(IsActive && PlayerState.IsPlaying ? "pause" : "play")" Size="22" />
+        </span>
+        @if (Track.DurationText is not null)
+        {
+            <span class="track-card-duration" title="Thời lượng @Track.DurationText">@Track.DurationText</span>
+        }
+        @if (IsActive)
+        {
+            <span class="track-card-playing-badge" aria-hidden="true">
+                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+            </span>
+        }
+    </div>
+    <div class="track-card-body">
+        <h4 class="track-card-title" title="@Track.Title">@Track.Title</h4>
+        <p class="track-card-artist" title="@Track.Artist">@Track.Artist</p>
+        @if (Track.PublishedAt.HasValue)
+        {
+            <p class="track-card-date">@Track.PublishedAt.Value.ToString("dd/MM/yyyy")</p>
+        }
+    </div>
+    <div class="track-card-actions" @onclick:stopPropagation="true">
+        <button class="icon-button @(IsFavorite ? "is-favorite" : null)"
+                title="@(IsFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
+                aria-label="@(IsFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
+                @onclick="ToggleFavoriteAsync">
+            <Icon Name="@(IsFavorite ? "heart-filled" : "heart")" Size="18" />
+        </button>
+        <button class="icon-button"
+                title="Thêm vào hàng đợi"
+                aria-label="Thêm vào hàng đợi"
+                @onclick="AddToQueue">
+            <Icon Name="plus" Size="18" />
+        </button>
+        <a class="icon-button"
+           href="https://www.youtube.com/watch?v=@Track.VideoId"
+           target="_blank"
+           rel="noopener noreferrer"
+           title="Mở trên YouTube"
+           aria-label="Mở trên YouTube"
+           @onclick:stopPropagation="true">
+            <Icon Name="external" Size="18" />
+        </a>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public MusicTrack Track { get; set; } = default!;
+
+    /// <summary>Được gọi khi người dùng bấm Play/bấm vào card.</summary>
+    [Parameter] public EventCallback<MusicTrack> OnPlay { get; set; }
+
+    private bool IsActive => PlayerState.CurrentTrack?.VideoId == Track.VideoId;
+
+    private bool IsFavorite => Favorites.IsFavorite(Track.VideoId);
+
+    private Task PlayAsync() => OnPlay.InvokeAsync(Track);
+
+    private Task HandleKeyDown(KeyboardEventArgs e)
+        => e.Key is "Enter" or " " ? PlayAsync() : Task.CompletedTask;
+
+    private async Task ToggleFavoriteAsync()
+    {
+        var added = await Favorites.ToggleFavoriteAsync(Track);
+        Toasts.ShowSuccess(added
+            ? $"Đã thêm \"{Track.Title}\" vào yêu thích."
+            : $"Đã xóa \"{Track.Title}\" khỏi yêu thích.");
+    }
+
+    private void AddToQueue()
+    {
+        PlayerState.AddToQueue(new MusicTrack
+        {
+            VideoId = Track.VideoId,
+            Title = Track.Title,
+            Artist = Track.Artist,
+            ThumbnailUrl = Track.ThumbnailUrl,
+            PublishedAt = Track.PublishedAt
+        });
+        Toasts.ShowSuccess($"Đã thêm \"{Track.Title}\" vào hàng đợi.");
+    }
+}

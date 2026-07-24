@@ -1,0 +1,58 @@
+@inject MusicPlayerState PlayerState
+@inject FavoritesService Favorites
+@implements IDisposable
+
+<div class="track-grid">
+    @foreach (var track in Tracks)
+    {
+        <TrackCard Track="track" OnPlay="HandlePlay" @key="track.VideoId" />
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public IReadOnlyList<MusicTrack> Tracks { get; set; } = Array.Empty<MusicTrack>();
+
+    /// <summary>
+    /// true: bấm Play sẽ thay queue bằng toàn bộ danh sách này và phát bài được chọn
+    /// (hành vi cho kết quả tìm kiếm). false: chỉ phát bài đó (thêm vào queue nếu chưa có).
+    /// </summary>
+    [Parameter] public bool ReplaceQueueOnPlay { get; set; } = true;
+
+    protected override void OnInitialized()
+    {
+        PlayerState.OnChange += HandleChanged;
+        Favorites.OnChange += HandleChanged;
+    }
+
+    private void HandleChanged() => _ = InvokeAsync(StateHasChanged);
+
+    private void HandlePlay(MusicTrack track)
+    {
+        if (ReplaceQueueOnPlay)
+        {
+            var index = -1;
+            for (var i = 0; i < Tracks.Count; i++)
+            {
+                if (Tracks[i].VideoId == track.VideoId)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index >= 0)
+            {
+                PlayerState.SetQueue(Tracks, index);
+                return;
+            }
+        }
+
+        PlayerState.PlayTrack(track);
+    }
+
+    public void Dispose()
+    {
+        PlayerState.OnChange -= HandleChanged;
+        Favorites.OnChange -= HandleChanged;
+    }
+}

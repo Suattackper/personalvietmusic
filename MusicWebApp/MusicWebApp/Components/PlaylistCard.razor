@@ -1,0 +1,26 @@
+@inject NavigationManager Nav
+
+<button class="playlist-card"
+        title="Phát playlist @Playlist.Name"
+        aria-label="Phát playlist @Playlist.Name (@Playlist.Tracks.Count bài)"
+        @onclick="Open">
+    <span class="playlist-card-icon" aria-hidden="true">@Playlist.Emoji</span>
+    <span class="playlist-card-body">
+        <span class="playlist-card-name">@Playlist.Name</span>
+        <span class="playlist-card-desc">@Playlist.Description</span>
+    </span>
+    <span class="playlist-card-count">@Playlist.Tracks.Count bài</span>
+    <span class="playlist-card-play" aria-hidden="true">
+        <Icon Name="play" Size="18" />
+    </span>
+</button>
+
+@code {
+    [Parameter, EditorRequired] public CuratedPlaylist Playlist { get; set; } = default!;
+
+    private void Open()
+    {
+        // autoplay=1: trang chi tiết sẽ tự phát toàn bộ playlist ngay khi mở.
+        Nav.NavigateTo($"playlist/{Playlist.Id}?autoplay=1");
+    }
+}

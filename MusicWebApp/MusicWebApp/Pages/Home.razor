@@ -1,0 +1,65 @@
+@page "/"
+@inject NavigationManager Nav
+@inject PlaylistService PlaylistSvc
+
+<PageTitle>VietMusic - Nghe nhạc Việt</PageTitle>
+
+<section class="page-section">
+    <div class="home-hero">
+        <h1 class="page-heading">Chào mừng đến với VietMusic 🎵</h1>
+        <p class="home-hero-subtitle">
+            Khám phá và nghe nhạc Việt yêu thích của bạn. Chọn một thể loại bên dưới
+            hoặc tìm kiếm bài hát bất kỳ.
+        </p>
+    </div>
+
+    @if (_playlists is { Count: > 0 })
+    {
+        <h2 class="section-heading">🎶 Nghe ngay — playlist có sẵn</h2>
+        <div class="playlist-grid">
+            @foreach (var playlist in _playlists)
+            {
+                <PlaylistCard Playlist="playlist" @key="playlist.Id" />
+            }
+        </div>
+    }
+
+    <h2 class="section-heading">Khám phá theo thể loại</h2>
+    <div class="genre-grid">
+        @foreach (var genre in Genres)
+        {
+            <button class="genre-card"
+                    title="Tìm kiếm @genre.Name"
+                    aria-label="Tìm kiếm @genre.Name"
+                    @onclick="() => SearchGenre(genre.Name)">
+                <span class="genre-card-icon" aria-hidden="true">@genre.Emoji</span>
+                <span class="genre-card-name">@genre.Name</span>
+            </button>
+        }
+    </div>
+</section>
+
+@code {
+    private IReadOnlyList<CuratedPlaylist>? _playlists;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _playlists = await PlaylistSvc.GetPlaylistsAsync();
+    }
+
+    private static readonly (string Name, string Emoji)[] Genres =
+    {
+        ("Nhạc Việt mới", "🎵"),
+        ("V-Pop", "🎤"),
+        ("Nhạc trẻ Việt Nam", "🎧"),
+        ("Ballad Việt", "💜"),
+        ("Rap Việt", "🔥"),
+        ("Chill Việt", "🌙"),
+        ("Acoustic Việt", "🎸")
+    };
+
+    private void SearchGenre(string genre)
+    {
+        Nav.NavigateTo($"search?q={Uri.EscapeDataString(genre)}");
+    }
+}

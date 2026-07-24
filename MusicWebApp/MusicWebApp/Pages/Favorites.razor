@@ -1,0 +1,38 @@
+@page "/favorites"
+@inject FavoritesService FavoritesSvc
+@implements IDisposable
+
+<PageTitle>Yêu thích - VietMusic</PageTitle>
+
+<section class="page-section">
+    <h1 class="page-heading">
+        <span class="page-heading-icon" aria-hidden="true"><Icon Name="heart-filled" Size="22" /></span>
+        Bài hát yêu thích
+    </h1>
+
+    @if (FavoritesSvc.Favorites.Count == 0)
+    {
+        <EmptyState IconName="heart"
+                    Title="Chưa có bài hát yêu thích"
+                    Description="Bấm biểu tượng trái tim trên bài hát bất kỳ để thêm vào danh sách này." />
+    }
+    else
+    {
+        <p class="page-subtitle">@FavoritesSvc.Favorites.Count bài hát</p>
+        <TrackList Tracks="FavoritesSvc.Favorites" />
+    }
+</section>
+
+@code {
+    protected override void OnInitialized()
+    {
+        FavoritesSvc.OnChange += HandleChanged;
+    }
+
+    private void HandleChanged() => _ = InvokeAsync(StateHasChanged);
+
+    public void Dispose()
+    {
+        FavoritesSvc.OnChange -= HandleChanged;
+    }
+}

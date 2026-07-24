@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vietmusic",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": [
+        "run",
+        "--project",
+        "MusicWebApp/MusicWebApp/MusicWebApp.csproj",
+        "--no-launch-profile",
+        "--",
+        "--urls=http://0.0.0.0:5098"
+      ],
+      "port": 5098
+    }
+  ]
+}

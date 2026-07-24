@@ -1,0 +1,72 @@
+name: Deploy VietMusic to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # Nếu bạn đặt secret YOUTUBE_API_KEY trong repo (Settings > Secrets),
+      # workflow sẽ ghi key đó vào appsettings.json khi build — key không cần
+      # nằm trong source. Nếu không đặt secret thì dùng appsettings.json có sẵn.
+      - name: Inject YouTube API key from secret (nếu có)
+        env:
+          YT_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          if [ -n "$YT_KEY" ]; then
+            printf '{\n  "YouTube": {\n    "ApiKey": "%s"\n  }\n}\n' "$YT_KEY" \
+              > MusicWebApp/MusicWebApp/wwwroot/appsettings.json
+            echo "Đã ghi API key từ secret vào appsettings.json."
+          else
+            echo "Không có secret YOUTUBE_API_KEY — dùng appsettings.json trong repo."
+          fi
+
+      - name: Publish
+        run: dotnet publish MusicWebApp/MusicWebApp/MusicWebApp.csproj -c Release -o release
+
+      # GitHub Pages phục vụ ở đường dẫn con /<tên-repo>/, nên phải sửa base href.
+      - name: Sửa base href theo tên repo
+        run: |
+          sed -i 's|<base href="/" />|<base href="/${{ github.event.repository.name }}/" />|g' \
+            release/wwwroot/index.html
+
+      # SPA fallback + cho phép GitHub phục vụ thư mục _framework.
+      - name: Thêm 404.html và .nojekyll
+        run: |
+          cp release/wwwroot/index.html release/wwwroot/404.html
+          touch release/wwwroot/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: release/wwwroot
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

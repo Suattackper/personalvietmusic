@@ -1,0 +1,101 @@
+@page "/playlist/{PlaylistId}"
+@inject PlaylistService PlaylistSvc
+@inject MusicPlayerState PlayerState
+@inject ToastService Toasts
+
+<PageTitle>@(_playlist?.Name ?? "Playlist") - VietMusic</PageTitle>
+
+<section class="page-section">
+    @if (_playlist is null && !_loaded)
+    {
+        <LoadingIndicator Text="Đang tải playlist..." />
+    }
+    else if (_playlist is null)
+    {
+        <EmptyState IconName="disc"
+                    Title="Không tìm thấy playlist"
+                    Description="Playlist này không tồn tại hoặc đã bị xóa.">
+            <a class="button-primary" href="playlists">Xem tất cả playlist</a>
+        </EmptyState>
+    }
+    else
+    {
+        <div class="page-heading-row">
+            <h1 class="page-heading">
+                <span class="page-heading-icon playlist-heading-emoji" aria-hidden="true">@_playlist.Emoji</span>
+                @_playlist.Name
+            </h1>
+            <div class="playlist-actions">
+                <button class="button-primary" @onclick="PlayAll">
+                    <Icon Name="play" Size="16" />
+                    Phát tất cả
+                </button>
+                <button class="button-secondary" @onclick="PlayShuffled">
+                    <Icon Name="shuffle" Size="16" />
+                    Phát ngẫu nhiên
+                </button>
+            </div>
+        </div>
+        <p class="page-subtitle">@_playlist.Description — @_tracks.Count bài</p>
+
+        <TrackList Tracks="_tracks" />
+    }
+</section>
+
+@code {
+    [Parameter] public string PlaylistId { get; set; } = string.Empty;
+
+    [SupplyParameterFromQuery(Name = "autoplay")]
+    public string? Autoplay { get; set; }
+
+    private CuratedPlaylist? _playlist;
+    private List<MusicTrack> _tracks = new();
+    private bool _loaded;
+    private string? _loadedId;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (PlaylistId == _loadedId)
+        {
+            return;
+        }
+
+        _loadedId = PlaylistId;
+        _loaded = false;
+        _playlist = await PlaylistSvc.GetByIdAsync(PlaylistId);
+        _tracks = _playlist?.Tracks.Select(t => t.ToMusicTrack()).ToList() ?? new List<MusicTrack>();
+        _loaded = true;
+
+        // Bấm vào card playlist => phát luôn toàn bộ.
+        if (Autoplay == "1" && _tracks.Count > 0)
+        {
+            PlayerState.SetQueue(_tracks, 0);
+        }
+    }
+
+    private void PlayAll()
+    {
+        if (_tracks.Count == 0)
+        {
+            return;
+        }
+
+        PlayerState.SetQueue(_tracks, 0);
+        Toasts.ShowSuccess($"Đang phát playlist \"{_playlist!.Name}\" ({_tracks.Count} bài).");
+    }
+
+    private void PlayShuffled()
+    {
+        if (_tracks.Count == 0)
+        {
+            return;
+        }
+
+        if (!PlayerState.IsShuffle)
+        {
+            PlayerState.ToggleShuffle();
+        }
+        PlayerState.SetQueue(_tracks, Random.Shared.Next(_tracks.Count));
+        Toasts.ShowSuccess($"Đang phát ngẫu nhiên \"{_playlist!.Name}\".");
+    }
+}

@@ -6,7 +6,7 @@
     {
         <div class="toast toast-@toast.Level.ToString().ToLowerInvariant()" role="alert">
             <span class="toast-message">@toast.Message</span>
-            <button class="toast-close" title="Đóng thông báo" aria-label="Đóng thông báo"
+            <button class="toast-close" title="@Lang.T("Đóng thông báo")" aria-label="@Lang.T("Đóng thông báo")"
                     @onclick="() => Remove(toast.Id)">
                 <Icon Name="close" Size="16" />
             </button>
@@ -22,6 +22,7 @@
     protected override void OnInitialized()
     {
         Toasts.OnToast += HandleToast;
+        Lang.OnChange += RefreshLanguage;
     }
 
     private void HandleToast(ToastMessage toast)
@@ -30,6 +31,8 @@
         StateHasChanged();
         _ = AutoDismissAsync(toast.Id);
     }
+
+    private void RefreshLanguage() => _ = InvokeAsync(StateHasChanged);
 
     private async Task AutoDismissAsync(Guid id)
     {
@@ -49,5 +52,6 @@
     public void Dispose()
     {
         Toasts.OnToast -= HandleToast;
+        Lang.OnChange -= RefreshLanguage;
     }
 }

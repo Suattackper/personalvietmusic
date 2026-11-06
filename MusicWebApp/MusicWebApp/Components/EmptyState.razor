@@ -2,10 +2,10 @@
     <div class="empty-state-icon" aria-hidden="true">
         <Icon Name="@IconName" Size="48" />
     </div>
-    <h3>@Title</h3>
+    <h3>@Lang.T(Title)</h3>
     @if (!string.IsNullOrEmpty(Description))
     {
-        <p>@Description</p>
+        <p>@Lang.T(Description)</p>
     }
     @ChildContent
 </div>

@@ -12,14 +12,14 @@
     <div id="youtube-player-host"></div>
 </div>
 <button class="video-toggle-btn @(_videoVisible ? "is-open" : null)"
-        title="@(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
-        aria-label="@(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
+        title="@Lang.T(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
+        aria-label="@Lang.T(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
         aria-pressed="@_videoVisible"
         @onclick="ToggleVideo">
     <Icon Name="@(_videoVisible ? "chevron-down" : "video")" Size="22" />
 </button>
 
-<footer class="player-bar" aria-label="Trình phát nhạc">
+<footer class="player-bar" aria-label="@Lang.T("Trình phát nhạc")">
     <div class="player-info">
         @if (PlayerState.CurrentTrack is not null)
         {
@@ -27,7 +27,7 @@
             {
                 <img class="player-thumb"
                      src="@PlayerState.CurrentTrack.ThumbnailUrl"
-                     alt="Ảnh bìa @PlayerState.CurrentTrack.Title" />
+                     alt="@Lang.F("Ảnh bìa {0}", PlayerState.CurrentTrack.Title)" />
             }
             <div class="player-track-meta">
                 <span class="player-track-title" title="@PlayerState.CurrentTrack.Title">
@@ -38,8 +38,8 @@
                 </span>
             </div>
             <button class="icon-button player-fav-button @(IsCurrentFavorite ? "is-favorite" : null)"
-                    title="@(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
-                    aria-label="@(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
+                    title="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
+                    aria-label="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
                     @onclick="ToggleCurrentFavoriteAsync">
                 <Icon Name="@(IsCurrentFavorite ? "heart-filled" : "heart")" Size="18" />
             </button>
@@ -50,8 +50,8 @@
                 <Icon Name="music" Size="24" />
             </div>
             <div class="player-track-meta">
-                <span class="player-track-title muted">Chưa phát bài nào</span>
-                <span class="player-track-artist muted">Chọn một bài hát để bắt đầu</span>
+                <span class="player-track-title muted">@Lang.T("Chưa phát bài nào")</span>
+                <span class="player-track-artist muted">@Lang.T("Chọn một bài hát để bắt đầu")</span>
             </div>
         }
     </div>
@@ -59,29 +59,29 @@
     <div class="player-center">
         <div class="player-controls">
             <button class="icon-button @(PlayerState.IsShuffle ? "control-active" : null)"
-                    title="@(PlayerState.IsShuffle ? "Tắt phát ngẫu nhiên" : "Bật phát ngẫu nhiên")"
-                    aria-label="@(PlayerState.IsShuffle ? "Tắt phát ngẫu nhiên" : "Bật phát ngẫu nhiên")"
+                    title="@Lang.T(PlayerState.IsShuffle ? "Tắt phát ngẫu nhiên" : "Bật phát ngẫu nhiên")"
+                    aria-label="@Lang.T(PlayerState.IsShuffle ? "Tắt phát ngẫu nhiên" : "Bật phát ngẫu nhiên")"
                     aria-pressed="@PlayerState.IsShuffle"
                     @onclick="PlayerState.ToggleShuffle">
                 <Icon Name="shuffle" Size="18" />
             </button>
             <button class="icon-button"
-                    title="Bài trước"
-                    aria-label="Bài trước"
+                    title="@Lang.T("Bài trước")"
+                    aria-label="@Lang.T("Bài trước")"
                     disabled="@(PlayerState.Queue.Count == 0)"
                     @onclick="PlayPrevious">
                 <Icon Name="previous" Size="20" />
             </button>
             <button class="play-button"
-                    title="@(PlayerState.IsPlaying ? "Tạm dừng" : "Phát")"
-                    aria-label="@(PlayerState.IsPlaying ? "Tạm dừng" : "Phát")"
+                    title="@Lang.T(PlayerState.IsPlaying ? "Tạm dừng" : "Phát")"
+                    aria-label="@Lang.T(PlayerState.IsPlaying ? "Tạm dừng" : "Phát")"
                     disabled="@(PlayerState.CurrentTrack is null)"
                     @onclick="TogglePlayPause">
                 <Icon Name="@(PlayerState.IsPlaying ? "pause" : "play")" Size="22" />
             </button>
             <button class="icon-button"
-                    title="Bài tiếp theo"
-                    aria-label="Bài tiếp theo"
+                    title="@Lang.T("Bài tiếp theo")"
+                    aria-label="@Lang.T("Bài tiếp theo")"
                     disabled="@(PlayerState.Queue.Count == 0)"
                     @onclick="PlayNext">
                 <Icon Name="next" Size="20" />
@@ -98,18 +98,18 @@
             </button>
         </div>
         <div class="player-progress">
-            <span class="player-time" aria-label="Thời gian hiện tại">@FormatTime(DisplayTime)</span>
+            <span class="player-time" aria-label="@Lang.T("Thời gian hiện tại")">@FormatTime(DisplayTime)</span>
             <input type="range"
                    class="progress-slider"
                    min="0"
                    max="@Inv(SliderMax)"
                    step="any"
                    value="@Inv(Math.Clamp(DisplayTime, 0, SliderMax))"
-                   aria-label="Thanh tiến trình bài hát"
+                   aria-label="@Lang.T("Thanh tiến trình bài hát")"
                    disabled="@(PlayerState.CurrentTrack is null || PlayerState.Duration <= 0)"
                    @oninput="OnSeekInput"
                    @onchange="OnSeekCommitAsync" />
-            <span class="player-time" aria-label="Tổng thời lượng">@FormatTime(PlayerState.Duration)</span>
+            <span class="player-time" aria-label="@Lang.T("Tổng thời lượng")">@FormatTime(PlayerState.Duration)</span>
         </div>
     </div>
 
@@ -123,7 +123,7 @@
                max="100"
                step="1"
                value="@PlayerState.Volume"
-               aria-label="Âm lượng"
+               aria-label="@Lang.T("Âm lượng")"
                @oninput="OnVolumeChangedAsync" />
     </div>
 </footer>
@@ -146,9 +146,9 @@
 
     private string RepeatTitle => PlayerState.RepeatMode switch
     {
-        RepeatMode.None => "Bật lặp lại danh sách",
-        RepeatMode.All => "Bật lặp lại một bài",
-        _ => "Tắt lặp lại"
+        RepeatMode.None => Lang.T("Bật lặp lại danh sách"),
+        RepeatMode.All => Lang.T("Bật lặp lại một bài"),
+        _ => Lang.T("Tắt lặp lại")
     };
 
     private bool IsCurrentFavorite =>
@@ -160,6 +160,7 @@
         PlayerState.OnTrackChanged += HandleTrackChanged;
         PlayerState.OnPlayPauseRequested += HandlePlayPauseRequested;
         Favorites.OnChange += HandleStateChanged;
+        Lang.OnChange += HandleStateChanged;
     }
 
     private void ToggleVideo() => _videoVisible = !_videoVisible;
@@ -174,8 +175,8 @@
 
         var added = await Favorites.ToggleFavoriteAsync(track);
         Toasts.ShowSuccess(added
-            ? $"Đã thêm \"{track.Title}\" vào yêu thích."
-            : $"Đã xóa \"{track.Title}\" khỏi yêu thích.");
+            ? Lang.F("Đã thêm \"{0}\" vào yêu thích.", track.Title)
+            : Lang.F("Đã xóa \"{0}\" khỏi yêu thích.", track.Title));
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -254,7 +255,7 @@
     {
         if (!PlayerState.PlayNext())
         {
-            Toasts.ShowInfo("Không có bài tiếp theo trong hàng đợi.");
+            Toasts.ShowInfo(Lang.T("Không có bài tiếp theo trong hàng đợi."));
         }
     }
 
@@ -262,7 +263,7 @@
     {
         if (!PlayerState.PlayPrevious())
         {
-            Toasts.ShowInfo("Không có bài trước đó trong hàng đợi.");
+            Toasts.ShowInfo(Lang.T("Không có bài trước đó trong hàng đợi."));
         }
     }
 
@@ -374,10 +375,10 @@
     {
         var message = errorCode switch
         {
-            101 or 150 => "Video này không cho phép phát nhúng.",
-            100 => "Video không tồn tại hoặc đã bị xóa.",
-            2 => "Video không hợp lệ.",
-            _ => "Không phát được video này."
+            101 or 150 => Lang.T("Video này không cho phép phát nhúng."),
+            100 => Lang.T("Video không tồn tại hoặc đã bị xóa."),
+            2 => Lang.T("Video không hợp lệ."),
+            _ => Lang.T("Không phát được video này.")
         };
 
         var trackTitle = PlayerState.CurrentTrack?.Title;
@@ -402,6 +403,7 @@
         PlayerState.OnTrackChanged -= HandleTrackChanged;
         PlayerState.OnPlayPauseRequested -= HandlePlayPauseRequested;
         Favorites.OnChange -= HandleStateChanged;
+        Lang.OnChange -= HandleStateChanged;
 
         try
         {

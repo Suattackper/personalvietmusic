@@ -1,14 +1,14 @@
 @page "/playlists"
 @inject PlaylistService PlaylistSvc
 
-<PageTitle>Playlist - AnhTanMusic</PageTitle>
+<PageTitle>@Lang.T("Playlist") - AnhTanMusic</PageTitle>
 
 <section class="page-section">
     <h1 class="page-heading">
         <span class="page-heading-icon" aria-hidden="true"><Icon Name="disc" Size="22" /></span>
-        Playlist có sẵn
+        @Lang.T("Playlist có sẵn")
     </h1>
-    <p class="page-subtitle">Bấm vào một playlist để phát ngay — không tốn quota tìm kiếm.</p>
+    <p class="page-subtitle">@Lang.T("Chọn một bộ sưu tập theo ngôn ngữ, tìm bài yêu thích rồi phát. Các playlist quen thuộc vẫn có bên dưới.")</p>
 
     @if (_playlists is null)
     {
@@ -22,8 +22,23 @@
     }
     else
     {
+        <h2 class="section-heading">@Lang.T("🌍 Chọn nhạc theo ngôn ngữ")</h2>
+        <div class="playlist-grid country-playlist-grid">
+            @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("country-")))
+            {
+                <PlaylistCard Playlist="playlist" @key="playlist.Id" />
+            }
+        </div>
+        <h2 class="section-heading">@Lang.T("✨ Nhạc mới 2025–2026")</h2>
+        <div class="playlist-grid country-playlist-grid">
+            @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("recent-")))
+            {
+                <PlaylistCard Playlist="playlist" @key="playlist.Id" />
+            }
+        </div>
+        <h2 class="section-heading">@Lang.T("🎶 Playlist tuyển chọn")</h2>
         <div class="playlist-grid">
-            @foreach (var playlist in _playlists)
+            @foreach (var playlist in _playlists.Where(p => !p.Id.StartsWith("country-") && !p.Id.StartsWith("recent-")))
             {
                 <PlaylistCard Playlist="playlist" @key="playlist.Id" />
             }

@@ -28,6 +28,26 @@ public class PlaylistService
         {
             _playlists = await _httpClient.GetFromJsonAsync<List<CuratedPlaylist>>("data/playlists.json")
                 ?? new List<CuratedPlaylist>();
+            foreach (var language in new[] { "vi", "en", "ja", "zh" })
+            {
+                try
+                {
+                    var collection = await _httpClient.GetFromJsonAsync<CuratedPlaylist>($"data/music/{language}.json");
+                    if (collection is not null)
+                    {
+                        _playlists.Add(collection);
+                    }
+                    var recent = await _httpClient.GetFromJsonAsync<CuratedPlaylist>($"data/music/{language}-recent.json");
+                    if (recent is not null)
+                    {
+                        _playlists.Add(recent);
+                    }
+                }
+                catch (Exception)
+                {
+                    // Một bộ sưu tập lỗi không làm mất các playlist còn lại.
+                }
+            }
         }
         catch (Exception)
         {

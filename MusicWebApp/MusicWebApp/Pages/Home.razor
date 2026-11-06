@@ -2,38 +2,52 @@
 @inject NavigationManager Nav
 @inject PlaylistService PlaylistSvc
 
-<PageTitle>AnhTanMusic - Nghe nhạc Việt</PageTitle>
+<PageTitle>AnhTanMusic - @Lang.T("Nhạc Việt")</PageTitle>
 
 <section class="page-section">
     <div class="home-hero">
-        <h1 class="page-heading">Chào mừng đến với AnhTanMusic 🎵</h1>
+        <h1 class="page-heading">@Lang.T("Chào mừng đến với AnhTanMusic 🎵")</h1>
         <p class="home-hero-subtitle">
-            Khám phá và nghe nhạc Việt yêu thích của bạn. Chọn một thể loại bên dưới
-            hoặc tìm kiếm bài hát bất kỳ.
+            @Lang.T("Khám phá và nghe nhạc yêu thích của bạn. Chọn một bộ sưu tập hoặc tìm kiếm bài hát bất kỳ.")
         </p>
     </div>
 
     @if (_playlists is { Count: > 0 })
     {
-        <h2 class="section-heading">🎶 Nghe ngay — playlist có sẵn</h2>
+        <h2 class="section-heading">@Lang.T("🌍 Nhạc Việt, Anh, Nhật, Trung")</h2>
+        <p class="page-subtitle">@Lang.T("Mở từng danh sách để tìm và chọn bài bạn muốn nghe.")</p>
+        <div class="playlist-grid country-playlist-grid">
+            @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("country-")))
+            {
+                <PlaylistCard Playlist="playlist" @key="playlist.Id" />
+            }
+        </div>
+        <h2 class="section-heading">@Lang.T("✨ Nhạc mới 2025–2026")</h2>
+        <div class="playlist-grid country-playlist-grid">
+            @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("recent-")))
+            {
+                <PlaylistCard Playlist="playlist" @key="playlist.Id" />
+            }
+        </div>
+        <h2 class="section-heading">@Lang.T("🎶 Nghe ngay — playlist có sẵn")</h2>
         <div class="playlist-grid">
-            @foreach (var playlist in _playlists)
+            @foreach (var playlist in _playlists.Where(p => !p.Id.StartsWith("country-") && !p.Id.StartsWith("recent-")))
             {
                 <PlaylistCard Playlist="playlist" @key="playlist.Id" />
             }
         </div>
     }
 
-    <h2 class="section-heading">Khám phá theo thể loại</h2>
+    <h2 class="section-heading">@Lang.T("Khám phá theo thể loại")</h2>
     <div class="genre-grid">
         @foreach (var genre in Genres)
         {
             <button class="genre-card"
-                    title="Tìm kiếm @genre.Name"
-                    aria-label="Tìm kiếm @genre.Name"
+                    title="@Lang.F("Tìm kiếm {0}", Lang.T(genre.Name))"
+                    aria-label="@Lang.F("Tìm kiếm {0}", Lang.T(genre.Name))"
                     @onclick="() => SearchGenre(genre.Name)">
                 <span class="genre-card-icon" aria-hidden="true">@genre.Emoji</span>
-                <span class="genre-card-name">@genre.Name</span>
+                <span class="genre-card-name">@Lang.T(genre.Name)</span>
             </button>
         }
     </div>

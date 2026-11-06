@@ -300,6 +300,34 @@ button {
     border-bottom: 1px solid var(--border);
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.language-switcher select {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 8px 10px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.language-switcher select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 /* .icon-button.menu-toggle để thắng specificity của .icon-button (chỉ hiện trên mobile) */
 .icon-button.menu-toggle {
     display: none;
@@ -517,6 +545,43 @@ button {
     margin-bottom: 8px;
 }
 
+.country-playlist-grid .playlist-card {
+    border-color: var(--primary);
+}
+
+.playlist-find {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 22px 0;
+}
+
+.playlist-find label {
+    font-weight: 600;
+}
+
+.playlist-find input {
+    flex: 1 1 240px;
+    min-width: 0;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+}
+
+.playlist-find input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.playlist-find span {
+    color: var(--text-muted);
+    font-size: .85rem;
+}
+
 .playlist-card {
     position: relative;
     display: flex;
@@ -659,6 +724,20 @@ button {
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 18px 20px;
+}
+
+.about-author {
+    margin-bottom: 16px;
+}
+
+.about-author h3 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+}
+
+.about-author p {
+    margin: 5px 0;
+    color: var(--text-muted);
 }
 
 .about-card h2 {

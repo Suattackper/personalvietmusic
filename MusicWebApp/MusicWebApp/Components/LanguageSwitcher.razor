@@ -1,0 +1,19 @@
+@implements IDisposable
+<label class="language-switcher">
+    <span class="sr-only">@Lang.T("Ngôn ngữ")</span>
+    <select aria-label="@Lang.T("Ngôn ngữ")" value="@Lang.Code" @onchange="ChangeLanguage">
+        <option value="vi">VI</option>
+        <option value="en">EN</option>
+    </select>
+</label>
+
+@code {
+    protected override void OnInitialized() => Lang.OnChange += RefreshLanguage;
+
+    private void RefreshLanguage() => _ = InvokeAsync(StateHasChanged);
+
+    private async Task ChangeLanguage(ChangeEventArgs e)
+        => await Lang.SetAsync(e.Value?.ToString() ?? "vi");
+
+    public void Dispose() => Lang.OnChange -= RefreshLanguage;
+}

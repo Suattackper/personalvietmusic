@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AnhTanMusic - Nghe nhạc Việt</title>
+    <title>AnhTanMusic</title>
     <base href="/" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
@@ -16,6 +16,19 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="AnhTanMusic" />
     <script>
+        window.vietmusicLanguage = {
+            apply: function (code) {
+                var english = code === "en";
+                document.documentElement.lang = english ? "en" : "vi";
+                var error = document.getElementById("blazor-error-ui");
+                if (error) {
+                    error.querySelector(".error-message").textContent = english ? "An unexpected error occurred." : "Đã xảy ra lỗi không mong muốn.";
+                    error.querySelector(".reload").textContent = english ? "Reload page" : "Tải lại trang";
+                    error.querySelector(".dismiss").title = english ? "Close" : "Đóng";
+                }
+            }
+        };
+        try { window.vietmusicLanguage.apply(localStorage.getItem("vietmusic_language")); } catch (e) { }
         // Áp theme đã lưu trước khi app khởi động để tránh chớp màu.
         (function () {
             try {
@@ -38,7 +51,7 @@
     </div>
 
     <div id="blazor-error-ui">
-        Đã xảy ra lỗi không mong muốn.
+        <span class="error-message">Đã xảy ra lỗi không mong muốn.</span>
         <a href="" class="reload">Tải lại trang</a>
         <a class="dismiss" title="Đóng">🗙</a>
     </div>

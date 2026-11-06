@@ -1,0 +1,658 @@
+{
+  "id": "country-en",
+  "name": "Nhạc Anh",
+  "emoji": "🇬🇧",
+  "description": "Những ca khúc tiếng Anh nổi bật qua nhiều năm.",
+  "tracks": [
+    {
+      "v": "09R8_2nJtjg",
+      "t": "Maroon 5 - Sugar (Official Music Video)",
+      "a": "Maroon 5"
+    },
+    {
+      "v": "2vjPBrBU-TM",
+      "t": "Sia - Chandelier (Official Video)",
+      "a": "Sia"
+    },
+    {
+      "v": "2Vv-BfVoq4g",
+      "t": "Ed Sheeran - Perfect (Official Music Video)",
+      "a": "Ed Sheeran"
+    },
+    {
+      "v": "34Na4j8AVgA",
+      "t": "The Weeknd - Starboy ft. Daft Punk (Official Video) ft. Daft Punk",
+      "a": "The Weeknd"
+    },
+    {
+      "v": "3AtDnEC4zak",
+      "t": "Charlie Puth - We Don't Talk Anymore (feat. Selena Gomez) [Official Video]",
+      "a": "Charlie Puth"
+    },
+    {
+      "v": "450p7goxZqg",
+      "t": "John Legend - All of Me (Official Video)",
+      "a": "John Legend"
+    },
+    {
+      "v": "60ItHLz5WEA",
+      "t": "Alan Walker - Faded",
+      "a": "Alan Walker"
+    },
+    {
+      "v": "7wtfhZwyrcc",
+      "t": "Imagine Dragons - Believer (Official Music Video)",
+      "a": "Imagine Dragons"
+    },
+    {
+      "v": "aJOTlE1K90k",
+      "t": "Maroon 5 - Girls Like You ft. Cardi B (Official Music Video)",
+      "a": "Maroon 5"
+    },
+    {
+      "v": "ApXoWvfEYVU",
+      "t": "Post Malone, Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)",
+      "a": "Post Malone, Swae Lee"
+    },
+    {
+      "v": "CevxZvSJLk8",
+      "t": "Katy Perry - Roar",
+      "a": "Katy Perry"
+    },
+    {
+      "v": "e-ORhEE9VVg",
+      "t": "Taylor Swift - Blank Space",
+      "a": "Taylor Swift"
+    },
+    {
+      "v": "fRh_vgS2dFE",
+      "t": "Justin Bieber - Sorry (PURPOSE : The Movement)",
+      "a": "Justin Bieber"
+    },
+    {
+      "v": "hT_nvWreIhg",
+      "t": "OneRepublic - Counting Stars",
+      "a": "OneRepublic"
+    },
+    {
+      "v": "JGwWNGJdvx8",
+      "t": "Ed Sheeran - Shape of You (Official Music Video)",
+      "a": "Ed Sheeran"
+    },
+    {
+      "v": "k2qgadSvNyU",
+      "t": "Dua Lipa - New Rules (Official Music Video)",
+      "a": "Dua Lipa"
+    },
+    {
+      "v": "kXYiU_JCYtU",
+      "t": "Numb (Official Music Video) [4K UPGRADE] – Linkin Park",
+      "a": "Numb (Official Music Video) [4K UPGRADE]"
+    },
+    {
+      "v": "lp-EO5I60KA",
+      "t": "Ed Sheeran - Thinking Out Loud (Official Music Video)",
+      "a": "Ed Sheeran"
+    },
+    {
+      "v": "lWA2pjMjpBs",
+      "t": "Rihanna - Diamonds",
+      "a": "Rihanna"
+    },
+    {
+      "v": "lY2yjAdbvdQ",
+      "t": "Shawn Mendes - Treat You Better",
+      "a": "Shawn Mendes"
+    },
+    {
+      "v": "nfWlot6h_JM",
+      "t": "Taylor Swift - Shake It Off",
+      "a": "Taylor Swift"
+    },
+    {
+      "v": "OPf0YbXqDm0",
+      "t": "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars",
+      "a": "Mark Ronson"
+    },
+    {
+      "v": "papuvlVeZg8",
+      "t": "Clean Bandit - Rockabye (feat. Sean Paul & Anne-Marie) [Official Video]",
+      "a": "Clean Bandit"
+    },
+    {
+      "v": "PT2_F-1esPk",
+      "t": "The Chainsmokers - Closer (Lyric) ft. Halsey",
+      "a": "The Chainsmokers"
+    },
+    {
+      "v": "pXRviuL6vMY",
+      "t": "twenty one pilots: Stressed Out [OFFICIAL VIDEO]",
+      "a": "International"
+    },
+    {
+      "v": "RBumgq5yVrA",
+      "t": "Passenger | Let Her Go (Official Video)",
+      "a": "Passenger"
+    },
+    {
+      "v": "RgKAFK5djSk",
+      "t": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack",
+      "a": "Wiz Khalifa"
+    },
+    {
+      "v": "rtOvBOTyX00",
+      "t": "Christina Perri - A Thousand Years [Official Music Video]",
+      "a": "Christina Perri"
+    },
+    {
+      "v": "rYEDA3JcQqw",
+      "t": "Adele - Rolling in the Deep (Official Music Video)",
+      "a": "Adele"
+    },
+    {
+      "v": "YQHsXMglC9A",
+      "t": "Adele - Hello (Official Music Video)",
+      "a": "Adele"
+    },
+    {
+      "v": "k85mRPqvMbE",
+      "t": "Crazy Frog - Axel F (Official Video)",
+      "a": "Crazy Frog"
+    },
+    {
+      "v": "0KSOMA3QBU0",
+      "t": "Katy Perry - Dark Horse ft. Juicy J",
+      "a": "Katy Perry"
+    },
+    {
+      "v": "YqeW9_5kURI",
+      "t": "Major Lazer & DJ Snake - Lean On (feat. MØ) [Official 4K Music Video]",
+      "a": "Major Lazer & DJ Snake"
+    },
+    {
+      "v": "kffacxfA7G4",
+      "t": "Justin Bieber - Baby ft. Ludacris",
+      "a": "Justin Bieber"
+    },
+    {
+      "v": "L0MK7qz13bU",
+      "t": "Idina Menzel - Let It Go (From Frozen/Sing-Along)",
+      "a": "Idina Menzel"
+    },
+    {
+      "v": "fLexgOxsZu0",
+      "t": "Bruno Mars - The Lazy Song (Official Music Video)",
+      "a": "Bruno Mars"
+    },
+    {
+      "v": "uelHwf8o7_U",
+      "t": "Eminem - Love The Way You Lie ft. Rihanna",
+      "a": "Eminem"
+    },
+    {
+      "v": "5GL9JoH4Sws",
+      "t": "Fifth Harmony - Work from Home (Official Video) ft. Ty Dolla $ign",
+      "a": "Fifth Harmony"
+    },
+    {
+      "v": "kOkQ4T5WO9E",
+      "t": "Calvin Harris, Rihanna - This Is What You Came For (Official Video)",
+      "a": "Calvin Harris, Rihanna"
+    },
+    {
+      "v": "t4H_Zoh7G5A",
+      "t": "Jennifer Lopez, Pitbull - On The Floor (Official Music Video)",
+      "a": "Jennifer Lopez, Pitbull"
+    },
+    {
+      "v": "ixkoVwKQaJg",
+      "t": "DJ Snake - Taki Taki ft. Selena Gomez, Ozuna, Cardi B (Official Music Video)",
+      "a": "DJ Snake"
+    },
+    {
+      "v": "5qm8PH4xAss",
+      "t": "50 Cent - In Da Club (Official Music Video)",
+      "a": "50 Cent"
+    },
+    {
+      "v": "ALZHF5UqnU4",
+      "t": "Marshmello - Alone (Official Music Video)",
+      "a": "Marshmello"
+    },
+    {
+      "v": "8UVNT4wvIGY",
+      "t": "Gotye - Somebody That I Used To Know (feat. Kimbra) [Official Music Video]",
+      "a": "Gotye"
+    },
+    {
+      "v": "PIh2xe4jnpk",
+      "t": "MAGIC! - Rude (Official Video)",
+      "a": "MAGIC!"
+    },
+    {
+      "v": "7PCkvCPvDXk",
+      "t": "Meghan Trainor - All About That Bass (Official Video)",
+      "a": "Meghan Trainor"
+    },
+    {
+      "v": "KQ6zr6kCPj8",
+      "t": "LMFAO - Party Rock Anthem ft. Lauren Bennett, GoonRock",
+      "a": "LMFAO"
+    },
+    {
+      "v": "hLQl3WQQoQ0",
+      "t": "Adele - Someone Like You (Official Music Video)",
+      "a": "Adele"
+    },
+    {
+      "v": "PMivT7MJ41M",
+      "t": "Bruno Mars - That’s What I Like [Official Music Video]",
+      "a": "Bruno Mars"
+    },
+    {
+      "v": "FM7MFYoylVs",
+      "t": "The Chainsmokers & Coldplay - Something Just Like This (Official Lyric Video)",
+      "a": "The Chainsmokers & Coldplay"
+    },
+    {
+      "v": "IcrbM1l_BoI",
+      "t": "Avicii - Wake Me Up (Official Video)",
+      "a": "Avicii"
+    },
+    {
+      "v": "djV11Xbc914",
+      "t": "a-ha - Take On Me (Official Video) [4K]",
+      "a": "a-ha"
+    },
+    {
+      "v": "V1Pl8CzNzCw",
+      "t": "Billie Eilish, Khalid - lovely",
+      "a": "Billie Eilish, Khalid"
+    },
+    {
+      "v": "8SbUC-UaAxE",
+      "t": "Guns N' Roses - November Rain",
+      "a": "Guns N' Roses"
+    },
+    {
+      "v": "SXiSVQZLje8",
+      "t": "Ariana Grande ft. Nicki Minaj - Side To Side (Official Video) ft. Nicki Minaj",
+      "a": "Ariana Grande ft. Nicki Minaj"
+    },
+    {
+      "v": "YVkUvmDQ3HY",
+      "t": "Eminem - Without Me (Official Music Video)",
+      "a": "Eminem"
+    },
+    {
+      "v": "YBHQbu5rbdQ",
+      "t": "Fifth Harmony - Worth It (Official Video) ft. Kid Ink",
+      "a": "Fifth Harmony"
+    },
+    {
+      "v": "fKopy74weus",
+      "t": "Imagine Dragons - Thunder",
+      "a": "Imagine Dragons"
+    },
+    {
+      "v": "tt2k8PGm-TI",
+      "t": "ZAYN - Dusk Till Dawn (Official Video) ft. Sia",
+      "a": "ZAYN"
+    },
+    {
+      "v": "UprcpdwuwCg",
+      "t": "twenty one pilots: Heathens (from Suicide Squad: The Album) [OFFICIAL VIDEO]",
+      "a": "International"
+    },
+    {
+      "v": "AJtDXIazrMo",
+      "t": "Ellie Goulding - Love Me Like You Do (Official Video)",
+      "a": "Ellie Goulding"
+    },
+    {
+      "v": "Zi_XLOBDo_Y",
+      "t": "Michael Jackson - Billie Jean (Official Video)",
+      "a": "Michael Jackson"
+    },
+    {
+      "v": "eVTXPUF4Oz4",
+      "t": "In The End [Official HD Music Video] - Linkin Park",
+      "a": "In The End [Official HD Music Video]"
+    },
+    {
+      "v": "Io0fBr1XBUA",
+      "t": "The Chainsmokers - Don't Let Me Down (Official Video) ft. Daya",
+      "a": "The Chainsmokers"
+    },
+    {
+      "v": "yzTuBuRdAyA",
+      "t": "The Weeknd - The Hills",
+      "a": "The Weeknd"
+    },
+    {
+      "v": "DK_0jXPuIr0",
+      "t": "Justin Bieber - What Do You Mean?",
+      "a": "Justin Bieber"
+    },
+    {
+      "v": "q0hyYWKXF0Q",
+      "t": "TONES AND I - DANCE MONKEY (OFFICIAL VIDEO)",
+      "a": "TONES AND I"
+    },
+    {
+      "v": "L3wKzyIN1yk",
+      "t": "Rag'n'Bone Man - Human (Official Video)",
+      "a": "Rag'n'Bone Man"
+    },
+    {
+      "v": "YykjpeuMNEk",
+      "t": "Coldplay - Hymn For The Weekend (Official Video)",
+      "a": "Coldplay"
+    },
+    {
+      "v": "6NXnxTNIWkc",
+      "t": "4 Non Blondes - What's Up (Official Music Video)",
+      "a": "4 Non Blondes"
+    },
+    {
+      "v": "XXYlFuWEuKI",
+      "t": "The Weeknd - Save Your Tears (Official Music Video)",
+      "a": "The Weeknd"
+    },
+    {
+      "v": "l0U7SxXHkPY",
+      "t": "Future - Life Is Good (Official Music Video) ft. Drake",
+      "a": "Future"
+    },
+    {
+      "v": "hTWKbfoikeg",
+      "t": "Nirvana - Smells Like Teen Spirit (Official Music Video)",
+      "a": "Nirvana"
+    },
+    {
+      "v": "LjhCEhWiKXk",
+      "t": "Bruno Mars - Just The Way You Are (Official Music Video)",
+      "a": "Bruno Mars"
+    },
+    {
+      "v": "JRfuAukYTKg",
+      "t": "David Guetta - Titanium ft. Sia (Official Video)",
+      "a": "David Guetta"
+    },
+    {
+      "v": "euCqAq6BRa4",
+      "t": "DJ Snake - Let Me Love You (Official Music Video) ft. Justin Bieber",
+      "a": "DJ Snake"
+    },
+    {
+      "v": "uxpDa-c-4Mc",
+      "t": "Drake - Hotline Bling",
+      "a": "Drake"
+    },
+    {
+      "v": "0HDdjwpPM3Y",
+      "t": "Jessie J - Bang Bang ft. Ariana Grande, Nicki Minaj",
+      "a": "Jessie J"
+    },
+    {
+      "v": "j5-yKhDd64s",
+      "t": "Eminem - Not Afraid",
+      "a": "Eminem"
+    },
+    {
+      "v": "fPO76Jlnz6c",
+      "t": "Coolio - Gangsta's Paradise (feat. L.V.) [Official Music Video]",
+      "a": "Coolio"
+    },
+    {
+      "v": "fJ9rUzIMcZQ",
+      "t": "Queen – Bohemian Rhapsody (Official Video Remastered)",
+      "a": "Queen"
+    },
+    {
+      "v": "OpQFFLBMEPI",
+      "t": "P!nk - Just Give Me a Reason (Official Video) ft. Nate Ruess",
+      "a": "P!nk"
+    },
+    {
+      "v": "1G4isv_Fylg",
+      "t": "Coldplay - Paradise (Official Video)",
+      "a": "Coldplay"
+    },
+    {
+      "v": "qrO4YZeyl0I",
+      "t": "Lady Gaga - Bad Romance (Official Music Video)",
+      "a": "Lady Gaga"
+    },
+    {
+      "v": "HCjNJDNzw8Y",
+      "t": "Camila Cabello - Havana (Audio) ft. Young Thug",
+      "a": "Camila Cabello"
+    },
+    {
+      "v": "Pkh8UtuejGw",
+      "t": "Shawn Mendes, Camila Cabello - Señorita",
+      "a": "Shawn Mendes, Camila Cabello"
+    },
+    {
+      "v": "1w7OgIMMRc4",
+      "t": "Guns N' Roses - Sweet Child O' Mine (Official Music Video)",
+      "a": "Guns N' Roses"
+    },
+    {
+      "v": "vjW8wmF5VWc",
+      "t": "Silentó - Watch Me (Whip/Nae Nae) (Official)",
+      "a": "Silentó"
+    },
+    {
+      "v": "ru0K8uYEZWw",
+      "t": "Justin Timberlake - CAN'T STOP THE FEELING! (from DreamWorks Animation's \"TROLLS\") (Official Video)",
+      "a": "Justin Timberlake"
+    },
+    {
+      "v": "QK8mJJJvaes",
+      "t": "MACKLEMORE & RYAN LEWIS - THRIFT SHOP FEAT. WANZ (OFFICIAL VIDEO)",
+      "a": "MACKLEMORE & RYAN LEWIS"
+    },
+    {
+      "v": "nYh-n7EOtMA",
+      "t": "Sia - Cheap Thrills (Official Lyric Video) ft. Sean Paul",
+      "a": "Sia"
+    },
+    {
+      "v": "CTFtOOh47oo",
+      "t": "French Montana - Unforgettable ft. Swae Lee",
+      "a": "French Montana"
+    },
+    {
+      "v": "3JWTaaS7LdU",
+      "t": "Whitney Houston - I Will Always Love You (Official 4K Video)",
+      "a": "Whitney Houston"
+    },
+    {
+      "v": "weeI1G46q0o",
+      "t": "DJ Khaled - I'm The One ft. Justin Bieber, Quavo, Chance the Rapper, Lil Wayne",
+      "a": "DJ Khaled"
+    },
+    {
+      "v": "bpOSxM0rNPM",
+      "t": "Arctic Monkeys - Do I Wanna Know? (Official Video)",
+      "a": "Arctic Monkeys"
+    },
+    {
+      "v": "kPa7bsKwL-c",
+      "t": "Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)",
+      "a": "Lady Gaga, Bruno Mars"
+    },
+    {
+      "v": "0yW7w8F2TVA",
+      "t": "James Arthur - Say You Won't Let Go",
+      "a": "James Arthur"
+    },
+    {
+      "v": "6Ejga4kJUts",
+      "t": "The Cranberries - Zombie (Official Music Video)",
+      "a": "The Cranberries"
+    },
+    {
+      "v": "79DijItQXMM",
+      "t": "Dwayne Johnson - You're Welcome (from Moana/Official Video)",
+      "a": "Dwayne Johnson"
+    },
+    {
+      "v": "bo_efYhYU2A",
+      "t": "Lady Gaga, Bradley Cooper - Shallow (from A Star Is Born) (Official Music Video)",
+      "a": "Lady Gaga, Bradley Cooper"
+    },
+    {
+      "v": "fWNaR-rxAic",
+      "t": "Carly Rae Jepsen - Call Me Maybe",
+      "a": "Carly Rae Jepsen"
+    },
+    {
+      "v": "gCYcHz2k5x0",
+      "t": "Martin Garrix - Animals (Official Video)",
+      "a": "Martin Garrix"
+    },
+    {
+      "v": "NGLxoKOvzu4",
+      "t": "Jason Derulo - Swalla (feat. Nicki Minaj & Ty Dolla $ign) [Official Music Video]",
+      "a": "Jason Derulo"
+    },
+    {
+      "v": "bnVUHWCynig",
+      "t": "Beyoncé - Halo",
+      "a": "Beyoncé"
+    },
+    {
+      "v": "8WYHDfJDPDc",
+      "t": "Nelly - Dilemma (Official Music Video) ft. Kelly Rowland",
+      "a": "Nelly"
+    },
+    {
+      "v": "nfs8NYg7yQM",
+      "t": "Charlie Puth - Attention [Official Video]",
+      "a": "Charlie Puth"
+    },
+    {
+      "v": "oyEuk8j8imI",
+      "t": "Justin Bieber - Love Yourself (PURPOSE : The Movement)",
+      "a": "Justin Bieber"
+    },
+    {
+      "v": "dQw4w9WgXcQ",
+      "t": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+      "a": "Rick Astley"
+    },
+    {
+      "v": "LHCob76kigA",
+      "t": "Lukas Graham - 7 Years [Official Music Video]",
+      "a": "Lukas Graham"
+    },
+    {
+      "v": "4fndeDfaWCg",
+      "t": "Backstreet Boys - I Want It That Way (Official HD Video)",
+      "a": "Backstreet Boys"
+    },
+    {
+      "v": "bESGLojNYSo",
+      "t": "Lady Gaga - Poker Face (Official Music Video)",
+      "a": "Lady Gaga"
+    },
+    {
+      "v": "LjxulQ1bEWg",
+      "t": "Tyga - Taste (Official Video) ft. Offset",
+      "a": "Tyga"
+    },
+    {
+      "v": "yebNIHKAC4A",
+      "t": "“Golden” Official Lyric Video | KPop Demon Hunters | Sony Animation",
+      "a": "“Golden” Official Lyric Video"
+    },
+    {
+      "v": "UqyT8IEBkvY",
+      "t": "Bruno Mars - 24K Magic (Official Music Video)",
+      "a": "Bruno Mars"
+    },
+    {
+      "v": "3YxaaGgTQYM",
+      "t": "Evanescence - Bring Me To Life (Official HD Music Video) ft. Paul McCoy",
+      "a": "Evanescence"
+    },
+    {
+      "v": "ebXbLfLACGM",
+      "t": "Calvin Harris - Summer (Official Video)",
+      "a": "Calvin Harris"
+    },
+    {
+      "v": "v2AC41dglnM",
+      "t": "AC/DC - Thunderstruck (Official Video)",
+      "a": "AC/DC"
+    },
+    {
+      "v": "OMOGaugKpzs",
+      "t": "The Police - Every Breath You Take (Official Music Video)",
+      "a": "The Police"
+    },
+    {
+      "v": "QtXby3twMmI",
+      "t": "Coldplay - Adventure Of A Lifetime (Official Video)",
+      "a": "Coldplay"
+    },
+    {
+      "v": "nCkpzqqog4k",
+      "t": "Sam Smith - I'm Not The Only One (Official Music Video)",
+      "a": "Sam Smith"
+    },
+    {
+      "v": "PIb6AZdTr-A",
+      "t": "Cyndi Lauper - Girls Just Want To Have Fun (Official Video)",
+      "a": "Cyndi Lauper"
+    },
+    {
+      "v": "_CL6n0FJZpk",
+      "t": "Dr. Dre - Still D.R.E. ft. Snoop Dogg",
+      "a": "Dr. Dre"
+    },
+    {
+      "v": "VuNIsY6JdUw",
+      "t": "Taylor Swift - You Belong With Me",
+      "a": "Taylor Swift"
+    },
+    {
+      "v": "xTlNMmZKwpA",
+      "t": "Cardi B, Bad Bunny & J Balvin - I Like It [Official Music Video]",
+      "a": "Cardi B, Bad Bunny & J Balvin"
+    },
+    {
+      "v": "ZyhrYis509A",
+      "t": "Aqua - Barbie Girl (Official Music Video)",
+      "a": "Aqua"
+    },
+    {
+      "v": "QJO3ROT-A4E",
+      "t": "One Direction - What Makes You Beautiful (Official Video)",
+      "a": "One Direction"
+    },
+    {
+      "v": "VbfpW0pbvaU",
+      "t": "Shawn Mendes - Stitches (Official Music Video)",
+      "a": "Shawn Mendes"
+    },
+    {
+      "v": "SC4xMk98Pdc",
+      "t": "Post Malone - Congratulations (Official Music Video) ft. Quavo",
+      "a": "Post Malone"
+    },
+    {
+      "v": "uO59tfQ2TbA",
+      "t": "David Guetta - Hey Mama (Official Video) ft Nicki Minaj, Bebe Rexha & Afrojack",
+      "a": "David Guetta"
+    },
+    {
+      "v": "xpVfcZ0ZcFM",
+      "t": "Drake - God's Plan",
+      "a": "Drake"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 @inject NavigationManager Nav
+@implements IDisposable
 
 <form class="search-box" role="search" @onsubmit="Submit" @onsubmit:preventDefault="true">
     <span class="search-box-icon" aria-hidden="true">
@@ -6,21 +7,27 @@
     </span>
     <input type="search"
            class="search-box-input"
-           placeholder="Tìm bài hát, nghệ sĩ..."
-           aria-label="Tìm kiếm bài hát"
+           placeholder="@Lang.T("Tìm bài hát, nghệ sĩ...")"
+           aria-label="@Lang.T("Tìm kiếm bài hát")"
            @bind="_keyword"
            @bind:event="oninput" />
     <button type="submit"
             class="search-box-button"
-            title="Tìm kiếm"
-            aria-label="Tìm kiếm"
+            title="@Lang.T("Tìm kiếm")"
+            aria-label="@Lang.T("Tìm kiếm")"
             disabled="@(string.IsNullOrWhiteSpace(_keyword))">
-        Tìm
+        @Lang.T("Tìm")
     </button>
 </form>
 
 @code {
     private string _keyword = string.Empty;
+
+    protected override void OnInitialized() => Lang.OnChange += RefreshLanguage;
+
+    private void RefreshLanguage() => _ = InvokeAsync(StateHasChanged);
+
+    public void Dispose() => Lang.OnChange -= RefreshLanguage;
 
     private void Submit()
     {

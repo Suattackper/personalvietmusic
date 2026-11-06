@@ -13,6 +13,12 @@
 - 🌙 Dark mode mặc định, chuyển dark/light, ghi nhớ lựa chọn
 - 📱 Responsive: sidebar cố định (desktop) → thu gọn icon (tablet) → drawer (mobile)
 - 🔔 Toast thông báo lỗi/thành công thống nhất, tự chuyển bài khi video lỗi hoặc không cho nhúng
+- 🌐 Giao diện tiếng Việt (mặc định) và tiếng Anh, ghi nhớ lựa chọn trong trình duyệt
+- 🎼 Bốn bộ sưu tập nhạc Việt, Anh, Nhật, Trung; tìm bài trong từng danh sách
+
+## Tác giả và thời gian
+
+Nguyễn Trần Anh Tân — Software Engineer, sinh năm 2003. Dự án cá nhân cho portfolio, bắt đầu ngày 24/07/2026 theo commit Git đầu tiên và đang tiếp tục phát triển.
 
 ## Công nghệ
 

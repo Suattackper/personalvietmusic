@@ -1,7 +1,7 @@
 {
-  "name": "AnhTanMusic - Nghe nhạc Việt",
+  "name": "AnhTanMusic",
   "short_name": "AnhTanMusic",
-  "description": "Web nghe nhạc Việt — tìm kiếm và phát nhạc qua YouTube.",
+  "description": "Khám phá và phát nhạc Việt, Anh, Nhật, Trung qua YouTube.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",

@@ -3,19 +3,19 @@
 @inject ToastService Toasts
 @implements IDisposable
 
-<PageTitle>Nghe gần đây - AnhTanMusic</PageTitle>
+<PageTitle>@Lang.T("Nghe gần đây") - AnhTanMusic</PageTitle>
 
 <section class="page-section">
     <div class="page-heading-row">
         <h1 class="page-heading">
             <span class="page-heading-icon" aria-hidden="true"><Icon Name="clock" Size="22" /></span>
-            Nghe gần đây
+            @Lang.T("Nghe gần đây")
         </h1>
         @if (Recent.History.Count > 0)
         {
             <button class="button-secondary" @onclick="ClearHistoryAsync">
                 <Icon Name="trash" Size="16" />
-                Xóa lịch sử
+                @Lang.T("Xóa lịch sử")
             </button>
         }
     </div>
@@ -28,7 +28,7 @@
     }
     else
     {
-        <p class="page-subtitle">@Recent.History.Count bài hát đã nghe gần đây</p>
+        <p class="page-subtitle">@Lang.F("{0} bài hát đã nghe gần đây", Recent.History.Count)</p>
         <TrackList Tracks="Recent.History" />
     }
 </section>
@@ -44,7 +44,7 @@
     private async Task ClearHistoryAsync()
     {
         await Recent.ClearAsync();
-        Toasts.ShowInfo("Đã xóa lịch sử nghe.");
+        Toasts.ShowInfo(Lang.T("Đã xóa lịch sử nghe."));
     }
 
     public void Dispose()

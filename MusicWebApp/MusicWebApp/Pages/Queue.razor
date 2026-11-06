@@ -3,19 +3,19 @@
 @inject ToastService Toasts
 @implements IDisposable
 
-<PageTitle>Hàng đợi - AnhTanMusic</PageTitle>
+<PageTitle>@Lang.T("Hàng đợi") - AnhTanMusic</PageTitle>
 
 <section class="page-section">
     <div class="page-heading-row">
         <h1 class="page-heading">
             <span class="page-heading-icon" aria-hidden="true"><Icon Name="queue" Size="22" /></span>
-            Hàng đợi phát
+            @Lang.T("Hàng đợi phát")
         </h1>
         @if (PlayerState.Queue.Count > 0)
         {
             <button class="button-secondary" @onclick="ClearQueue">
                 <Icon Name="trash" Size="16" />
-                Xóa toàn bộ
+                @Lang.T("Xóa toàn bộ")
             </button>
         }
     </div>
@@ -28,7 +28,7 @@
     }
     else
     {
-        <p class="page-subtitle">@PlayerState.Queue.Count bài hát trong hàng đợi</p>
+        <p class="page-subtitle">@Lang.F("{0} bài hát trong hàng đợi", PlayerState.Queue.Count)</p>
         <QueuePanel />
     }
 </section>
@@ -44,7 +44,7 @@
     private void ClearQueue()
     {
         PlayerState.ClearQueue();
-        Toasts.ShowInfo("Đã xóa toàn bộ hàng đợi.");
+        Toasts.ShowInfo(Lang.T("Đã xóa toàn bộ hàng đợi."));
     }
 
     public void Dispose()

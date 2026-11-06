@@ -1,69 +1,111 @@
 @page "/about"
 
-<PageTitle>Giới thiệu - AnhTanMusic</PageTitle>
+<PageTitle>@Lang.T("Giới thiệu") - AnhTanMusic</PageTitle>
 
 <section class="page-section about-page">
     <h1 class="page-heading">
         <span class="page-heading-icon" aria-hidden="true"><Icon Name="info" Size="22" /></span>
-        Giới thiệu AnhTanMusic
+        @Lang.T("Giới thiệu AnhTanMusic")
     </h1>
 
     <div class="about-hero">
         <span class="about-hero-icon" aria-hidden="true">🎵</span>
-        <p>
-            <strong>AnhTanMusic</strong> là web nghe nhạc Việt miễn phí, tìm kiếm bằng
-            YouTube và phát trực tiếp qua trình phát YouTube nhúng. Toàn bộ chạy trên
-            trình duyệt của bạn — không cần đăng nhập, dữ liệu yêu thích/hàng đợi lưu
-            ngay trên máy.
-        </p>
+        @if (Lang.Code == "vi")
+        {
+            <p><strong>AnhTanMusic</strong> là dự án web nghe nhạc của tôi. Ứng dụng tìm bài hát qua YouTube, phát bằng trình phát nhúng và lưu yêu thích, hàng đợi, lịch sử ngay trong trình duyệt. Bạn có thể khám phá các bộ sưu tập nhạc Việt, Anh, Nhật và Trung.</p>
+        }
+        else
+        {
+            <p><strong>AnhTanMusic</strong> is my personal music web project. It finds songs through YouTube, plays them with the embedded player, and stores favorites, queue and history in your browser. Explore Vietnamese, English, Japanese and Chinese music collections.</p>
+        }
+    </div>
+
+    <div class="about-card about-author">
+        <h2>👨‍💻 @Lang.T("Tác giả")</h2>
+        <h3>Nguyễn Trần Anh Tân</h3>
+        <p>@Lang.T("Kỹ sư phần mềm") · @Lang.T("Sinh năm 2003")</p>
+        <p>@Lang.T("Dự án cá nhân trong portfolio của tôi.")</p>
+        <p>@Lang.T("Bắt đầu dự án: 24/07/2026") · @Lang.T("Đang phát triển")</p>
     </div>
 
     <div class="about-grid">
         <div class="about-card">
-            <h2>✨ Tính năng chính</h2>
+            <h2>@Lang.T("✨ Tính năng chính")</h2>
+            @if (Lang.Code == "vi")
+            {
+                <ul>
+                    <li>Tìm kiếm bài hát và nghệ sĩ qua YouTube.</li>
+                    <li>Khám phá playlist có sẵn và bốn bộ sưu tập theo ngôn ngữ.</li>
+                    <li>Lưu bài yêu thích, hàng đợi và lịch sử nghe trên thiết bị.</li>
+                    <li>Phát, tạm dừng, chuyển bài, lặp, phát ngẫu nhiên, tua và chỉnh âm lượng.</li>
+                    <li>Giao diện sáng/tối, Anh–Việt và bố cục phù hợp điện thoại.</li>
+                </ul>
+            }
+            else
+            {
+                <ul>
+                    <li>Search for songs and artists through YouTube.</li>
+                    <li>Explore curated playlists and four language collections.</li>
+                    <li>Keep favorites, queue and listening history on your device.</li>
+                    <li>Play, pause, skip, repeat, shuffle, seek and adjust volume.</li>
+                    <li>Light and dark themes, English and Vietnamese, and a responsive layout.</li>
+                </ul>
+            }
+        </div>
+
+        <div class="about-card">
+            <h2>@Lang.T("📖 Cách dùng")</h2>
+            @if (Lang.Code == "vi")
+            {
+                <ol>
+                    <li>Chọn một playlist hoặc tìm bài hát trong ô tìm kiếm phía trên.</li>
+                    <li>Bấm vào bài hát để phát. Dùng thanh phát để điều khiển hàng đợi.</li>
+                    <li>Bấm biểu tượng trái tim để lưu bài yêu thích.</li>
+                    <li>Dùng nút VI/EN trên đầu trang để đổi ngôn ngữ.</li>
+                </ol>
+            }
+            else
+            {
+                <ol>
+                    <li>Choose a playlist or search for a song at the top of the page.</li>
+                    <li>Select a song to play it. Use the player bar to control the queue.</li>
+                    <li>Tap the heart to save a favorite song.</li>
+                    <li>Use the VI/EN selector in the header to change language.</li>
+                </ol>
+            }
+        </div>
+
+        <div class="about-card">
+            <h2>@Lang.T("🛠️ Công nghệ & công cụ")</h2>
             <ul>
-                <li>Tìm kiếm bài hát, nghệ sĩ theo thời gian thực.</li>
-                <li>Playlist có sẵn — bấm là phát cả list ngay.</li>
-                <li>Yêu thích, Hàng đợi, Nghe gần đây (lưu trên máy).</li>
-                <li>Trình phát: phát/dừng, chuyển bài, lặp, phát ngẫu nhiên, tua, âm lượng.</li>
-                <li>Giao diện sáng/tối, responsive cho điện thoại.</li>
+                <li>C#, Blazor WebAssembly, .NET 8</li>
+                <li>JavaScript interop, HTML, CSS</li>
+                <li>YouTube Data API v3, YouTube IFrame Player API</li>
+                <li>Browser localStorage</li>
+                <li>Git, GitHub Actions, GitHub Pages</li>
             </ul>
         </div>
 
         <div class="about-card">
-            <h2>📖 Cách dùng</h2>
-            <ol>
-                <li><strong>Nghe nhanh:</strong> vào Trang chủ hoặc mục Playlist, bấm một playlist là phát luôn.</li>
-                <li><strong>Tìm bài:</strong> gõ tên bài/ca sĩ ở ô tìm kiếm trên đầu, nhấn Enter.</li>
-                <li><strong>Phát:</strong> bấm vào một thẻ bài hát để phát; bấm lại vào bài đang phát để tạm dừng / phát tiếp.</li>
-                <li><strong>Yêu thích:</strong> bấm biểu tượng ♥ trên bài hát hoặc trên thanh phát.</li>
-                <li><strong>Hàng đợi:</strong> bấm dấu ＋ để thêm bài vào hàng đợi.</li>
-                <li><strong>Khung video:</strong> dùng nút tròn góc phải dưới để ẩn/hiện khung video YouTube.</li>
-                <li><strong>Đổi giao diện:</strong> bấm biểu tượng mặt trời/mặt trăng trên đầu.</li>
-            </ol>
-        </div>
-
-        <div class="about-card">
-            <h2>🛠️ Công nghệ</h2>
-            <ul>
-                <li>Blazor WebAssembly (.NET 8), chạy 100% phía trình duyệt.</li>
-                <li>YouTube Data API v3 để tìm kiếm.</li>
-                <li>YouTube IFrame Player API để phát nhạc.</li>
-                <li>localStorage để lưu yêu thích, hàng đợi, lịch sử, giao diện.</li>
-            </ul>
-        </div>
-
-        <div class="about-card">
-            <h2>⚠️ Lưu ý &amp; giới hạn</h2>
-            <ul>
-                <li>Nhạc phát qua YouTube nên <strong>có thể có quảng cáo</strong> (tùy video), không thể tắt.</li>
-                <li>Một số video bị chặn nhúng sẽ không phát được — app tự chuyển bài kế tiếp.</li>
-                <li>Trên điện thoại, phát nền khi khóa màn hình/đổi tab bị hạn chế bởi YouTube.</li>
-                <li>Cần có kết nối mạng để nghe.</li>
-                <li>Dữ liệu lưu theo trình duyệt — xóa dữ liệu duyệt web sẽ mất.</li>
-            </ul>
+            <h2>@Lang.T("⚠️ Lưu ý & giới hạn")</h2>
+            @if (Lang.Code == "vi")
+            {
+                <ul>
+                    <li>Video YouTube có thể có quảng cáo hoặc không cho phép phát nhúng.</li>
+                    <li>Cần kết nối mạng để nghe; phát nền trên điện thoại có thể bị hạn chế.</li>
+                    <li>Dữ liệu lưu trong trình duyệt và sẽ mất nếu xóa dữ liệu duyệt web.</li>
+                </ul>
+            }
+            else
+            {
+                <ul>
+                    <li>YouTube videos may show ads or disallow embedded playback.</li>
+                    <li>An internet connection is required; background playback on phones may be limited.</li>
+                    <li>Data is stored in your browser and is lost if you clear browser data.</li>
+                </ul>
+            }
         </div>
     </div>
 
-    <p class="about-footer">Chúc bạn nghe nhạc vui vẻ! 💜</p>
+    <p class="about-footer">@Lang.T("Chúc bạn nghe nhạc vui vẻ! 💜")</p>
 </section>

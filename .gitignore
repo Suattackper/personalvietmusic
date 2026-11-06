@@ -14,3 +14,7 @@ publish/
 # OS
 Thumbs.db
 .DS_Store
+
+# Local music research and verification output
+/music-candidates/recent-pool.json
+/music-candidates/embed-report.json

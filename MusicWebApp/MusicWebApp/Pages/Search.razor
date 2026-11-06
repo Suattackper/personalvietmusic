@@ -3,14 +3,14 @@
 @inject ToastService Toasts
 @implements IDisposable
 
-<PageTitle>Tìm kiếm - AnhTanMusic</PageTitle>
+<PageTitle>@Lang.T("Tìm kiếm") - AnhTanMusic</PageTitle>
 
 <section class="page-section">
     @if (string.IsNullOrEmpty(_currentKeyword))
     {
         <h1 class="page-heading">
             <span class="page-heading-icon" aria-hidden="true"><Icon Name="search" Size="22" /></span>
-            Tìm kiếm
+            @Lang.T("Tìm kiếm")
         </h1>
         <EmptyState IconName="search"
                     Title="Bắt đầu tìm kiếm"
@@ -20,7 +20,7 @@
     {
         <h1 class="page-heading">
             <span class="page-heading-icon" aria-hidden="true"><Icon Name="search" Size="22" /></span>
-            Kết quả cho "@_currentKeyword"
+            @Lang.F("Kết quả cho \"{0}\"", _currentKeyword)
         </h1>
 
         @if (_isLoading)
@@ -30,7 +30,7 @@
         else if (_errorMessage is not null)
         {
             <EmptyState IconName="close" Title="Đã xảy ra lỗi" Description="@_errorMessage">
-                <button class="button-primary" @onclick="RetryAsync">Thử lại</button>
+                <button class="button-primary" @onclick="RetryAsync">@Lang.T("Thử lại")</button>
             </EmptyState>
         }
         else if (_tracks.Count == 0)
@@ -52,7 +52,7 @@
                     }
                     else
                     {
-                        <button class="button-secondary" @onclick="LoadMoreAsync">Tải thêm kết quả</button>
+                        <button class="button-secondary" @onclick="LoadMoreAsync">@Lang.T("Tải thêm kết quả")</button>
                     }
                 </div>
             }

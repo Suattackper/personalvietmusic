@@ -3,7 +3,7 @@
 @inject MusicPlayerState PlayerState
 @inject ToastService Toasts
 
-<PageTitle>@(_playlist?.Name ?? "Playlist") - AnhTanMusic</PageTitle>
+<PageTitle>@Lang.T(_playlist?.Name ?? "Playlist") - AnhTanMusic</PageTitle>
 
 <section class="page-section">
     @if (_playlist is null && !_loaded)
@@ -15,7 +15,7 @@
         <EmptyState IconName="disc"
                     Title="Không tìm thấy playlist"
                     Description="Playlist này không tồn tại hoặc đã bị xóa.">
-            <a class="button-primary" href="playlists">Xem tất cả playlist</a>
+            <a class="button-primary" href="playlists">@Lang.T("Xem tất cả playlist")</a>
         </EmptyState>
     }
     else
@@ -23,22 +23,40 @@
         <div class="page-heading-row">
             <h1 class="page-heading">
                 <span class="page-heading-icon playlist-heading-emoji" aria-hidden="true">@_playlist.Emoji</span>
-                @_playlist.Name
+                @Lang.T(_playlist.Name)
             </h1>
             <div class="playlist-actions">
                 <button class="button-primary" @onclick="PlayAll">
                     <Icon Name="play" Size="16" />
-                    Phát tất cả
+                    @Lang.T("Phát tất cả")
                 </button>
                 <button class="button-secondary" @onclick="PlayShuffled">
                     <Icon Name="shuffle" Size="16" />
-                    Phát ngẫu nhiên
+                    @Lang.T("Phát ngẫu nhiên")
                 </button>
             </div>
         </div>
-        <p class="page-subtitle">@_playlist.Description — @_tracks.Count bài</p>
+        <p class="page-subtitle">@Lang.T(_playlist.Description) — @Lang.F("{0} bài", _tracks.Count)</p>
 
-        <TrackList Tracks="_tracks" />
+        @if (IsCountryCollection)
+        {
+            <div class="playlist-find">
+                <label for="playlist-search">@Lang.T("Tìm bài trong danh sách")</label>
+                <input id="playlist-search" type="search" placeholder="@Lang.T("Tên bài hát hoặc nghệ sĩ...")"
+                       @bind="_query" @bind:event="oninput" />
+                <span>@VisibleTracks.Count / @Lang.F("{0} bài", _tracks.Count)</span>
+            </div>
+        }
+
+        @if (VisibleTracks.Count == 0)
+        {
+            <EmptyState IconName="search" Title="Không tìm thấy bài hát"
+                        Description="Thử tìm bằng tên bài hoặc nghệ sĩ khác." />
+        }
+        else
+        {
+            <TrackList Tracks="VisibleTracks" />
+        }
     }
 </section>
 
@@ -52,6 +70,12 @@
     private List<MusicTrack> _tracks = new();
     private bool _loaded;
     private string? _loadedId;
+    private string _query = string.Empty;
+    private bool IsCountryCollection => _playlist?.Id.StartsWith("country-") == true || _playlist?.Id.StartsWith("recent-") == true;
+    private IReadOnlyList<MusicTrack> VisibleTracks => string.IsNullOrWhiteSpace(_query)
+        ? _tracks
+        : _tracks.Where(t => t.Title.Contains(_query.Trim(), StringComparison.OrdinalIgnoreCase)
+                          || t.Artist.Contains(_query.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -62,6 +86,7 @@
 
         _loadedId = PlaylistId;
         _loaded = false;
+        _query = string.Empty;
         _playlist = await PlaylistSvc.GetByIdAsync(PlaylistId);
         _tracks = _playlist?.Tracks.Select(t => t.ToMusicTrack()).ToList() ?? new List<MusicTrack>();
         _loaded = true;
@@ -75,18 +100,20 @@
 
     private void PlayAll()
     {
-        if (_tracks.Count == 0)
+        var tracks = VisibleTracks;
+        if (tracks.Count == 0)
         {
             return;
         }
 
-        PlayerState.SetQueue(_tracks, 0);
-        Toasts.ShowSuccess($"Đang phát playlist \"{_playlist!.Name}\" ({_tracks.Count} bài).");
+        PlayerState.SetQueue(tracks, 0);
+        Toasts.ShowSuccess(Lang.F("Đang phát playlist \"{0}\" ({1} bài).", Lang.T(_playlist!.Name), tracks.Count));
     }
 
     private void PlayShuffled()
     {
-        if (_tracks.Count == 0)
+        var tracks = VisibleTracks;
+        if (tracks.Count == 0)
         {
             return;
         }
@@ -95,7 +122,7 @@
         {
             PlayerState.ToggleShuffle();
         }
-        PlayerState.SetQueue(_tracks, Random.Shared.Next(_tracks.Count));
-        Toasts.ShowSuccess($"Đang phát ngẫu nhiên \"{_playlist!.Name}\".");
+        PlayerState.SetQueue(tracks, Random.Shared.Next(tracks.Count));
+        Toasts.ShowSuccess(Lang.F("Đang phát ngẫu nhiên \"{0}\".", Lang.T(_playlist!.Name)));
     }
 }

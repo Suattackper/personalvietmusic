@@ -12,6 +12,7 @@ public static class StorageKeys
     public const string Queue = "vietmusic_queue";
     public const string RecentlyPlayed = "vietmusic_recently_played";
     public const string Theme = "vietmusic_theme";
+    public const string Language = "vietmusic_language";
     public const string Volume = "vietmusic_volume";
     public const string RepeatMode = "vietmusic_repeat_mode";
     public const string Shuffle = "vietmusic_shuffle";

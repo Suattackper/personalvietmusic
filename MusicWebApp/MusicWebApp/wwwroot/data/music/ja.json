@@ -1,0 +1,658 @@
+{
+  "id": "country-ja",
+  "name": "Nhạc Nhật",
+  "emoji": "🇯🇵",
+  "description": "J-pop và nhạc Nhật nổi bật.",
+  "tracks": [
+    {
+      "v": "-EKxzId_Sj4",
+      "t": "米津玄師  - アイネクライネ , Kenshi Yonezu - Eine Kleine",
+      "a": "米津玄師"
+    },
+    {
+      "v": "-tKVN2mAKRI",
+      "t": "DAOKO × 米津玄師『打上花火』MUSIC VIDEO",
+      "a": "米津玄師"
+    },
+    {
+      "v": "-VKIqrvVOpo",
+      "t": "ヨルシカ - ただ君に晴れ (MUSIC VIDEO)",
+      "a": "ヨルシカ"
+    },
+    {
+      "v": "0xSiBpUdW4E",
+      "t": "あいみょん - マリーゴールド【OFFICIAL MUSIC VIDEO】",
+      "a": "あいみょん"
+    },
+    {
+      "v": "9aJVr5tTTWk",
+      "t": "米津玄師 - ピースサイン , Kenshi Yonezu - Peace Sign",
+      "a": "米津玄師"
+    },
+    {
+      "v": "bt8wNQJaKAk",
+      "t": "Official髭男dism - I LOVE...［Official Video］",
+      "a": "Official髭男dism"
+    },
+    {
+      "v": "dFf4AgBNR1E",
+      "t": "【MV full】 恋するフォーチュンクッキー / AKB48[公式]",
+      "a": "J-pop"
+    },
+    {
+      "v": "Dx_fKPBPYUI",
+      "t": "米津玄師 - LOSER , Kenshi Yonezu",
+      "a": "米津玄師"
+    },
+    {
+      "v": "dy90tA3TT1c",
+      "t": "YOASOBI「怪物」Official Music Video　(YOASOBI - Monster)",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "gJX2iy6nhHc",
+      "t": "米津玄師  - 灰色と青（ ＋菅田将暉 ）,  Kenshi Yonezu - Haiirotoao（+Masaki Suda)",
+      "a": "米津玄師"
+    },
+    {
+      "v": "Hh9yZWeTmVM",
+      "t": "ONE OK ROCK - The Beginning [Official Music Video]",
+      "a": "ONE OK ROCK"
+    },
+    {
+      "v": "jhOVibLEDhA",
+      "t": "星野源 – 恋 (Official Video)",
+      "a": "星野源"
+    },
+    {
+      "v": "kzZ6KXDM1RI",
+      "t": "優里『ドライフラワー』Official Music Video -ディレクターズカットver.-",
+      "a": "J-pop"
+    },
+    {
+      "v": "LIlZCmETvsY",
+      "t": "サカナクション / 新宝島　-Music Video-",
+      "a": "J-pop"
+    },
+    {
+      "v": "LmZD-TU96q4",
+      "t": "米津玄師  Kenshi Yonezu - IRIS OUT",
+      "a": "米津玄師"
+    },
+    {
+      "v": "M2cckDmNLMI",
+      "t": "米津玄師 Kenshi Yonezu - KICKBACK",
+      "a": "米津玄師"
+    },
+    {
+      "v": "Mi9uNu35Gmk",
+      "t": "SEKAI NO OWARI「RPG」",
+      "a": "J-pop"
+    },
+    {
+      "v": "PDSkFeMVNFs",
+      "t": "RADWIMPS - 前前前世 (movie ver.) [Official Music Video]",
+      "a": "RADWIMPS"
+    },
+    {
+      "v": "pgXpM4l_MwI",
+      "t": "【Ado】 唱",
+      "a": "Ado"
+    },
+    {
+      "v": "QjrkrVmC-8M",
+      "t": "Mrs. GREEN APPLE「ライラック」Official Music Video",
+      "a": "Mrs. GREEN APPLE"
+    },
+    {
+      "v": "Qp3b-RXtz4w",
+      "t": "【Ado】うっせぇわ",
+      "a": "Ado"
+    },
+    {
+      "v": "SX_ViT4Ra7k",
+      "t": "米津玄師  Kenshi Yonezu  - Lemon",
+      "a": "米津玄師"
+    },
+    {
+      "v": "TQ8WlA2GXbk",
+      "t": "Official髭男dism - Pretender［Official Video］",
+      "a": "Official髭男dism"
+    },
+    {
+      "v": "UFQEttrn6CQ",
+      "t": "米津玄師 - 感電   Kenshi Yonezu - KANDEN",
+      "a": "米津玄師"
+    },
+    {
+      "v": "wfCcs0vLysk",
+      "t": "Mrs. GREEN APPLE - インフェルノ（Inferno）",
+      "a": "Mrs. GREEN APPLE"
+    },
+    {
+      "v": "x8VYWazR5mE",
+      "t": "YOASOBI「夜に駆ける」 Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "Y4nEEZwckuU",
+      "t": "YOASOBI「群青」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "YnSW8ian29w",
+      "t": "【Ado】踊",
+      "a": "Ado"
+    },
+    {
+      "v": "ZRtdQ81jPUQ",
+      "t": "YOASOBI「アイドル」 Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "Ct6BUPvE2sM",
+      "t": "PIKOTARO - PPAP (Pen Pineapple Apple Pen) (Long Version) (Official Video) [Ultra Records]",
+      "a": "PIKOTARO"
+    },
+    {
+      "v": "QW28YKqdxe0",
+      "t": "NiziU  『Make you happy』 M/V",
+      "a": "J-pop"
+    },
+    {
+      "v": "OIBODIPC_8Y",
+      "t": "YOASOBI「勇者」 Official Music Video／TVアニメ『葬送のフリーレン』オープニングテーマ",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "WIKqgE4BwAY",
+      "t": "BABYMETAL - ギミチョコ！！- Gimme chocolate!! (OFFICIAL)",
+      "a": "BABYMETAL"
+    },
+    {
+      "v": "ptnYBctoexk",
+      "t": "米津玄師  - 馬と鹿   Kenshi Yonezu - Uma to Shika",
+      "a": "米津玄師"
+    },
+    {
+      "v": "51CH3dPaWXc",
+      "t": "スピッツ / ロビンソン",
+      "a": "J-pop"
+    },
+    {
+      "v": "KTZ-y85Erus",
+      "t": "ヨルシカ - だから僕は音楽を辞めた (Music Video)",
+      "a": "ヨルシカ"
+    },
+    {
+      "v": "J5Z7tIq7bco",
+      "t": "スキマスイッチ - 「奏（かなで）」Music Video : SUKIMASWITCH / KANADE Music Video",
+      "a": "スキマスイッチ"
+    },
+    {
+      "v": "sOiMD45QGLs",
+      "t": "【Ado】ギラギラ",
+      "a": "Ado"
+    },
+    {
+      "v": "m34DPnRUfMU",
+      "t": "Mrs. GREEN APPLE - 青と夏",
+      "a": "Mrs. GREEN APPLE"
+    },
+    {
+      "v": "yzC4hFK5P3g",
+      "t": "きゃりーぱみゅぱみゅ - PONPONPON , Kyary Pamyu Pamyu - PONPONPON",
+      "a": "きゃりーぱみゅぱみゅ"
+    },
+    {
+      "v": "DuMqFknYHBs",
+      "t": "Official髭男dism - イエスタデイ［Official Video］",
+      "a": "Official髭男dism"
+    },
+    {
+      "v": "zkNzxsaCunU",
+      "t": "米津玄師 - 春雷   Kenshi Yonezu - Shunrai",
+      "a": "米津玄師"
+    },
+    {
+      "v": "F64yFFnZfkI",
+      "t": "ヨルシカ - 言って。(Music Video)",
+      "a": "ヨルシカ"
+    },
+    {
+      "v": "1FliVTcX8bQ",
+      "t": "【Ado】新時代 (ウタ from ONE PIECE FILM RED)",
+      "a": "Ado"
+    },
+    {
+      "v": "lzAyrgSqeeE",
+      "t": "米津玄師  - orion , Kenshi Yonezu",
+      "a": "米津玄師"
+    },
+    {
+      "v": "yOAwvRmVIyo",
+      "t": "あいみょん - 裸の心【OFFICIAL MUSIC VIDEO】",
+      "a": "あいみょん"
+    },
+    {
+      "v": "gU5oN0KVofU",
+      "t": "Superfly 『愛をこめて花束を』Music Video",
+      "a": "J-pop"
+    },
+    {
+      "v": "Uh6dkL1M9DM",
+      "t": "米津玄師  - Flamingo / Kenshi Yonezu",
+      "a": "米津玄師"
+    },
+    {
+      "v": "lkHlnWFnA0c",
+      "t": "【MV full】 ヘビーローテーション / AKB48 [公式]",
+      "a": "J-pop"
+    },
+    {
+      "v": "0E00Zuayv9Q",
+      "t": "PPAP（Pen-Pineapple-Apple-Pen Official）ペンパイナッポーアッポーペン／PIKOTARO(ピコ太郎)",
+      "a": "J-pop"
+    },
+    {
+      "v": "-kgOFJG881I",
+      "t": "Official髭男dism - 宿命［Official Video］",
+      "a": "Official髭男dism"
+    },
+    {
+      "v": "4-Gw0TAM6-Q",
+      "t": "三代目 J SOUL BROTHERS from EXILE TRIBE / 「R.Y.U.S.E.I.」Music Video",
+      "a": "J-pop"
+    },
+    {
+      "v": "hN5MBlGv2Ac",
+      "t": "Official髭男dism - Subtitle [Official Video]",
+      "a": "Official髭男dism"
+    },
+    {
+      "v": "3eytpBOkOFA",
+      "t": "YOASOBI「祝福」Official Music Video (『機動戦士ガンダム 水星の魔女』オープニングテーマ)",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "O1bhZgkC4Gw",
+      "t": "Official髭男dism - Cry Baby［Official Video］",
+      "a": "Official髭男dism"
+    },
+    {
+      "v": "K_xTet06SUo",
+      "t": "和楽器バンド / 千本桜",
+      "a": "J-pop"
+    },
+    {
+      "v": "EHw005ZqCXk",
+      "t": "Official髭男dism - ノーダウト［Official Video］",
+      "a": "Official髭男dism"
+    },
+    {
+      "v": "gt-v_YCkaMY",
+      "t": "【Ado】逆光（ウタ from ONE PIECE FILM RED）",
+      "a": "Ado"
+    },
+    {
+      "v": "8iuLXODzL04",
+      "t": "YOASOBI「たぶん」Official Music  Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "xefpHEg5UIA",
+      "t": "Mrs. GREEN APPLE - 僕のこと",
+      "a": "Mrs. GREEN APPLE"
+    },
+    {
+      "v": "9lVPAWLWtWc",
+      "t": "ヨルシカ - 花に亡霊（OFFICIAL VIDEO）",
+      "a": "ヨルシカ"
+    },
+    {
+      "v": "x2rvSf0STBM",
+      "t": "Mrs. GREEN APPLE「ダンスホール」Official Music Video",
+      "a": "Mrs. GREEN APPLE"
+    },
+    {
+      "v": "dHXC_ahjtEE",
+      "t": "Chinozo 'グッバイ宣言' feat.FloweR",
+      "a": "J-pop"
+    },
+    {
+      "v": "sAuEeM_6zpk",
+      "t": "YOASOBI「あの夢をなぞって」 Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "j1hft9Wjq9U",
+      "t": "YOASOBI - 夜に駆ける / THE HOME TAKE",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "s582L3gujnw",
+      "t": "米津玄師 - パプリカ  Kenshi Yonezu - PAPRIKA",
+      "a": "米津玄師"
+    },
+    {
+      "v": "EQ94zflNqn4",
+      "t": "RADWIMPS - 愛にできることはまだあるかい [Official Music Video]",
+      "a": "RADWIMPS"
+    },
+    {
+      "v": "-zQWavER7to",
+      "t": "「海の声」 フルver. / 浦島太郎（桐谷健太） 【公式】",
+      "a": "J-pop"
+    },
+    {
+      "v": "IV7usfiEbms",
+      "t": "ケツメイシ「友よ 〜 この先もずっと…」",
+      "a": "J-pop"
+    },
+    {
+      "v": "j7CDb610Bg0",
+      "t": "BUMP OF CHICKEN「天体観測」",
+      "a": "J-pop"
+    },
+    {
+      "v": "CbH2F0kXgTY",
+      "t": "OFFICIAL HIGE DANDISM - MIXED NUTS [ Official Video ]",
+      "a": "OFFICIAL HIGE DANDISM"
+    },
+    {
+      "v": "44cICMd3jW4",
+      "t": "Mrs. GREEN APPLE「Soranji」Official Music Video",
+      "a": "Mrs. GREEN APPLE"
+    },
+    {
+      "v": "6YZlFdTIdzM",
+      "t": "ONE OK ROCK - Clock Strikes [Official Music Video]",
+      "a": "ONE OK ROCK"
+    },
+    {
+      "v": "9qRCARM_LfE",
+      "t": "あいみょん - 愛を伝えたいだとか 【OFFICIAL MUSIC VIDEO】",
+      "a": "あいみょん"
+    },
+    {
+      "v": "kzdJkT4kp-A",
+      "t": "YOASOBI「ハルジオン」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "NyUTYwZe_l4",
+      "t": "YOASOBI - 群青  / THE FIRST TAKE",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "Jj1_mfUzjOs",
+      "t": "YOASOBI「UNDEAD」 Official Music Video／『〈物語〉シリーズ オフ&モンスターシーズン』主題歌",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "nhOhFOoURnE",
+      "t": "YOASOBI「三原色」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "vd3IlOjSUGQ",
+      "t": "YOASOBI「ハルカ」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "RzXTe-QfWTw",
+      "t": "YOASOBI「アイドル」(Idol) from 『YOASOBI ARENA TOUR 2023 \"電光石火\"』2023.6.4@さいたまスーパーアリーナ",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "vcGbefQBvJ4",
+      "t": "YOASOBI「アンコール」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "mnta9Pp2LqA",
+      "t": "YOASOBI「ラブレター」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "RkjSfZ30GM4",
+      "t": "YOASOBI / Idol (「アイドル」English Ver. )",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "EaA6NlH80wg",
+      "t": "YOASOBI - 優しい彗星  / THE FIRST TAKE",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "VyvhvlYvRnc",
+      "t": "YOASOBI「優しい彗星」Official Music Video　(YOASOBI - Comet)",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "0yoM7ETNPIY",
+      "t": "YOASOBI「セブンティーン」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "Av3xaZkVpJs",
+      "t": "YOASOBI「アドベンチャー」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "shZyg5VFI1Y",
+      "t": "YOASOBI「Biri-Biri」 Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "qDL3zhB8-MM",
+      "t": "「ツバメ」/ YOASOBI with ミドリーズ Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "K1Tz2yNmamI",
+      "t": "YOASOBI「もう少しだけ」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "I0kytvnHG-Q",
+      "t": "YOASOBI「もしも命が描けたら」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "wJQ9ig_d8yY",
+      "t": "YOASOBI「大正浪漫」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "eZ0E3Rkv0NA",
+      "t": "ラストリゾート / 初音ミク",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "qd1OyC3OMEI",
+      "t": "YOASOBI「群青」 from 初有観客ライブ『NICE TO MEET YOU』2021.12.04@日本武道館",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "ZNFKZI7L9xE",
+      "t": "YOASOBI「三原色」ahamo Special Movie",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "evtoG-4dLM4",
+      "t": "YOASOBI「Watch me!」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "7G0ovtPqHnI",
+      "t": "YOASOBI「海のまにまに」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "KPK23K7ipVo",
+      "t": "YOASOBI「祝福」(The Blessing) from 『YOASOBI ARENA TOUR 2023 \"電光石火\"』2023.6.3@さいたまスーパーアリーナ",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "_ZtBv0hTm1w",
+      "t": "YOASOBI「夜に駆ける」 from 『ROCK IN JAPAN FESTIVAL 2022』2022.8.06@千葉市蘇我スポーツ公園",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "EEbWRjavSVw",
+      "t": "シネマ / 初音ミク",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "ng08QQvjV0U",
+      "t": "YOASOBI「群青」(with 大阪桐蔭高等学校吹奏楽部) from UT × YOASOBI『SING YOUR WORLD』",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "GWDzKel_vuQ",
+      "t": "YOASOBI「舞台に立って」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "WQ6ePunO8uY",
+      "t": "YOASOBI「好きだ」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "fTAIlcryiWM",
+      "t": "ブルックリンでライブする一日ダイジェスト【北米ツアー2026】",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "ZSr3P-Rn6x0",
+      "t": "YOASOBI「HEART BEAT」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "lWl5viCqGSc",
+      "t": "幽霊東京 / 初音ミク",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "2-c0DFt6vK4",
+      "t": "YOASOBI「ミスター」Official Music Video",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "c9kyYxSfS-A",
+      "t": "YOASOBI「アイドル(Idol)」from『Clockenflap』2023.12.01@Central Harbourfront in Hong Kong",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "MCniEJSh12U",
+      "t": "YOASOBI「怪物」 from 初有観客ライブ『NICE TO MEET YOU』2021.12.04@日本武道館",
+      "a": "YOASOBI"
+    },
+    {
+      "v": "-wb2PAx6aEs",
+      "t": "米津玄師 - さよーならまたいつか！ Kenshi Yonezu - Sayonara, Mata Itsuka !",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "1s84rIhPuhk",
+      "t": "米津玄師 - 海の幽霊  Kenshi Yonezu - Spirits of the Sea",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "sPLqsLsooJY",
+      "t": "米津玄師, 宇多田ヒカル Kenshi Yonezu, Hikaru Utada -  JANE DOE",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "AS4q9yaWJkI",
+      "t": "ハチ - 砂の惑星 feat.初音ミク , HACHI - DUNE ft.Miku Hatsune",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "HOz-9FzIDf0",
+      "t": "ハチ  MV「マトリョシカ」HACHI / MATORYOSHKA",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "7WZ1Kt3zraY",
+      "t": "米津玄師  - Pale Blue / Kenshi Yonezu",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "Qa9PkDZkyHg",
+      "t": "米津玄師 - メトロノーム , Kenshi Yonezu - Metronome",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "2PqxOytUjz0",
+      "t": "米津玄師　MV『ゴーゴー幽霊船』",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "Y4_vXzyOJHE",
+      "t": "米津玄師  - Flowerwall , Kenshi Yonezu",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "Zhx1n6uvgUE",
+      "t": "米津玄師  - M八七 　Kenshi Yonezu - M87",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "qnX2CdOBcDI",
+      "t": "ハチ - ドーナツホール , HACHI - DONUT HOLE",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "xCIJJ2Rb368",
+      "t": "米津玄師　MV「MAD HEAD LOVE」",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "W-Tun8O-Tjk",
+      "t": "米津玄師　MV『vivi』",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "VUsURj_OYdA",
+      "t": "米津玄師  - 地球儀　Kenshi Yonezu - Spinning Globe",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "DdF-u3fe5pg",
+      "t": "米津玄師  Kenshi Yonezu - LADY",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "8nxaZ69ElEc",
+      "t": "米津玄師 - 死神　 Kenshi Yonezu - Shinigami",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "mHP6-D-yBEw",
+      "t": "米津玄師  - POP SONG / Kenshi Yonezu",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "XeFQJ6-XoD0",
+      "t": "米津玄師 - カムパネルラ  Kenshi Yonezu - Campanella",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "lwolyOIcCQg",
+      "t": "米津玄師 - TEENAGE RIOT / Kenshi Yonezu",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "fp3F6TqBsAU",
+      "t": "米津玄師  Kenshi Yonezu - Plazma",
+      "a": "Kenshi Yonezu"
+    },
+    {
+      "v": "M-Eyhjkepy0",
+      "t": "米津玄師 Kenshi Yonezu - BOW AND ARROW",
+      "a": "Kenshi Yonezu"
+    }
+  ]
+}

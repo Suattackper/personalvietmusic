@@ -6,24 +6,25 @@
 @implements IDisposable
 
 <div class="app-shell">
-    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+    <a class="skip-link" href="#main-content">@Lang.T("Bỏ qua điều hướng")</a>
 
     <NavMenu IsOpen="_navOpen" OnClose="CloseNav" />
 
     <div class="app-main">
         <header class="app-header">
             <button class="icon-button menu-toggle"
-                    title="Mở menu điều hướng"
-                    aria-label="Mở menu điều hướng"
+                    title="@Lang.T("Mở menu điều hướng")"
+                    aria-label="@Lang.T("Mở menu điều hướng")"
                     @onclick="ToggleNav">
                 <Icon Name="menu" Size="22" />
             </button>
             <SearchBox />
+            <LanguageSwitcher />
             <ThemeToggle />
         </header>
 
         <main id="main-content" class="app-content">
-            @Body
+            <div @key="Lang.Code">@Body</div>
         </main>
     </div>
 
@@ -37,6 +38,8 @@
     protected override async Task OnInitializedAsync()
     {
         Nav.LocationChanged += HandleLocationChanged;
+        Lang.OnChange += HandleLanguageChanged;
+        await Lang.InitializeAsync();
 
         // Khôi phục dữ liệu người dùng từ localStorage khi app khởi động.
         await Favorites.InitializeAsync();
@@ -58,8 +61,11 @@
 
     private void CloseNav() => _navOpen = false;
 
+    private void HandleLanguageChanged() => _ = InvokeAsync(StateHasChanged);
+
     public void Dispose()
     {
         Nav.LocationChanged -= HandleLocationChanged;
+        Lang.OnChange -= HandleLanguageChanged;
     }
 }

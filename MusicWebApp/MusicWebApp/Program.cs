@@ -15,6 +15,7 @@ builder.Services.AddSingleton(youTubeOptions);
 
 builder.Services.AddScoped<IYouTubeMusicService, YouTubeMusicService>();
 builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
+builder.Services.AddScoped<LanguageService>();
 builder.Services.AddScoped<MusicPlayerState>();
 builder.Services.AddScoped<FavoritesService>();
 builder.Services.AddScoped<RecentlyPlayedService>();

@@ -1,9 +1,10 @@
 @inject ILocalStorageService Storage
 @inject IJSRuntime JS
+@implements IDisposable
 
 <button class="icon-button theme-toggle"
-        title="@(_isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối")"
-        aria-label="@(_isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối")"
+        title="@Lang.T(_isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối")"
+        aria-label="@Lang.T(_isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối")"
         @onclick="ToggleThemeAsync">
     <Icon Name="@(_isDark ? "sun" : "moon")" Size="20" />
 </button>
@@ -11,8 +12,11 @@
 @code {
     private bool _isDark = true;
 
+    private void RefreshLanguage() => _ = InvokeAsync(StateHasChanged);
+
     protected override async Task OnInitializedAsync()
     {
+        Lang.OnChange += RefreshLanguage;
         // Mặc định dark mode; index.html đã áp theme sớm để tránh chớp màu.
         var saved = await Storage.GetItemAsync(StorageKeys.Theme);
         _isDark = saved != "light";
@@ -30,4 +34,6 @@
     {
         await JS.InvokeVoidAsync("vietmusicTheme.apply", _isDark ? "dark" : "light");
     }
+
+    public void Dispose() => Lang.OnChange -= RefreshLanguage;
 }

@@ -24,7 +24,7 @@
             </span>
             @if (!string.IsNullOrEmpty(track.ThumbnailUrl))
             {
-                <img class="queue-item-thumb" src="@track.ThumbnailUrl" alt="Ảnh bìa @track.Title" loading="lazy" />
+                <img class="queue-item-thumb" src="@track.ThumbnailUrl" alt="@Lang.F("Ảnh bìa {0}", track.Title)" loading="lazy" />
             }
             <div class="queue-item-meta">
                 <span class="queue-item-title" title="@track.Title">@track.Title</span>
@@ -32,14 +32,14 @@
             </div>
             <div class="queue-item-actions">
                 <button class="icon-button"
-                        title="Phát bài này"
-                        aria-label="Phát @track.Title"
+                        title="@Lang.T("Phát bài này")"
+                        aria-label="@Lang.F("Phát {0}", track.Title)"
                         @onclick="() => PlayerState.PlayTrackAt(index)">
                     <Icon Name="play" Size="16" />
                 </button>
                 <button class="icon-button"
-                        title="Xóa khỏi hàng đợi"
-                        aria-label="Xóa @track.Title khỏi hàng đợi"
+                        title="@Lang.T("Xóa khỏi hàng đợi")"
+                        aria-label="@Lang.F("Xóa {0} khỏi hàng đợi", track.Title)"
                         @onclick="() => Remove(track)">
                     <Icon Name="close" Size="16" />
                 </button>
@@ -59,7 +59,7 @@
     private void Remove(MusicTrack track)
     {
         PlayerState.RemoveFromQueue(track.VideoId);
-        Toasts.ShowInfo($"Đã xóa \"{track.Title}\" khỏi hàng đợi.");
+        Toasts.ShowInfo(Lang.F("Đã xóa \"{0}\" khỏi hàng đợi.", track.Title));
     }
 
     public void Dispose()

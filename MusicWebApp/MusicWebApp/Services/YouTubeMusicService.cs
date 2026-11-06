@@ -18,11 +18,13 @@ public class YouTubeMusicService : IYouTubeMusicService
 
     private readonly HttpClient _httpClient;
     private readonly YouTubeOptions _options;
+    private readonly LanguageService _language;
 
-    public YouTubeMusicService(HttpClient httpClient, YouTubeOptions options)
+    public YouTubeMusicService(HttpClient httpClient, YouTubeOptions options, LanguageService language)
     {
         _httpClient = httpClient;
         _options = options;
+        _language = language;
     }
 
     public async Task<YouTubeSearchResult> SearchAsync(
@@ -32,13 +34,13 @@ public class YouTubeMusicService : IYouTubeMusicService
     {
         if (string.IsNullOrWhiteSpace(keyword))
         {
-            throw new YouTubeApiException("Vui lòng nhập từ khóa tìm kiếm.");
+            throw new YouTubeApiException(_language.T("Vui lòng nhập từ khóa tìm kiếm."));
         }
 
         if (string.IsNullOrWhiteSpace(_options.ApiKey) || _options.ApiKey == ApiKeyPlaceholder)
         {
             throw new YouTubeApiException(
-                "YouTube API key chưa được cấu hình. Hãy điền API key vào wwwroot/appsettings.json (xem hướng dẫn trong README).");
+                _language.T("YouTube API key chưa được cấu hình. Hãy điền API key vào wwwroot/appsettings.json (xem hướng dẫn trong README)."));
         }
 
         var url = BuildSearchUrl(keyword.Trim(), pageToken);
@@ -55,7 +57,7 @@ public class YouTubeMusicService : IYouTubeMusicService
         catch (HttpRequestException ex)
         {
             throw new YouTubeApiException(
-                "Không thể kết nối tới YouTube. Vui lòng kiểm tra kết nối mạng và thử lại.", ex);
+                _language.T("Không thể kết nối tới YouTube. Vui lòng kiểm tra kết nối mạng và thử lại."), ex);
         }
 
         var body = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -73,12 +75,12 @@ public class YouTubeMusicService : IYouTubeMusicService
         catch (JsonException ex)
         {
             throw new YouTubeApiException(
-                "Dữ liệu YouTube trả về không hợp lệ. Vui lòng thử lại sau.", ex);
+                _language.T("Dữ liệu YouTube trả về không hợp lệ. Vui lòng thử lại sau."), ex);
         }
 
         if (searchResponse is null)
         {
-            throw new YouTubeApiException("Dữ liệu YouTube trả về không hợp lệ. Vui lòng thử lại sau.");
+            throw new YouTubeApiException(_language.T("Dữ liệu YouTube trả về không hợp lệ. Vui lòng thử lại sau."));
         }
 
         var tracks = searchResponse.Items
@@ -185,7 +187,7 @@ public class YouTubeMusicService : IYouTubeMusicService
         return url;
     }
 
-    private static MusicTrack MapToTrack(YouTubeSearchItem item)
+    private MusicTrack MapToTrack(YouTubeSearchItem item)
     {
         var snippet = item.Snippet;
         var thumbnails = snippet?.Thumbnails;
@@ -197,14 +199,14 @@ public class YouTubeMusicService : IYouTubeMusicService
         return new MusicTrack
         {
             VideoId = item.Id!.VideoId!,
-            Title = WebUtility.HtmlDecode(snippet?.Title ?? "Không có tiêu đề"),
-            Artist = WebUtility.HtmlDecode(snippet?.ChannelTitle ?? "Không rõ nghệ sĩ"),
+            Title = WebUtility.HtmlDecode(snippet?.Title ?? _language.T("Không có tiêu đề")),
+            Artist = WebUtility.HtmlDecode(snippet?.ChannelTitle ?? _language.T("Không rõ nghệ sĩ")),
             ThumbnailUrl = thumbnailUrl,
             PublishedAt = snippet?.PublishedAt
         };
     }
 
-    private static string BuildErrorMessage(HttpStatusCode statusCode, string body)
+    private string BuildErrorMessage(HttpStatusCode statusCode, string body)
     {
         // Đọc "reason" từ JSON lỗi của Google để phân biệt sai key / hết quota.
         var reason = TryGetErrorReason(body);
@@ -212,15 +214,15 @@ public class YouTubeMusicService : IYouTubeMusicService
         return (statusCode, reason) switch
         {
             (_, "quotaExceeded") or (_, "dailyLimitExceeded") =>
-                "YouTube API đã vượt quota trong ngày. Vui lòng thử lại sau hoặc dùng API key khác.",
+                _language.T("YouTube API đã vượt quota trong ngày. Vui lòng thử lại sau hoặc dùng API key khác."),
             (HttpStatusCode.BadRequest, "keyInvalid") or (HttpStatusCode.BadRequest, "badRequest") =>
-                "YouTube API key không hợp lệ. Hãy kiểm tra lại key trong wwwroot/appsettings.json.",
+                _language.T("YouTube API key không hợp lệ. Hãy kiểm tra lại key trong wwwroot/appsettings.json."),
             (HttpStatusCode.Forbidden, _) =>
-                "YouTube từ chối yêu cầu (403). API key có thể bị giới hạn sai domain hoặc chưa bật YouTube Data API v3.",
+                _language.T("YouTube từ chối yêu cầu (403). API key có thể bị giới hạn sai domain hoặc chưa bật YouTube Data API v3."),
             (HttpStatusCode.BadRequest, _) =>
-                "Yêu cầu tìm kiếm không hợp lệ (400). Vui lòng thử từ khóa khác.",
+                _language.T("Yêu cầu tìm kiếm không hợp lệ (400). Vui lòng thử từ khóa khác."),
             _ =>
-                $"YouTube API trả về lỗi ({(int)statusCode}). Vui lòng thử lại sau."
+                _language.F("YouTube API trả về lỗi ({0}). Vui lòng thử lại sau.", (int)statusCode)
         };
     }
 

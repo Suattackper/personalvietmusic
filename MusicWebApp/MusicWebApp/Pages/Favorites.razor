@@ -2,12 +2,12 @@
 @inject FavoritesService FavoritesSvc
 @implements IDisposable
 
-<PageTitle>Yêu thích - AnhTanMusic</PageTitle>
+<PageTitle>@Lang.T("Yêu thích") - AnhTanMusic</PageTitle>
 
 <section class="page-section">
     <h1 class="page-heading">
         <span class="page-heading-icon" aria-hidden="true"><Icon Name="heart-filled" Size="22" /></span>
-        Bài hát yêu thích
+        @Lang.T("Bài hát yêu thích")
     </h1>
 
     @if (FavoritesSvc.Favorites.Count == 0)
@@ -18,7 +18,7 @@
     }
     else
     {
-        <p class="page-subtitle">@FavoritesSvc.Favorites.Count bài hát</p>
+        <p class="page-subtitle">@Lang.F("{0} bài hát", FavoritesSvc.Favorites.Count)</p>
         <TrackList Tracks="FavoritesSvc.Favorites" />
     }
 </section>

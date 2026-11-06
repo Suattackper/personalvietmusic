@@ -1,12 +1,13 @@
 @* Sidebar điều hướng: cố định trên desktop, drawer trên mobile. *@
+@implements IDisposable
 
 @if (IsOpen)
 {
     <div class="sidebar-overlay" @onclick="CloseAsync" aria-hidden="true"></div>
 }
 
-<aside class="sidebar @(IsOpen ? "open" : null)" aria-label="Điều hướng chính">
-    <a class="sidebar-logo" href="" title="AnhTanMusic - Trang chủ">
+<aside class="sidebar @(IsOpen ? "open" : null)" aria-label="@Lang.T("Điều hướng chính")">
+    <a class="sidebar-logo" href="" title="AnhTanMusic - @Lang.T("Trang chủ")">
         <span class="sidebar-logo-icon" aria-hidden="true">
             <Icon Name="music" Size="26" />
         </span>
@@ -16,31 +17,31 @@
     <nav class="sidebar-nav">
         <NavLink class="sidebar-link" href="" Match="NavLinkMatch.All">
             <Icon Name="home" Size="20" />
-            <span class="sidebar-link-text">Trang chủ</span>
+            <span class="sidebar-link-text">@Lang.T("Trang chủ")</span>
         </NavLink>
         <NavLink class="sidebar-link" href="search">
             <Icon Name="search" Size="20" />
-            <span class="sidebar-link-text">Tìm kiếm</span>
+            <span class="sidebar-link-text">@Lang.T("Tìm kiếm")</span>
         </NavLink>
         <NavLink class="sidebar-link" href="playlists">
             <Icon Name="disc" Size="20" />
-            <span class="sidebar-link-text">Playlist</span>
+            <span class="sidebar-link-text">@Lang.T("Playlist")</span>
         </NavLink>
         <NavLink class="sidebar-link" href="favorites">
             <Icon Name="heart" Size="20" />
-            <span class="sidebar-link-text">Yêu thích</span>
+            <span class="sidebar-link-text">@Lang.T("Yêu thích")</span>
         </NavLink>
         <NavLink class="sidebar-link" href="recent">
             <Icon Name="clock" Size="20" />
-            <span class="sidebar-link-text">Nghe gần đây</span>
+            <span class="sidebar-link-text">@Lang.T("Nghe gần đây")</span>
         </NavLink>
         <NavLink class="sidebar-link" href="queue">
             <Icon Name="queue" Size="20" />
-            <span class="sidebar-link-text">Hàng đợi</span>
+            <span class="sidebar-link-text">@Lang.T("Hàng đợi")</span>
         </NavLink>
         <NavLink class="sidebar-link" href="about">
             <Icon Name="info" Size="20" />
-            <span class="sidebar-link-text">Giới thiệu</span>
+            <span class="sidebar-link-text">@Lang.T("Giới thiệu")</span>
         </NavLink>
     </nav>
 </aside>
@@ -48,6 +49,12 @@
 @code {
     [Parameter] public bool IsOpen { get; set; }
     [Parameter] public EventCallback OnClose { get; set; }
+
+    protected override void OnInitialized() => Lang.OnChange += RefreshLanguage;
+
+    private void RefreshLanguage() => _ = InvokeAsync(StateHasChanged);
+
+    public void Dispose() => Lang.OnChange -= RefreshLanguage;
 
     private Task CloseAsync() => OnClose.InvokeAsync();
 }

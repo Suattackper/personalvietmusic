@@ -1,0 +1,658 @@
+{
+  "id": "country-zh",
+  "name": "Nhạc Trung",
+  "emoji": "🇨🇳",
+  "description": "Những ca khúc nhạc Hoa được yêu thích.",
+  "tracks": [
+    {
+      "v": "_VxLOj3TB5k",
+      "t": "周杰倫Jay Chou X aMEI【不該 Shouldn't Be】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "-gaB9ov-Om0",
+      "t": "\"A.I.N.Y. 愛你\" [MV] - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "4OqXWzekVw4",
+      "t": "G.E.M. 鄧紫棋 - 喜歡你 Official MV [HD]",
+      "a": "G.E.M."
+    },
+    {
+      "v": "6Q0Pd53mojY",
+      "t": "周杰倫 Jay Chou【夜曲 Nocturne】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "Bbp9ZaJD_eA",
+      "t": "周杰倫 Jay Chou【七里香 Orange Jasmine】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "bu7nU9Mhpyo",
+      "t": "周杰倫 Jay Chou (特別演出: 派偉俊)【告白氣球 Love Confession】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "cWZvojeFbXo",
+      "t": "G.E.M.鄧紫棋【自由的你 Free to Be You】Official Music Video",
+      "a": "G.E.M."
+    },
+    {
+      "v": "D9ksLn6hZ7Q",
+      "t": "G.E.M.【多遠都要在一起 LONG DISTANCE】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "DYptgVvkVLQ",
+      "t": "周杰倫 Jay Chou【晴天 Sunny Day】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "FWtbGkpdoP4",
+      "t": "G.E.M.【來自天堂的魔鬼 AWAY】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "HK7SPnGSxLM",
+      "t": "周杰倫 Jay Chou【說好不哭 Won't Cry (with 五月天阿信 Mayday Ashin)】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "HsmrCg0Fe3U",
+      "t": "曾沛慈 Pets Tseng〈牽掛 What We’ve Carried〉Official Music Video",
+      "a": "Nhạc Hoa"
+    },
+    {
+      "v": "I1Kx8Ii4eYk",
+      "t": "G.E.M.【岩石裡的花 LOVE FINDS A WAY】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "j22AIr5KlTc",
+      "t": "G.E.M.【夜空中最亮的星】Official Audio [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "KBsLwkKsfGY",
+      "t": "怎麼了 - 周興哲｜R&B × Emo改編｜當最愛的藍色變成灰色的雨天，我卻還笑著給你祝福，深夜耳機循環情緒現場",
+      "a": "怎麼了"
+    },
+    {
+      "v": "kfXdP7nZIiE",
+      "t": "周杰倫 Jay Chou【等你下課 Waiting For You  (with 楊瑞代 Gary)】歌詞版Lyrics MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "L229QDxDakU",
+      "t": "周杰倫 Jay Chou【一路向北 All the Way North】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "Lhel0tzHE08",
+      "t": "G.E.M.【再見 GOODBYE】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "ma7r2HGqwXs",
+      "t": "G.E.M.【倒數 TIK TOK】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "mLFhTFiX0uM",
+      "t": "周杰倫 Jay Chou【說好的幸福呢 The Promised Love】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "qzwsQTY-99o",
+      "t": "周杰倫 Jay Chou【楓Maple Leaf 】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "T4SimnaiktU",
+      "t": "G.E.M.【光年之外 LIGHT YEARS AWAY 】MV (電影《太空潛航者 Passengers》中文主題曲) [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "UBySINroNkw",
+      "t": "周杰倫 Jay Chou【明明就 Ming Ming Jiu】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "v489sYYjtHI",
+      "t": "周杰倫 Jay Chou【算什麼男人 What Kind of Man】Official MV (ft. 林依晨)",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "vDR-e3W6ARc",
+      "t": "G.E.M.【新的心跳 HEARTBEAT】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "wt0RKW3aC84",
+      "t": "周杰倫 Jay Chou【給我一首歌的時間 Give me the Time of One Song】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "YJfHuATJYsQ",
+      "t": "周杰倫 Jay Chou【擱淺 Step Aside】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "z_OHuXPrTBs",
+      "t": "黃奇斌 Ng KiPin - 咱到遮就為止 We Go as Far as Here｜Official Music Video",
+      "a": "黃奇斌 Ng KiPin"
+    },
+    {
+      "v": "zqKoXPHhmsM",
+      "t": "周杰倫 Jay Chou【聽見下雨的聲音 Rhythm of the Rain】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "Z8Mqw0b9ADs",
+      "t": "周杰倫 Jay Chou【青花瓷 Blue and White Porcelain】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "sHD_z90ZKV0",
+      "t": "周杰倫 Jay Chou【稻香 Rice Field】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "KKsioz-zaZY",
+      "t": "周杰倫 Jay Chou【說了再見 Say Goodbye】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "TMB6-YflpA4",
+      "t": "周杰倫 Jay Chou【手寫的從前 Handwritten Past】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "aaM7qG2ycjk",
+      "t": "周杰倫 Jay Chou【髮如雪 Hair White as Snow】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "1hI-7vj2FhE",
+      "t": "周杰倫 Jay Chou【安靜 Silence】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "_B8RaLCNUZw",
+      "t": "周杰倫 Jay Chou【聽媽媽的話 Listen to Mom】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "2kdYSeoHChg",
+      "t": "周杰倫 Jay Chou【愛情廢柴 Failure at love】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "MAjY8mCTXWk",
+      "t": "周杰倫 Jay Chou【不愛我就拉倒 If You Don't Love Me, It's Fine】Official MV 發燒影片華語地區蟬聯第一 美國直衝前二",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "kYhh1PpsOg4",
+      "t": "周杰倫 Jay Chou【珊瑚海 Coral Sea (feat. 梁心頤 Lara)】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "uIWypArI73w",
+      "t": "周杰倫 Jay Chou【不能說的祕密 Secret】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "ocDo3ySyHSI",
+      "t": "周杰倫 Jay Chou【千里之外 Far Away (feat.費玉清 Fei Yu-ching)】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "L6joGUdc6y4",
+      "t": "周杰倫 Jay Chou【紅塵客棧 Hong-Chen Inn】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "2zxc27bvrO8",
+      "t": "周杰倫 Jay Chou【最長的電影 The Longest Movie】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "miBGaUagOz8",
+      "t": "周杰倫 Jay Chou【愛你沒差 Love you, no matter what】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "eS2T9IiOYbc",
+      "t": "周杰倫 Jay Chou【聽爸爸的話 Listen to Dad】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "s-VFpsrbWLk",
+      "t": "周杰倫 Jay Chou【我不配 Not Good Enough For You】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "PdjbRvvJAzg",
+      "t": "周杰倫 Jay Chou【菊花台 Chrysanthemum Terrace】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "H7hpK6cm-6k",
+      "t": "周杰倫 Jay Chou【開不了口 I Find It Hard To Say】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "KcK8WurGpEQ",
+      "t": "周杰倫 Jay Chou【藉口 Excuse】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "VitJnr3IySc",
+      "t": "周杰倫 Jay Chou【蒲公英的約定 A Dandelion's Promise】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "wr-6wwt8RXk",
+      "t": "周杰倫 Jay Chou【霍元甲 Fearless】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "-u4sPnpaFEA",
+      "t": "周杰倫 Jay Chou【大笨鐘 Big Ben】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "WxZvXPTBC0A",
+      "t": "周杰倫 Jay Chou【彩虹 Rainbow】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "rKFtivD7Rvw",
+      "t": "周杰倫 Jay Chou【傻笑 Smile (feat. 袁詠琳 Cindy)】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "0-4mm0e2h44",
+      "t": "周杰倫 Jay Chou【退後 A Step Back】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "duZDsG3tvoA",
+      "t": "周杰倫 Jay Chou【半島鐵盒 Peninsula Ironbox】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "s5Xl5MXboas",
+      "t": "周杰倫 Jay Chou【蘭亭序 Lan-Ting-Xu】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "5XK2C9w6oVk",
+      "t": "周杰倫 Jay Chou【愛在西元前 Love before AD】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "RPWDeLqsN0g",
+      "t": "周杰倫 Jay Chou【龍捲風 Tornado】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "TbFWYT9VGRk",
+      "t": "周杰倫 Jay Chou【我是如此相信 I Truly Believe】(電影天火主題曲) Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "me7jfhFIZvk",
+      "t": "周杰倫 Jay Chou【Mine Mine】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "FbqBv7Tz1QY",
+      "t": "周杰倫 Jay Chou【公公偏頭痛 Eunuch with a Headache】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "COMHDRqAvYE",
+      "t": "周杰倫 Jay Chou【煙花易冷 Fade Away】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "bX33UI9ZPLk",
+      "t": "周杰倫 Jay Chou【黑色毛衣 Black Sweater】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "9q7JOQfcJQM",
+      "t": "周杰倫 Jay Chou【以父之名 In The Name of The Father】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "K9CbHZLXPIA",
+      "t": "周杰倫 Jay Chou【白色風車 White Windmill】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "MKNrnSsIwf8",
+      "t": "周杰倫 Jay Chou【回到過去 Back to the Past】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "87VUC4J_0Ps",
+      "t": "周杰倫 Jay Chou【可愛女人 Cute Girl (feat.徐若瑄Vivian)】 -Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "qct0JLjaHDc",
+      "t": "周杰倫 Jay Chou【東風破 Dong-Feng-Po】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "qIZ5MAwbeCg",
+      "t": "周杰倫 Jay Chou【止戰之殤 Wounds of War】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "yfn8sE9obWU",
+      "t": "周杰倫 Jay Chou【哪裡都是你 You are everywhere】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "qQ7g1tfEGFc",
+      "t": "周杰倫 Jay Chou【陽光宅男 Sunshine Nerd】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "q1ww6bDjfiI",
+      "t": "周杰倫 Jay Chou【花海 Floral Sea】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "S-p4gXbIifo",
+      "t": "周杰倫 Jay Chou【公主病 Princess Syndrome】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "4j0Fgmsxr-o",
+      "t": "周杰倫 Jay Chou【超人不會飛 Superman Can't Fly】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "AdkkF6MT0R0",
+      "t": "周杰倫 Jay Chou【夜的第七章 Chapter Seven】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "RcdscWaat_w",
+      "t": "周杰倫 Jay Chou【怎麼了 What's Wrong (feat. 袁詠琳 Cindy)】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "CYT9DPJdtS4",
+      "t": "周杰倫 Jay Chou【暗號 Secret Code】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "Y4xCVlyCvX4",
+      "t": "周杰倫 Jay Chou【簡單愛 Simple Love】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "Wrbjahfg8RM",
+      "t": "周杰倫 Jay Chou【你好嗎 How Are You】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "-gJzlOJ0Zoo",
+      "t": "周杰倫 Jay Chou【天涯過客 Passer-by】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "IoCoIxkGkVw",
+      "t": "周杰倫 Jay Chou【園遊會 Fun Fair】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "6d0v2InyN_w",
+      "t": "周杰倫 Jay Chou【我落淚 情緒零碎 Tears of Scattered Emotion】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "8CD06hC1KGU",
+      "t": "周杰倫 Jay Chou【本草綱目Chinese Herbal Manual】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "-7r6VqSllNg",
+      "t": "周杰倫 Jay Chou【床邊故事 Bedtime Stories】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "X2njc8is50o",
+      "t": "周杰倫 Jay Chou【飄移 Drift】(頭文字Dの実写版)-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "sTNJsIcPSvE",
+      "t": "周杰倫 Jay Chou【星晴 Starry Mood】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "wRT-5heURhY",
+      "t": "周杰倫 Jay Chou【黑色幽默 Dark Humor】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "QQucPUfXUQQ",
+      "t": "周杰倫Jay Chou(ジェイ・チョウ)【等你下課Waiting For You (with 楊瑞代 Gary)】(君を待っている) Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "syYc5dydzmE",
+      "t": "周杰倫 Jay Chou【鞋子特大號 Extra Large Shoes】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "xVTI5eSzwzQ",
+      "t": "周杰倫 Jay Chou【心雨 Rainy Mood】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "COhiu3c7Sgc",
+      "t": "周杰倫 Jay Chou【一點點 A Little Bit】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "-QqpEvN2Xd8",
+      "t": "周杰倫 Jay Chou【烏克麗麗 Ukulele】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "j9k3liT2MLo",
+      "t": "周杰倫 Jay Chou【前世情人 Lover From Previous Life】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "iJPfSSpnR8g",
+      "t": "派偉俊Patrick Brasca x @jaychou【Try】(電影｢功夫熊貓3｣全球主題曲 Kung Fu Panda 3 Theme Song) Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "nCfrfCzaB2A",
+      "t": "周杰倫 Jay Chou【時光機 Time Machine】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "NH43WjeoVgs",
+      "t": "周杰倫 Jay Chou【 說走就走 Let's Go】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "LdPjnubLRN0",
+      "t": "周杰倫 Jay Chou【爺爺泡的茶 Grandpa's Tea】Official MV",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "fuM1aVCGR8c",
+      "t": "Jay Chou 周杰倫【反方向的鐘 Counter-clockwise Clock】-Official Music Video",
+      "a": "Jay Chou"
+    },
+    {
+      "v": "l8pJxVZKW6w",
+      "t": "G.E.M. \"你把我灌醉 (INTOXICATED)\" 鄧紫棋 Official MV",
+      "a": "G.E.M."
+    },
+    {
+      "v": "8XcmT8-ZByA",
+      "t": "\"我的秘密\"  MySecret  MV - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "ugVNDvnDDpA",
+      "t": "G.E.M.【那一夜 WOKE】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "rzzul2fmufI",
+      "t": "G.E.M.【盲點 BLINDSPOT 】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "C117NWgCJ88",
+      "t": "G.E.M.【一路逆風 AGAINST THE WIND】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "mGeiABBB5f8",
+      "t": "G.E.M. \"泡沫\"  \"BUBBLE\" [HD] 官方MV 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "0tGgnh6F1YI",
+      "t": "G.E.M.【於是 THEREFORE】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "ziDO6HWb4R8",
+      "t": "G.E.M.【瞬間 MOMENTS】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "8lg1ymm99CQ",
+      "t": "\"Mascara 煙燻妝\" [MV] - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "c21dGpyxU-M",
+      "t": "G.E.M.【紅薔薇白玫瑰】(EYES, NOSE, LIPS Cover) Official Audio [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "5FK0qCEQ3L0",
+      "t": "G.E.M.【另一個童話 MY FAIRYTALES】Official Audio [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "D7oQ2Yi_y2I",
+      "t": "\"寫不完的溫柔\" [MV] - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "9k_qrnQpwR8",
+      "t": "\"Where Did U Go\" [MV] - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "B7BGm1uwHg0",
+      "t": "\"All About U\" [MV] - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "SJHWJvOmpFY",
+      "t": "G.E.M.【桃花諾】Official Audio (電視劇《上古情歌》片尾曲) [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "Kh83ya8g3CQ",
+      "t": "G.E.M. 鄧紫棋 - 多遠都要在一起 (月亮的來電) [HD] Long Distance - A call from the Moon",
+      "a": "G.E.M."
+    },
+    {
+      "v": "FllV2qTT-Ko",
+      "t": "G.E.M. 國語主打 \"奇蹟\" [HD] MV 官方首播 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "WhJtXSIzfG8",
+      "t": "G.E.M.【有心人】全新演繹 Official Lyric Video [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "rwrYO8S1wX4",
+      "t": "G.E.M.【單行的軌道 One Way Road】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "3FddFXcH6QY",
+      "t": "\"睡公主\" [MV] - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "U-cIHm7sOQY",
+      "t": "G.E.M.【回憶的沙漏 (10週年版) SANDGLASS】Official MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "4V1K9d7fmHg",
+      "t": "寂寞星球的玫瑰 [紅館 HD] MV  - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "peXpXFYhhyY",
+      "t": "G.E.M.  \"Someday I'll Fly\" [HD] MV 年度歌曲 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "Nk9pK_H9rKs",
+      "t": "G.E.M.【愛如意】MV [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "0TP9n8H29Hs",
+      "t": "\"Get Over You\" [HD] MV - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "2kDKbxPpXYg",
+      "t": "\"Good to be Bad\" [HD] MV - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "xVdKKL4ENwU",
+      "t": "G.E.M.【錯過不錯 RIGHTFULLY WRONG】Official Audio [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "ljakSDUjijc",
+      "t": "G.E.M.【突然之間 UNEXPECTEDLY】Official Video [HD] 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "ordZIcwXZTs",
+      "t": "\"等一個他\" [MV] - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "K-wfInwgdaU",
+      "t": "\"想講你知\" [HD] MV - G.E.M. 鄧紫棋",
+      "a": "G.E.M."
+    },
+    {
+      "v": "2RINai2fjr0",
+      "t": "G.E.M.【毒蘋果 FEARLESS】Official Audio [HD] 鄧紫棋",
+      "a": "G.E.M."
+    }
+  ]
+}

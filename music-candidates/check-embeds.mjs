@@ -13,6 +13,7 @@ const playlists = JSON.parse(featuredRaw);
 for (const code of ['vi', 'en', 'ja', 'zh']) {
   playlists.push(JSON.parse(await readFile(new URL(`music/${code}.json`, basePath), 'utf8')));
   playlists.push(JSON.parse(await readFile(new URL(`music/${code}-recent.json`, basePath), 'utf8')));
+  playlists.push(JSON.parse(await readFile(new URL(`music/${code}-tiktok.json`, basePath), 'utf8')));
 }
 const ids = [...new Set(playlists.flatMap((list) => list.tracks.map((track) => track.v)))];
 const results = new Map();
@@ -57,6 +58,8 @@ for (const playlist of playlists) {
     ? new URL(`music/${playlist.id.slice(8)}.json`, basePath)
     : playlist.id.startsWith('recent-')
       ? new URL(`music/${playlist.id.slice(7)}-recent.json`, basePath)
+      : playlist.id.startsWith('tiktok-')
+        ? new URL(`music/${playlist.id.slice(7)}-tiktok.json`, basePath)
       : null;
   if (file) {
     playlist.tracks = playlist.tracks.filter((track) => !remove.has(track.v));
@@ -73,7 +76,7 @@ if (remove.size > 0) {
 }
 
 for (const code of ['vi', 'en', 'ja', 'zh']) {
-  for (const suffix of ['', '-recent']) {
+  for (const suffix of ['', '-recent', '-tiktok']) {
     const file = new URL(`${code}${suffix}.json`, import.meta.url);
     const list = JSON.parse(await readFile(file, 'utf8'));
     list.tracks = list.tracks.filter((track) => !remove.has(track.videoId));

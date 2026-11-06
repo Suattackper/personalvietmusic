@@ -36,9 +36,17 @@
                 <PlaylistCard Playlist="playlist" @key="playlist.Id" />
             }
         </div>
+        <h2 class="section-heading">@Lang.T("🔥 TikTok viral theo ngôn ngữ")</h2>
+        <p class="page-subtitle">@Lang.T("Mỗi danh sách có 100 bài tuyển từ nhiều mốc xu hướng; thứ tự không phải bảng xếp hạng TikTok chính thức.")</p>
+        <div class="playlist-grid country-playlist-grid">
+            @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("tiktok-")))
+            {
+                <PlaylistCard Playlist="playlist" @key="playlist.Id" />
+            }
+        </div>
         <h2 class="section-heading">@Lang.T("🎶 Playlist tuyển chọn")</h2>
         <div class="playlist-grid">
-            @foreach (var playlist in _playlists.Where(p => !p.Id.StartsWith("country-") && !p.Id.StartsWith("recent-")))
+            @foreach (var playlist in _playlists.Where(p => !p.Id.StartsWith("country-") && !p.Id.StartsWith("recent-") && !p.Id.StartsWith("tiktok-")))
             {
                 <PlaylistCard Playlist="playlist" @key="playlist.Id" />
             }

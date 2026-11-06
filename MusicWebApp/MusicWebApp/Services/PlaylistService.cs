@@ -9,7 +9,7 @@ namespace MusicWebApp.Services;
 /// </summary>
 public class PlaylistService
 {
-    private const string CatalogVersion = "2026-11-06-zh-fix";
+    private const string CatalogVersion = "2026-11-06-tiktok-100";
     private readonly HttpClient _httpClient;
     private readonly ILogger<PlaylistService> _logger;
     private List<CuratedPlaylist>? _playlists;
@@ -35,6 +35,7 @@ public class PlaylistService
             {
                 await AddCollectionAsync($"data/music/{language}.json");
                 await AddCollectionAsync($"data/music/{language}-recent.json");
+                await AddCollectionAsync($"data/music/{language}-tiktok.json");
             }
         }
         catch (Exception ex)

@@ -18,7 +18,7 @@
 @code {
     [Parameter, EditorRequired] public CuratedPlaylist Playlist { get; set; } = default!;
 
-    private bool IsCountryCollection => Playlist.Id.StartsWith("country-") || Playlist.Id.StartsWith("recent-");
+    private bool IsCountryCollection => Playlist.Id.StartsWith("country-") || Playlist.Id.StartsWith("recent-") || Playlist.Id.StartsWith("tiktok-");
 
     private void Open()
     {

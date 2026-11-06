@@ -1,0 +1,907 @@
+{
+  "language": "zh",
+  "collectedOn": "2026-11-06",
+  "selectionNote": "100 bài tuyển từ bảng TikTok/Douyin và playlist viral công khai; thứ tự theo nguồn tham khảo, không phải xếp hạng TikTok chính thức.",
+  "tracks": [
+    {
+      "videoId": "TtdXq9I4e-M",
+      "title": "Jumping Machine (跳楼机)",
+      "artist": "LBI利比",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 2,
+      "youtubeUrl": "https://www.youtube.com/watch?v=TtdXq9I4e-M",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "UbhiNvrPNa8",
+      "title": "离开我的依赖",
+      "artist": "王艳薇",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 3,
+      "youtubeUrl": "https://www.youtube.com/watch?v=UbhiNvrPNa8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "CwwQvC_JiN4",
+      "title": "世界赠予我的",
+      "artist": "王菲",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 4,
+      "youtubeUrl": "https://www.youtube.com/watch?v=CwwQvC_JiN4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "5A0GJdZKyeY",
+      "title": "特别的人",
+      "artist": "方大同",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 5,
+      "youtubeUrl": "https://www.youtube.com/watch?v=5A0GJdZKyeY",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "GCKQfIKMVkQ",
+      "title": "爱错",
+      "artist": "王力宏",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 6,
+      "youtubeUrl": "https://www.youtube.com/watch?v=GCKQfIKMVkQ",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "ZGpWmW9FQGE",
+      "title": "四点的海棠花未眠",
+      "artist": "渡",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 7,
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZGpWmW9FQGE",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "nra0WDxutB8",
+      "title": "爱情讯息",
+      "artist": "郭静",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 8,
+      "youtubeUrl": "https://www.youtube.com/watch?v=nra0WDxutB8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "oBjHa_-rxAk",
+      "title": "座位",
+      "artist": "于冬然",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 11,
+      "youtubeUrl": "https://www.youtube.com/watch?v=oBjHa_-rxAk",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "a2CJcUk9yjs",
+      "title": "去远方",
+      "artist": "付俊乐",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 12,
+      "youtubeUrl": "https://www.youtube.com/watch?v=a2CJcUk9yjs",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "4CeEQpqU3Y0",
+      "title": "零距离的思念",
+      "artist": "TINY7",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 13,
+      "youtubeUrl": "https://www.youtube.com/watch?v=4CeEQpqU3Y0",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "HOp8wvUoXH4",
+      "title": "打火机",
+      "artist": "曾千倚",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 14,
+      "youtubeUrl": "https://www.youtube.com/watch?v=HOp8wvUoXH4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "YCsXEUitdo4",
+      "title": "多远都要在一起",
+      "artist": "邓紫棋",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 15,
+      "youtubeUrl": "https://www.youtube.com/watch?v=YCsXEUitdo4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "5W84GWmnl4s",
+      "title": "可不可以 (抖音热歌)",
+      "artist": "张紫豪",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 16,
+      "youtubeUrl": "https://www.youtube.com/watch?v=5W84GWmnl4s",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "abyV3nd3FxE",
+      "title": "恋人",
+      "artist": "李荣浩",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 17,
+      "youtubeUrl": "https://www.youtube.com/watch?v=abyV3nd3FxE",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "CSEwICbi9Qk",
+      "title": "现在那边是几点",
+      "artist": "黄小琥",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 20,
+      "youtubeUrl": "https://www.youtube.com/watch?v=CSEwICbi9Qk",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "iUCDayJ1dQs",
+      "title": "西楼爱情故事 (女版)",
+      "artist": "桃子",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 21,
+      "youtubeUrl": "https://www.youtube.com/watch?v=iUCDayJ1dQs",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "59hYO0lmk2s",
+      "title": "我记得",
+      "artist": "赵雷",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 22,
+      "youtubeUrl": "https://www.youtube.com/watch?v=59hYO0lmk2s",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "jy63hNTwfts",
+      "title": "一点",
+      "artist": "Muyoi",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 23,
+      "youtubeUrl": "https://www.youtube.com/watch?v=jy63hNTwfts",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "_S3PxKuwTSU",
+      "title": "九万字",
+      "artist": "张靓颖",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 24,
+      "youtubeUrl": "https://www.youtube.com/watch?v=_S3PxKuwTSU",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "YSOSaun24vs",
+      "title": "舍得",
+      "artist": "王呈章",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 25,
+      "youtubeUrl": "https://www.youtube.com/watch?v=YSOSaun24vs",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "GF4NOu03r7E",
+      "title": "悬溺",
+      "artist": "葛东琪",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 26,
+      "youtubeUrl": "https://www.youtube.com/watch?v=GF4NOu03r7E",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "ZoJCN0pV7Qs",
+      "title": "如愿",
+      "artist": "王菲",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 29,
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZoJCN0pV7Qs",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "BNB9mkO0sOw",
+      "title": "可能",
+      "artist": "程响",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 30,
+      "youtubeUrl": "https://www.youtube.com/watch?v=BNB9mkO0sOw",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "TPfSuhNaBfQ",
+      "title": "到时说爱我",
+      "artist": "茜拉",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 31,
+      "youtubeUrl": "https://www.youtube.com/watch?v=TPfSuhNaBfQ",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "1Iw2xVKdmbM",
+      "title": "左转灯 (1000 Times+1) [feat. mac ova seas] [Slowed+Reverb]",
+      "artist": "派伟俊",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 32,
+      "youtubeUrl": "https://www.youtube.com/watch?v=1Iw2xVKdmbM",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "C487IGK9P-w",
+      "title": "指纹",
+      "artist": "杜宣达",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 34,
+      "youtubeUrl": "https://www.youtube.com/watch?v=C487IGK9P-w",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "u3M15beKlQk",
+      "title": "像晴天像雨天(电视剧《难哄》心动曲)",
+      "artist": "汪苏泷",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 35,
+      "youtubeUrl": "https://www.youtube.com/watch?v=u3M15beKlQk",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "KSTeFTHjj14",
+      "title": "推开世界的门",
+      "artist": "杨乃文",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 37,
+      "youtubeUrl": "https://www.youtube.com/watch?v=KSTeFTHjj14",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "1WdD4CHHQus",
+      "title": "没出息(本来应该从从容容游刃有余)",
+      "artist": "礼昂Leon",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 39,
+      "youtubeUrl": "https://www.youtube.com/watch?v=1WdD4CHHQus",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "gHk8MIx6nfY",
+      "title": "第57次取消发送",
+      "artist": "菲菲公主",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 40,
+      "youtubeUrl": "https://www.youtube.com/watch?v=gHk8MIx6nfY",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "rhvqYwa4y5s",
+      "title": "倒数",
+      "artist": "邓紫棋",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 41,
+      "youtubeUrl": "https://www.youtube.com/watch?v=rhvqYwa4y5s",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "jP9MbNfonA8",
+      "title": "夏夜最后的烟火",
+      "artist": "颜人中",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 42,
+      "youtubeUrl": "https://www.youtube.com/watch?v=jP9MbNfonA8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "SaNqXIFS99k",
+      "title": "红色高跟鞋",
+      "artist": "蔡健雅",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 43,
+      "youtubeUrl": "https://www.youtube.com/watch?v=SaNqXIFS99k",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "fmnvg1wzCPo",
+      "title": "出现又离开 (Live)",
+      "artist": "梁博",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 44,
+      "youtubeUrl": "https://www.youtube.com/watch?v=fmnvg1wzCPo",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "zv6PAHtWpOM",
+      "title": "小孩",
+      "artist": "罗森涛",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 46,
+      "youtubeUrl": "https://www.youtube.com/watch?v=zv6PAHtWpOM",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "B-8_gMqXzU8",
+      "title": "素颜 (with 何曼婷)",
+      "artist": "许嵩",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 47,
+      "youtubeUrl": "https://www.youtube.com/watch?v=B-8_gMqXzU8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "Gty9S9qRzEY",
+      "title": "月亮照山川(DJ默涵版)",
+      "artist": "窝窝",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 48,
+      "youtubeUrl": "https://www.youtube.com/watch?v=Gty9S9qRzEY",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "mUv6whexEOw",
+      "title": "你要的全拿走",
+      "artist": "胡彦斌",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 49,
+      "youtubeUrl": "https://www.youtube.com/watch?v=mUv6whexEOw",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "nlPeaMUB5bo",
+      "title": "若月亮没来(吉他版)",
+      "artist": "王宇宙Leto",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 50,
+      "youtubeUrl": "https://www.youtube.com/watch?v=nlPeaMUB5bo",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "1X96Sr210PE",
+      "title": "寂寞寂寞不好",
+      "artist": "曹格",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 51,
+      "youtubeUrl": "https://www.youtube.com/watch?v=1X96Sr210PE",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "H2rCD5E0KFU",
+      "title": "须尽欢 (思乡版)",
+      "artist": "郑浩",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 52,
+      "youtubeUrl": "https://www.youtube.com/watch?v=H2rCD5E0KFU",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "VnQWBaJJcq0",
+      "title": "亲爱的你啊(电视剧《无尽的尽头》主题曲)",
+      "artist": "任素汐",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 54,
+      "youtubeUrl": "https://www.youtube.com/watch?v=VnQWBaJJcq0",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "8nFLOYj-gXA",
+      "title": "一程山路",
+      "artist": "毛不易",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 55,
+      "youtubeUrl": "https://www.youtube.com/watch?v=8nFLOYj-gXA",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "mQXwaAzkQRE",
+      "title": "虚拟",
+      "artist": "陈粒",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 56,
+      "youtubeUrl": "https://www.youtube.com/watch?v=mQXwaAzkQRE",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "d3wrIyq0p1U",
+      "title": "句号",
+      "artist": "邓紫棋",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 57,
+      "youtubeUrl": "https://www.youtube.com/watch?v=d3wrIyq0p1U",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "7cLxx7Th6Gk",
+      "title": "喜欢你 (G.E.M.重生版)",
+      "artist": "邓紫棋",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 58,
+      "youtubeUrl": "https://www.youtube.com/watch?v=7cLxx7Th6Gk",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "1urTkS-r8F8",
+      "title": "伯虎说 (DJ版)",
+      "artist": "伯爵",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 60,
+      "youtubeUrl": "https://www.youtube.com/watch?v=1urTkS-r8F8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "uzvrK5FrH40",
+      "title": "伤心剖半 (把你的心剖开来)",
+      "artist": "邓典",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 61,
+      "youtubeUrl": "https://www.youtube.com/watch?v=uzvrK5FrH40",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "pfwpV08WBGA",
+      "title": "孤身 (DJ版)",
+      "artist": "万能公式",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 63,
+      "youtubeUrl": "https://www.youtube.com/watch?v=pfwpV08WBGA",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "sZA9N7XJ-qU",
+      "title": "平庸 (Live)",
+      "artist": "薛之谦",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 64,
+      "youtubeUrl": "https://www.youtube.com/watch?v=sZA9N7XJ-qU",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "9YpBKqFL7S4",
+      "title": "可我只是海",
+      "artist": "LBI利比",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 65,
+      "youtubeUrl": "https://www.youtube.com/watch?v=9YpBKqFL7S4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "HshjUMDG4tw",
+      "title": "无名的人 (电影《雄狮少年2》主题曲/片尾曲)",
+      "artist": "张韶涵",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 66,
+      "youtubeUrl": "https://www.youtube.com/watch?v=HshjUMDG4tw",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "GW17Iib6IqI",
+      "title": "拆穿(DJAh Remix)",
+      "artist": "闭文思",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 67,
+      "youtubeUrl": "https://www.youtube.com/watch?v=GW17Iib6IqI",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "rUPTNJvfK4A",
+      "title": "暖一杯茶",
+      "artist": "邵帅ShaoShuai",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 68,
+      "youtubeUrl": "https://www.youtube.com/watch?v=rUPTNJvfK4A",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "2AO8Rqa-IVk",
+      "title": "茶花开了",
+      "artist": "王睿卓",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 69,
+      "youtubeUrl": "https://www.youtube.com/watch?v=2AO8Rqa-IVk",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "0xtWC1tzXv4",
+      "title": "我爱你但是我要回家",
+      "artist": "ET",
+      "sourceUrl": "https://music.apple.com/cn/playlist/%E6%8A%96%E9%9F%B3-2025-%E5%B9%B4%E5%BA%A6%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.35323002b653460090e3d1b9a9707482",
+      "sourceRank": 71,
+      "youtubeUrl": "https://www.youtube.com/watch?v=0xtWC1tzXv4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "cjTdZMOWrVI",
+      "title": "甲乙丙丁Strangers",
+      "artist": "李佳薇",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 1,
+      "youtubeUrl": "https://www.youtube.com/watch?v=cjTdZMOWrVI",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "y_sILJY8wus",
+      "title": "我不难过",
+      "artist": "孙燕姿",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 2,
+      "youtubeUrl": "https://www.youtube.com/watch?v=y_sILJY8wus",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "XL67_hFwAIM",
+      "title": "失眠",
+      "artist": "Suki刘舒妤",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 6,
+      "youtubeUrl": "https://www.youtube.com/watch?v=XL67_hFwAIM",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "CdjJvnmw39o",
+      "title": "偏爱",
+      "artist": "张芸京",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 7,
+      "youtubeUrl": "https://www.youtube.com/watch?v=CdjJvnmw39o",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "V5OXMTh9PNc",
+      "title": "心墙",
+      "artist": "郭静",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 8,
+      "youtubeUrl": "https://www.youtube.com/watch?v=V5OXMTh9PNc",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "KzKOSsVHE6w",
+      "title": "情歌",
+      "artist": "梁静茹",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 10,
+      "youtubeUrl": "https://www.youtube.com/watch?v=KzKOSsVHE6w",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "jdrkYJi1Z5Y",
+      "title": "碎碎念",
+      "artist": "队长",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 12,
+      "youtubeUrl": "https://www.youtube.com/watch?v=jdrkYJi1Z5Y",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "Kp-vhiciyfA",
+      "title": "雨过后的风景",
+      "artist": "蔡诗芸",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 14,
+      "youtubeUrl": "https://www.youtube.com/watch?v=Kp-vhiciyfA",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "MyYU8kX5pDU",
+      "title": "吹吹山顶的风",
+      "artist": "巴扎黑",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 16,
+      "youtubeUrl": "https://www.youtube.com/watch?v=MyYU8kX5pDU",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "xttYNxBT_os",
+      "title": "雪下的时候",
+      "artist": "乔佳旭",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 18,
+      "youtubeUrl": "https://www.youtube.com/watch?v=xttYNxBT_os",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "7k7l0w_WOw4",
+      "title": "小半",
+      "artist": "陈粒",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 19,
+      "youtubeUrl": "https://www.youtube.com/watch?v=7k7l0w_WOw4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "tZ0lsIB5jPs",
+      "title": "你不该权衡利弊 (微醺版)",
+      "artist": "微醺阿俏",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 20,
+      "youtubeUrl": "https://www.youtube.com/watch?v=tZ0lsIB5jPs",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "FQcNB8M4A38",
+      "title": "开始懂了",
+      "artist": "孙燕姿",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 23,
+      "youtubeUrl": "https://www.youtube.com/watch?v=FQcNB8M4A38",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "ynJLV77CP1s",
+      "title": "梦的翅膀受了伤 (SouMix Remix)",
+      "artist": "蒋雪儿Snow.J",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 24,
+      "youtubeUrl": "https://www.youtube.com/watch?v=ynJLV77CP1s",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "K6enKZjVzCA",
+      "title": "其实",
+      "artist": "薛之谦",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 26,
+      "youtubeUrl": "https://www.youtube.com/watch?v=K6enKZjVzCA",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "ApADDtPcPB4",
+      "title": "戒烟",
+      "artist": "李荣浩",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 27,
+      "youtubeUrl": "https://www.youtube.com/watch?v=ApADDtPcPB4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "FB5-rPa5wBA",
+      "title": "玻璃",
+      "artist": "Gareth.T",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 30,
+      "youtubeUrl": "https://www.youtube.com/watch?v=FB5-rPa5wBA",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "gUR1pAu0JiM",
+      "title": "美人鱼",
+      "artist": "林俊杰",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 31,
+      "youtubeUrl": "https://www.youtube.com/watch?v=gUR1pAu0JiM",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "O29JAGCaPyE",
+      "title": "来不及爱你",
+      "artist": "h3R3 刘清云",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 32,
+      "youtubeUrl": "https://www.youtube.com/watch?v=O29JAGCaPyE",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "ZvtpEH2WNx8",
+      "title": "梦哑",
+      "artist": "任然",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 35,
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZvtpEH2WNx8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "nmCx2sSmET8",
+      "title": "再见太难",
+      "artist": "利得汇",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 36,
+      "youtubeUrl": "https://www.youtube.com/watch?v=nmCx2sSmET8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "TsNaKIP4FSs",
+      "title": "我好像在哪见过你",
+      "artist": "薛之谦",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 37,
+      "youtubeUrl": "https://www.youtube.com/watch?v=TsNaKIP4FSs",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "FHr45ESCsr4",
+      "title": "黄昏(纵然青丝如霜) [烟嗓R&B版]",
+      "artist": "微醺阿俏",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 38,
+      "youtubeUrl": "https://www.youtube.com/watch?v=FHr45ESCsr4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "0qyNXsAoWN8",
+      "title": "琵琶曲(人间琴悠扬 姑娘把谁记心上)",
+      "artist": "郑浩",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 40,
+      "youtubeUrl": "https://www.youtube.com/watch?v=0qyNXsAoWN8",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "gW_-HH4J7FI",
+      "title": "勇气",
+      "artist": "梁静茹",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 41,
+      "youtubeUrl": "https://www.youtube.com/watch?v=gW_-HH4J7FI",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "nDPaYBdo8Rc",
+      "title": "牡丹亭",
+      "artist": "浅影阿",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 42,
+      "youtubeUrl": "https://www.youtube.com/watch?v=nDPaYBdo8Rc",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "4uIdpMsblmc",
+      "title": "多余的解释",
+      "artist": "许嵩",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 47,
+      "youtubeUrl": "https://www.youtube.com/watch?v=4uIdpMsblmc",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "LHoAZkRVzZ4",
+      "title": "天龙八部之宿敌",
+      "artist": "许嵩",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 48,
+      "youtubeUrl": "https://www.youtube.com/watch?v=LHoAZkRVzZ4",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "w-e-EPzHznQ",
+      "title": "传说A Legend (feat. 成龙/金喜善)",
+      "artist": "张艺兴",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 49,
+      "youtubeUrl": "https://www.youtube.com/watch?v=w-e-EPzHznQ",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "BYyhFawlpmI",
+      "title": "冷夜",
+      "artist": "陈默之",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 51,
+      "youtubeUrl": "https://www.youtube.com/watch?v=BYyhFawlpmI",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "KgcCOxfKRZk",
+      "title": "盛夏的果实",
+      "artist": "莫文蔚",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 53,
+      "youtubeUrl": "https://www.youtube.com/watch?v=KgcCOxfKRZk",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "YunMnIFvL1s",
+      "title": "大花轿 (feat. 火风)",
+      "artist": "张艺兴",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 54,
+      "youtubeUrl": "https://www.youtube.com/watch?v=YunMnIFvL1s",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "cwcdhkBHpFo",
+      "title": "琵琶曲",
+      "artist": "冰洁",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 57,
+      "youtubeUrl": "https://www.youtube.com/watch?v=cwcdhkBHpFo",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "_-wyT4RrCTs",
+      "title": "恶作剧",
+      "artist": "林依晨",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 59,
+      "youtubeUrl": "https://www.youtube.com/watch?v=_-wyT4RrCTs",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "Ph_QFobkuGo",
+      "title": "慢慢离开你",
+      "artist": "金润吉",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 60,
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ph_QFobkuGo",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "qQOR1Ls3qzw",
+      "title": "风月吻眉梢",
+      "artist": "礼越",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 61,
+      "youtubeUrl": "https://www.youtube.com/watch?v=qQOR1Ls3qzw",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "f76vecH6P5M",
+      "title": "遇见",
+      "artist": "孙燕姿",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 62,
+      "youtubeUrl": "https://www.youtube.com/watch?v=f76vecH6P5M",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "vBHEj9eNA14",
+      "title": "半点心",
+      "artist": "草蜢",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 64,
+      "youtubeUrl": "https://www.youtube.com/watch?v=vBHEj9eNA14",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "V3d9GUJYCNo",
+      "title": "阳光下的星星",
+      "artist": "金海心",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 65,
+      "youtubeUrl": "https://www.youtube.com/watch?v=V3d9GUJYCNo",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "dq4rA_Br6pw",
+      "title": "他真的对你好吗 (Live)",
+      "artist": "付豪",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 67,
+      "youtubeUrl": "https://www.youtube.com/watch?v=dq4rA_Br6pw",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "qgqi4tLMEDE",
+      "title": "游京 (滔滔江水)",
+      "artist": "泽国同学",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 70,
+      "youtubeUrl": "https://www.youtube.com/watch?v=qgqi4tLMEDE",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "l7fqRBGiJ7M",
+      "title": "成都",
+      "artist": "赵雷",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 71,
+      "youtubeUrl": "https://www.youtube.com/watch?v=l7fqRBGiJ7M",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "7DqcxIUVW6o",
+      "title": "冻结",
+      "artist": "林俊杰",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 72,
+      "youtubeUrl": "https://www.youtube.com/watch?v=7DqcxIUVW6o",
+      "matchType": "youtube-search"
+    },
+    {
+      "videoId": "YDR5ugqV-Jk",
+      "title": "回到你身边(让你知道)",
+      "artist": "h3R3 刘清云",
+      "sourceUrl": "https://music.apple.com/cn/playlist/2026-%E5%B9%B4-9-%E6%9C%88%E6%8A%96%E9%9F%B3%E7%83%AD%E6%AD%8C%E6%A6%9C/pl.d1f66de41a364273bc81284fe843eab0",
+      "sourceRank": 73,
+      "youtubeUrl": "https://www.youtube.com/watch?v=YDR5ugqV-Jk",
+      "matchType": "youtube-search"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ const collections = [
 for (const collection of collections) {
   const candidates = JSON.parse(await readFile(new URL(`${collection.code}.json`, root), 'utf8'));
   const recent = JSON.parse(await readFile(new URL(`${collection.code}-recent.json`, root), 'utf8'));
+  const tiktok = JSON.parse(await readFile(new URL(`${collection.code}-tiktok.json`, root), 'utf8'));
   const toTracks = (items) => items.map((track) => ({
     v: track.videoId,
     t: track.title,
@@ -22,7 +23,10 @@ for (const collection of collections) {
   }));
   const tracks = toTracks(candidates.tracks);
   const recentTracks = toTracks(recent.tracks);
-  if (tracks.length === 0 || recentTracks.length !== 30 || new Set([...tracks, ...recentTracks].map((track) => track.v)).size !== tracks.length + recentTracks.length) {
+  const tiktokTracks = toTracks(tiktok.tracks);
+  if (tracks.length === 0 || recentTracks.length !== 30 || tiktokTracks.length !== 100
+      || new Set([...tracks, ...recentTracks].map((track) => track.v)).size !== tracks.length + recentTracks.length
+      || new Set(tiktokTracks.map((track) => track.v)).size !== 100) {
     throw new Error(`${collection.code} must have unique videos`);
   }
   const playlist = {
@@ -39,6 +43,13 @@ for (const collection of collections) {
     emoji: collection.emoji,
     description: '30 ca khúc nổi bật được đăng trong giai đoạn 2025–2026.',
     tracks: recentTracks,
+  }, null, 2) + '\n');
+  await writeFile(new URL(`${collection.code}-tiktok.json`, output), JSON.stringify({
+    id: `tiktok-${collection.code}`,
+    name: `TikTok ${collection.code === 'vi' ? 'Việt' : collection.code === 'en' ? 'Anh' : collection.code === 'ja' ? 'Nhật' : 'Trung'} — 100 bài`,
+    emoji: collection.emoji,
+    description: '100 ca khúc được tuyển từ xu hướng TikTok, Douyin và playlist viral.',
+    tracks: tiktokTracks,
   }, null, 2) + '\n');
 }
 

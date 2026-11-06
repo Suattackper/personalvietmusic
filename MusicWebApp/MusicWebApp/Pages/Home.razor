@@ -31,7 +31,7 @@
         </div>
         <h2 class="section-heading">@Lang.T("🎶 Nghe ngay — playlist có sẵn")</h2>
         <div class="playlist-grid">
-            @foreach (var playlist in _playlists.Where(p => !p.Id.StartsWith("country-") && !p.Id.StartsWith("recent-")))
+            @foreach (var playlist in _playlists.Where(p => !p.Id.StartsWith("country-") && !p.Id.StartsWith("recent-") && !p.Id.StartsWith("tiktok-")))
             {
                 <PlaylistCard Playlist="playlist" @key="playlist.Id" />
             }

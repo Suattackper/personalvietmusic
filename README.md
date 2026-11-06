@@ -15,6 +15,7 @@
 - 🔔 Toast thông báo lỗi/thành công thống nhất, tự chuyển bài khi video lỗi hoặc không cho nhúng
 - 🌐 Giao diện tiếng Việt (mặc định) và tiếng Anh, ghi nhớ lựa chọn trong trình duyệt
 - 🎼 Bốn bộ sưu tập nhạc Việt, Anh, Nhật, Trung; tìm bài trong từng danh sách
+- 🔥 Bốn playlist TikTok/Douyin riêng theo ngôn ngữ, 100 bài mỗi danh sách; nguồn tuyển chọn ghi trong `music-candidates/README.md`
 
 ## Tác giả và thời gian
 

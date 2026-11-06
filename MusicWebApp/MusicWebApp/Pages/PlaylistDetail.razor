@@ -71,7 +71,7 @@
     private bool _loaded;
     private string? _loadedId;
     private string _query = string.Empty;
-    private bool IsCountryCollection => _playlist?.Id.StartsWith("country-") == true || _playlist?.Id.StartsWith("recent-") == true;
+    private bool IsCountryCollection => _playlist?.Id.StartsWith("country-") == true || _playlist?.Id.StartsWith("recent-") == true || _playlist?.Id.StartsWith("tiktok-") == true;
     private IReadOnlyList<MusicTrack> VisibleTracks => string.IsNullOrWhiteSpace(_query)
         ? _tracks
         : _tracks.Where(t => t.Title.Contains(_query.Trim(), StringComparison.OrdinalIgnoreCase)

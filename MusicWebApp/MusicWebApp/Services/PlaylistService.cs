@@ -9,12 +9,15 @@ namespace MusicWebApp.Services;
 /// </summary>
 public class PlaylistService
 {
+    private const string CatalogVersion = "2026-11-06-zh-fix";
     private readonly HttpClient _httpClient;
+    private readonly ILogger<PlaylistService> _logger;
     private List<CuratedPlaylist>? _playlists;
 
-    public PlaylistService(HttpClient httpClient)
+    public PlaylistService(HttpClient httpClient, ILogger<PlaylistService> logger)
     {
         _httpClient = httpClient;
+        _logger = logger;
     }
 
     public async Task<IReadOnlyList<CuratedPlaylist>> GetPlaylistsAsync()
@@ -26,36 +29,43 @@ public class PlaylistService
 
         try
         {
-            _playlists = await _httpClient.GetFromJsonAsync<List<CuratedPlaylist>>("data/playlists.json")
+            _playlists = await _httpClient.GetFromJsonAsync<List<CuratedPlaylist>>($"data/playlists.json?v={CatalogVersion}")
                 ?? new List<CuratedPlaylist>();
             foreach (var language in new[] { "vi", "en", "ja", "zh" })
             {
-                try
-                {
-                    var collection = await _httpClient.GetFromJsonAsync<CuratedPlaylist>($"data/music/{language}.json");
-                    if (collection is not null)
-                    {
-                        _playlists.Add(collection);
-                    }
-                    var recent = await _httpClient.GetFromJsonAsync<CuratedPlaylist>($"data/music/{language}-recent.json");
-                    if (recent is not null)
-                    {
-                        _playlists.Add(recent);
-                    }
-                }
-                catch (Exception)
-                {
-                    // Một bộ sưu tập lỗi không làm mất các playlist còn lại.
-                }
+                await AddCollectionAsync($"data/music/{language}.json");
+                await AddCollectionAsync($"data/music/{language}-recent.json");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // File thiếu hoặc JSON hỏng — trả danh sách rỗng thay vì crash.
+            _logger.LogError(ex, "Could not load featured playlists");
             _playlists = new List<CuratedPlaylist>();
         }
 
         return _playlists;
+    }
+
+    private async Task AddCollectionAsync(string path)
+    {
+        for (var attempt = 0; attempt < 2; attempt++)
+        {
+            try
+            {
+                var version = attempt == 0 ? CatalogVersion : $"{CatalogVersion}-{DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}";
+                var collection = await _httpClient.GetFromJsonAsync<CuratedPlaylist>($"{path}?v={version}");
+                if (collection is null || collection.Tracks.Count == 0)
+                {
+                    throw new InvalidDataException($"Playlist {path} is empty");
+                }
+                _playlists!.Add(collection);
+                return;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Could not load {PlaylistPath} (attempt {Attempt})", path, attempt + 1);
+            }
+        }
     }
 
     public async Task<CuratedPlaylist?> GetByIdAsync(string id)

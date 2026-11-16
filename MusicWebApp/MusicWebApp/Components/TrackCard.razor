@@ -2,7 +2,7 @@
 @inject FavoritesService Favorites
 @inject ToastService Toasts
 
-<div class="track-card @(IsActive ? "active" : null)"
+<div class="track-card @(IsActive ? "active" : null) @(IsActive && PlayerState.IsPlaying ? "is-playing" : null)"
      role="button"
      tabindex="0"
      aria-label="@Lang.F(IsActive && PlayerState.IsPlaying ? "Tạm dừng {0}" : "Phát {0}", Track.Title)"
@@ -29,7 +29,7 @@
         @if (IsActive)
         {
             <span class="track-card-playing-badge" aria-hidden="true">
-                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
             </span>
         }
     </div>

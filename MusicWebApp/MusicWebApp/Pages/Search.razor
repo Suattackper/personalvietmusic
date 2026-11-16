@@ -25,7 +25,9 @@
 
         @if (_isLoading)
         {
-            <LoadingIndicator Text="Đang tìm kiếm..." />
+            <div class="skeleton-grid" aria-label="@Lang.T("Đang tìm kiếm...")" role="status">
+                @for (var i = 0; i < 8; i++) { <div class="skeleton skeleton-track"></div> }
+            </div>
         }
         else if (_errorMessage is not null)
         {

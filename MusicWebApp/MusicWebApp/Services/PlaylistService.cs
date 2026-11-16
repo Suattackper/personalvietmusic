@@ -13,6 +13,7 @@ public class PlaylistService
     private readonly HttpClient _httpClient;
     private readonly ILogger<PlaylistService> _logger;
     private List<CuratedPlaylist>? _playlists;
+    private readonly SemaphoreSlim _loadGate = new(1, 1);
 
     public PlaylistService(HttpClient httpClient, ILogger<PlaylistService> logger)
     {
@@ -22,13 +23,11 @@ public class PlaylistService
 
     public async Task<IReadOnlyList<CuratedPlaylist>> GetPlaylistsAsync()
     {
-        if (_playlists is not null)
-        {
-            return _playlists;
-        }
-
+        await _loadGate.WaitAsync();
         try
         {
+            if (_playlists is not null) return _playlists;
+
             _playlists = await _httpClient.GetFromJsonAsync<List<CuratedPlaylist>>($"data/playlists.json?v={CatalogVersion}")
                 ?? new List<CuratedPlaylist>();
             foreach (var language in new[] { "vi", "en", "ja", "zh" })
@@ -37,14 +36,15 @@ public class PlaylistService
                 await AddCollectionAsync($"data/music/{language}-recent.json");
                 await AddCollectionAsync($"data/music/{language}-tiktok.json");
             }
+            return _playlists;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Could not load featured playlists");
             _playlists = new List<CuratedPlaylist>();
+            return _playlists;
         }
-
-        return _playlists;
+        finally { _loadGate.Release(); }
     }
 
     private async Task AddCollectionAsync(string path)

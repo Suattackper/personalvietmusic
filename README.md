@@ -16,6 +16,7 @@
 - 🌐 Giao diện tiếng Việt (mặc định) và tiếng Anh, ghi nhớ lựa chọn trong trình duyệt
 - 🎼 Bốn bộ sưu tập nhạc Việt, Anh, Nhật, Trung; tìm bài trong từng danh sách
 - 🔥 Bốn playlist TikTok/Douyin riêng theo ngôn ngữ, 100 bài mỗi danh sách; nguồn tuyển chọn ghi trong `music-candidates/README.md`
+- ✨ Hiệu ứng CSS và JavaScript thuần, chế độ Now Playing, màu nền theo ảnh bìa; có nút tắt hiệu ứng và hỗ trợ `prefers-reduced-motion`
 
 ## Tác giả và thời gian
 

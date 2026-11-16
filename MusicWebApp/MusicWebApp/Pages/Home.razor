@@ -1,6 +1,8 @@
 @page "/"
 @inject NavigationManager Nav
 @inject PlaylistService PlaylistSvc
+@inject RecentlyPlayedService Recent
+@implements IDisposable
 
 <PageTitle>AnhTanMusic - @Lang.T("Nhạc Việt")</PageTitle>
 
@@ -12,7 +14,36 @@
         </p>
     </div>
 
-    @if (_playlists is { Count: > 0 })
+    <div class="home-recent-heading">
+        <h2 class="section-heading">@Lang.T("Nghe gần đây")</h2>
+        @if (Recent.History.Count > 0)
+        {
+            <a href="recent" class="button-secondary">@Lang.T("Xem tất cả")</a>
+        }
+    </div>
+    @if (Recent.History.Count > 0)
+    {
+        <TrackList Tracks="Recent.History.Take(4).ToList()" ReplaceQueueOnPlay="false" />
+    }
+    else
+    {
+        <div class="home-recent-empty">
+            <Icon Name="music" Size="24" />
+            <span>@Lang.T("Bài bạn nghe sẽ xuất hiện ở đây.")</span>
+        </div>
+    }
+
+    @if (_playlists is null)
+    {
+        <div class="skeleton-grid" aria-label="@Lang.T("Đang tải playlist...")" role="status">
+            @for (var i = 0; i < 4; i++) { <div class="skeleton skeleton-playlist"></div> }
+        </div>
+    }
+    else if (_playlists.Count == 0)
+    {
+        <EmptyState IconName="disc" Title="Chưa có playlist" Description="Không tìm thấy dữ liệu playlist (data/playlists.json)." />
+    }
+    else
     {
         <h2 class="section-heading">@Lang.T("🌍 Nhạc Việt, Anh, Nhật, Trung")</h2>
         <p class="page-subtitle">@Lang.T("Mở từng danh sách để tìm và chọn bài bạn muốn nghe.")</p>
@@ -55,6 +86,10 @@
 
 @code {
     private IReadOnlyList<CuratedPlaylist>? _playlists;
+
+    protected override void OnInitialized() => Recent.OnChange += RefreshRecent;
+    private void RefreshRecent() => _ = InvokeAsync(StateHasChanged);
+    public void Dispose() => Recent.OnChange -= RefreshRecent;
 
     protected override async Task OnInitializedAsync()
     {

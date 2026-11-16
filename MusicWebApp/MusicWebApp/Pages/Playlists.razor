@@ -12,7 +12,9 @@
 
     @if (_playlists is null)
     {
-        <LoadingIndicator Text="Đang tải playlist..." />
+        <div class="skeleton-grid" aria-label="@Lang.T("Đang tải playlist...")" role="status">
+            @for (var i = 0; i < 6; i++) { <div class="skeleton skeleton-playlist"></div> }
+        </div>
     }
     else if (_playlists.Count == 0)
     {

@@ -8,7 +8,9 @@
 <section class="page-section">
     @if (_playlist is null && !_loaded)
     {
-        <LoadingIndicator Text="Đang tải playlist..." />
+        <div class="skeleton-grid" aria-label="@Lang.T("Đang tải playlist...")" role="status">
+            @for (var i = 0; i < 8; i++) { <div class="skeleton skeleton-track"></div> }
+        </div>
     }
     else if (_playlist is null)
     {

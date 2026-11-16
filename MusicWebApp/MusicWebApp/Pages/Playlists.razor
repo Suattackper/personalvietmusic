@@ -1,6 +1,8 @@
 @page "/playlists"
 @inject PlaylistService PlaylistSvc
 @inject PersonalPlaylistService Personal
+@inject MusicPlayerState PlayerState
+@inject NavigationManager Nav
 
 <PageTitle>@Lang.T("Playlist") - AnhTanMusic</PageTitle>
 
@@ -26,11 +28,11 @@
     else
     {
         <h2 class="section-heading">@Lang.T("Playlist của tôi")</h2>
-        <a class="playlist-card personal-playlist-card" href="my-playlist">
+        <button class="playlist-card personal-playlist-card" @onclick="OpenPersonalPlaylist">
             <span class="playlist-card-art" aria-hidden="true"><span class="playlist-card-art-emoji">💜</span></span>
             <span class="playlist-card-body"><span class="playlist-card-name">@Lang.T("Playlist của tôi")</span><span class="playlist-card-desc">@Lang.T("Bộ sưu tập bài hát bạn đã lưu trên thiết bị này.")</span></span>
             <span class="playlist-card-count">@Lang.F("{0} bài", Personal.Tracks.Count)</span>
-        </a>
+        </button>
         <h2 class="section-heading">@Lang.T("🌍 Chọn nhạc theo ngôn ngữ")</h2>
         <div class="playlist-grid country-playlist-grid">
             @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("country-")))
@@ -70,5 +72,11 @@
     {
         await Personal.InitializeAsync();
         _playlists = await PlaylistSvc.GetPlaylistsAsync();
+    }
+
+    private void OpenPersonalPlaylist()
+    {
+        if (Personal.Tracks.Count > 0) PlayerState.SetQueue(Personal.Tracks, 0);
+        Nav.NavigateTo("my-playlist");
     }
 }

@@ -1,8 +1,9 @@
 @inject NavigationManager Nav
+@inject MusicPlayerState PlayerState
 
 <button class="playlist-card"
-        title="@Lang.T(IsCountryCollection ? "Mở danh sách" : "Phát playlist") @Lang.T(Playlist.Name)"
-        aria-label="@Lang.T(IsCountryCollection ? "Mở danh sách" : "Phát playlist") @Lang.T(Playlist.Name) (@Lang.F("{0} bài", Playlist.Tracks.Count))"
+        title="@Lang.T("Phát playlist") @Lang.T(Playlist.Name)"
+        aria-label="@Lang.T("Phát playlist") @Lang.T(Playlist.Name) (@Lang.F("{0} bài", Playlist.Tracks.Count))"
         @onclick="Open">
     <span class="playlist-card-art" aria-hidden="true">
         @foreach (var track in Playlist.Tracks.Take(3))
@@ -24,11 +25,14 @@
 @code {
     [Parameter, EditorRequired] public CuratedPlaylist Playlist { get; set; } = default!;
 
-    private bool IsCountryCollection => Playlist.Id.StartsWith("country-") || Playlist.Id.StartsWith("recent-") || Playlist.Id.StartsWith("tiktok-");
-
     private void Open()
     {
-        // autoplay=1: trang chi tiết sẽ tự phát toàn bộ playlist ngay khi mở.
-        Nav.NavigateTo(IsCountryCollection ? $"playlist/{Playlist.Id}" : $"playlist/{Playlist.Id}?autoplay=1");
+        // Phát ngay trong thao tác bấm trước khi chuyển route, tránh hai lần nạp
+        // và giữ cơ hội phát trên trình duyệt chặn autoplay sau điều hướng.
+        if (Playlist.Tracks.Count > 0)
+        {
+            PlayerState.SetQueue(Playlist.Tracks.Select(t => t.ToMusicTrack()), 0);
+        }
+        Nav.NavigateTo($"playlist/{Playlist.Id}");
     }
 }

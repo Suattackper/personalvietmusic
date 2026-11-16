@@ -26,9 +26,19 @@
         {
             @if (!string.IsNullOrEmpty(PlayerState.CurrentTrack.ThumbnailUrl))
             {
-                <img class="player-thumb"
-                     src="@PlayerState.CurrentTrack.ThumbnailUrl"
-                     alt="@Lang.F("Ảnh bìa {0}", PlayerState.CurrentTrack.Title)" />
+                <div class="mini-vinyl @(_visualState == "is-playing" ? "is-playing" : null)">
+                    <span class="mini-vinyl-spectrum" aria-hidden="true">
+                        @for (var bar = 0; bar < 16; bar++)
+                        {
+                            <span style="--bar-index:@bar"></span>
+                        }
+                    </span>
+                    <span class="mini-vinyl-disc">
+                        <img class="player-thumb"
+                             src="@PlayerState.CurrentTrack.ThumbnailUrl"
+                             alt="@Lang.F("Ảnh bìa {0}", PlayerState.CurrentTrack.Title)" />
+                    </span>
+                </div>
             }
             <div class="player-track-meta">
                 <span class="player-track-title" title="@PlayerState.CurrentTrack.Title">
@@ -146,7 +156,7 @@
             <div class="stage-aurora" aria-hidden="true"></div>
             <button class="icon-button now-close" data-now-close title="@Lang.T("Đóng chế độ nghe tập trung")" aria-label="@Lang.T("Đóng chế độ nghe tập trung")" @onclick="CloseNowPlaying"><Icon Name="close" Size="22" /></button>
             <p class="now-playing-eyebrow">@Lang.T("Đang phát")</p>
-            <div class="stage-art-wrap @(_vinylMode ? "vinyl-mode" : null) @(PlayerState.IsPlaying ? "is-playing" : null)" @key="PlayerState.CurrentTrack.VideoId">
+            <div class="stage-art-wrap @(_vinylMode ? "vinyl-mode" : null) @(_visualState == "is-playing" ? "is-playing" : null)" @key="PlayerState.CurrentTrack.VideoId">
                 <canvas id="stage-visualizer" class="stage-visualizer" aria-hidden="true"></canvas>
                 @if (!string.IsNullOrEmpty(PlayerState.CurrentTrack.ThumbnailUrl))
                 {
@@ -238,8 +248,8 @@
     private string _motionLevel = "full";
     private bool _systemReducedMotion;
     private bool _stageOpen;
-    private bool _vinylMode;
-    private string _visualizerMode = "ring";
+    private bool _vinylMode = true;
+    private string _visualizerMode = "bars";
     private string _stageTheme = "neon";
     private LyricDocument? _lyrics;
     private bool _lyricsAutoScroll = true;
@@ -363,11 +373,11 @@
             await JS.InvokeVoidAsync("anhTanEffects.endCoverTransition", ".now-playing-art");
             await JS.InvokeVoidAsync("anhTanStage.attachPanel", "now-playing-panel", _dotNetRef);
         }
-        if (_nowPlayingOpen && (_lastVisualizerPlaying != PlayerState.IsPlaying || _lastVisualizerMode != _visualizerMode))
+        if (_nowPlayingOpen && (_lastVisualizerPlaying != (_visualState == "is-playing") || _lastVisualizerMode != _visualizerMode))
         {
-            _lastVisualizerPlaying = PlayerState.IsPlaying;
+            _lastVisualizerPlaying = _visualState == "is-playing";
             _lastVisualizerMode = _visualizerMode;
-            await JS.InvokeVoidAsync("anhTanStage.mount", "stage-visualizer", _visualizerMode, PlayerState.IsPlaying);
+            await JS.InvokeVoidAsync("anhTanStage.mount", "stage-visualizer", _visualizerMode, _visualState == "is-playing");
         }
         if (_nowPlayingOpen && _lyricsAutoScroll && ActiveLyricIndex >= 0 && ActiveLyricIndex != _lastLyricIndex)
         {

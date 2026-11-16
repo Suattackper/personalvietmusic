@@ -8,11 +8,10 @@
 @* Khung video YouTube nổi (iframe duy nhất, luôn tồn tại trong DOM).
    Nút tròn kiểu chatbot bên cạnh để ẩn/hiện. Khi ẩn dùng opacity:0 (KHÔNG
    display:none) để giữ kích thước hợp lệ -> nhạc vẫn phát. *@
-<div class="player-video-box @(PlayerState.CurrentTrack is null ? "empty" : null) @(_videoVisible && PlayerState.CurrentTrack is not null ? null : "collapsed")">
+<div class="player-video-box @(PlayerState.CurrentTrack is null ? "empty" : null) @(_videoVisible ? null : "collapsed")">
     <div id="youtube-player-host"></div>
 </div>
 <button class="video-toggle-btn @(_videoVisible ? "is-open" : null)"
-        style="@(PlayerState.CurrentTrack is null ? "display:none" : null)"
         title="@Lang.T(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
         aria-label="@Lang.T(_videoVisible ? "Ẩn khung video" : "Hiện khung video")"
         aria-pressed="@_videoVisible"

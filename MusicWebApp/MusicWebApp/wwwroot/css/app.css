@@ -1772,7 +1772,6 @@ input[type="range"]:disabled {
 .motion-toggle[aria-pressed="false"] { opacity: .5; }
 input[type="range"] { min-height: 28px; }
 .player-progress input[type="range"] { min-width: 50px; }
-.player-video-box.empty { opacity: 0; pointer-events: none; }
 
 .now-playing-backdrop {
     position: fixed; inset: 0; z-index: 200;

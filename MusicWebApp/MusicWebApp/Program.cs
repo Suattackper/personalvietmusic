@@ -19,6 +19,8 @@ builder.Services.AddScoped<LanguageService>();
 builder.Services.AddScoped<MusicPlayerState>();
 builder.Services.AddScoped<FavoritesService>();
 builder.Services.AddScoped<RecentlyPlayedService>();
+builder.Services.AddScoped<LyricsService>();
+builder.Services.AddScoped<PersonalPlaylistService>();
 builder.Services.AddScoped<ToastService>();
 builder.Services.AddScoped<PlaylistService>();
 

@@ -2,6 +2,14 @@
 
 Ứng dụng web nghe nhạc Việt hiện đại, responsive, xây dựng hoàn toàn phía frontend bằng **Blazor WebAssembly Standalone**. Tìm kiếm bài hát qua **YouTube Data API v3** và phát nhạc qua **YouTube IFrame Player API**. Có thể deploy miễn phí dưới dạng static website (Cloudflare Pages, GitHub Pages...).
 
+## Trải nghiệm nghe nhạc
+
+- Now Playing có Sân khấu, đĩa vinyl, hai visualizer mô phỏng và ba không gian nghe. Nguồn YouTube vẫn phát bằng iframe hiện có; visualizer không đọc được phổ âm thanh thật của iframe.
+- Chọn mức hiệu ứng **Tắt / Nhẹ / Đầy đủ** trong player. Lựa chọn và không gian nghe được lưu ở trình duyệt. Thiết lập giảm chuyển động của hệ điều hành được ưu tiên.
+- Nút hình đĩa trên thẻ bài hát thêm vào **Playlist của tôi** tại `/my-playlist`, lưu trong localStorage; thông báo có nút hoàn tác. Nút dấu cộng vẫn thêm vào hàng đợi.
+- Lời bài hát chỉ hiển thị khi có dữ liệu hợp lệ trong `MusicWebApp/MusicWebApp/wwwroot/data/lyrics.json`. File hiện là `{}`. Để bổ sung nội dung được phép sử dụng, đặt VideoId làm khóa; giá trị có `text` cho lời tĩnh hoặc `lines` gồm `startMs`, `text`, và tùy chọn `words` (`startMs`, `endMs`, `text`) để đồng bộ theo dòng hoặc từ. Không tạo lời hoặc thời gian giả.
+- Hiệu ứng dùng CSS, JavaScript thuần và Canvas, không thêm dependency animation mới. `stageExperience.js` quản lý một vòng vẽ và dừng khi ẩn tab hoặc đóng Now Playing.
+
 ## Tính năng
 
 - 🏠 Trang chủ với các nhóm thể loại đề xuất (Nhạc Việt mới, V-Pop, Ballad Việt, Rap Việt...)

@@ -2,6 +2,7 @@
 @inject RecentlyPlayedService Recent
 @inject FavoritesService Favorites
 @inject ToastService Toasts
+@inject LyricsService Lyrics
 @inject IJSRuntime JS
 @implements IAsyncDisposable
 
@@ -112,14 +113,17 @@
                    disabled="@(PlayerState.CurrentTrack is null || PlayerState.Duration <= 0)"
                    @oninput="OnSeekInput"
                    @onchange="OnSeekCommitAsync" />
+            <span class="seek-preview" aria-hidden="true" style="left:@Inv(PlayerState.Duration > 0 ? Math.Clamp(DisplayTime / PlayerState.Duration * 100, 0, 100) : 0)%">@FormatTime(DisplayTime)</span>
             <span class="player-time" aria-label="@Lang.T("Tổng thời lượng")">@FormatTime(PlayerState.Duration)</span>
         </div>
     </div>
 
     <div class="player-extras">
-        <button class="icon-button motion-toggle" title="@Lang.T(_motionEnabled ? "Tắt hiệu ứng" : "Bật hiệu ứng")" aria-label="@Lang.T(_motionEnabled ? "Tắt hiệu ứng" : "Bật hiệu ứng")" aria-pressed="@_motionEnabled" @onclick="ToggleMotionAsync">
-            <Icon Name="sparkles" Size="18" />
-        </button>
+        <label class="motion-level-picker">@Lang.T("Hiệu ứng")
+            <select value="@_motionLevel" @onchange="ChangeMotionLevelAsync" aria-label="@Lang.T("Mức hiệu ứng")">
+                <option value="off">@Lang.T("Tắt")</option><option value="light">@Lang.T("Nhẹ")</option><option value="full">@Lang.T("Đầy đủ")</option>
+            </select>
+        </label>
         <span class="volume-icon" aria-hidden="true">
             <Icon Name="@(PlayerState.Volume == 0 ? "volume-mute" : "volume")" Size="18" />
         </span>
@@ -136,20 +140,40 @@
 
 @if (_nowPlayingOpen && PlayerState.CurrentTrack is not null)
 {
-    <div id="now-playing" class="now-playing-backdrop" role="presentation" @onclick="CloseNowPlaying">
-        <section class="now-playing-panel" role="dialog" aria-modal="true" aria-label="@Lang.T("Đang phát")" @onclick:stopPropagation="true">
+    <div id="now-playing" class="now-playing-backdrop stage-theme-@_stageTheme @(_stageOpen ? "stage-mode" : null)" role="presentation" @onclick="CloseNowPlaying">
+        <section id="now-playing-panel" class="now-playing-panel @(_stageOpen ? "stage-mode" : null)" role="dialog" aria-modal="true" aria-label="@Lang.T("Đang phát")" @onclick:stopPropagation="true">
             <div class="now-playing-glow" style="background-image:url('@PlayerState.CurrentTrack.ThumbnailUrl')" aria-hidden="true"></div>
+            <div class="stage-aurora" aria-hidden="true"></div>
             <button class="icon-button now-close" data-now-close title="@Lang.T("Đóng chế độ nghe tập trung")" aria-label="@Lang.T("Đóng chế độ nghe tập trung")" @onclick="CloseNowPlaying"><Icon Name="close" Size="22" /></button>
             <p class="now-playing-eyebrow">@Lang.T("Đang phát")</p>
-            @if (!string.IsNullOrEmpty(PlayerState.CurrentTrack.ThumbnailUrl))
-            {
-                <img class="now-playing-art" src="@PlayerState.CurrentTrack.ThumbnailUrl" alt="@Lang.F("Ảnh bìa {0}", PlayerState.CurrentTrack.Title)" />
-            }
+            <div class="stage-art-wrap @(_vinylMode ? "vinyl-mode" : null) @(PlayerState.IsPlaying ? "is-playing" : null)" @key="PlayerState.CurrentTrack.VideoId">
+                <canvas id="stage-visualizer" class="stage-visualizer" aria-hidden="true"></canvas>
+                @if (!string.IsNullOrEmpty(PlayerState.CurrentTrack.ThumbnailUrl))
+                {
+                    <img class="now-playing-art" src="@PlayerState.CurrentTrack.ThumbnailUrl" alt="@Lang.F("Ảnh bìa {0}", PlayerState.CurrentTrack.Title)" />
+                }
+                else
+                {
+                    <div class="now-playing-art art-fallback" aria-hidden="true"><Icon Name="music" Size="64" /></div>
+                }
+            </div>
             <h2>@PlayerState.CurrentTrack.Title</h2>
             <p class="now-playing-artist">@PlayerState.CurrentTrack.Artist</p>
+            <div class="stage-options" aria-label="@Lang.T("Tùy chọn hiển thị")">
+                <button class="button-secondary" @onclick="ToggleVinyl" aria-pressed="@_vinylMode">@Lang.T("Đĩa vinyl")</button>
+                <button class="button-secondary" @onclick="ToggleVisualizerMode">@Lang.T(_visualizerMode == "ring" ? "Phổ vòng" : "Phổ ngang")</button>
+                <button class="button-secondary" @onclick="ToggleStageAsync" aria-pressed="@_stageOpen">@Lang.T(_stageOpen ? "Thu gọn sân khấu" : "Mở sân khấu")</button>
+            </div>
+            <label class="stage-theme-picker">@Lang.T("Không gian nghe")
+                <select value="@_stageTheme" @onchange="ChangeStageThemeAsync">
+                    <option value="neon">Neon City</option><option value="rain">@Lang.T("Mưa đêm")</option><option value="vinyl">@Lang.T("Phòng đĩa than")</option>
+                </select>
+            </label>
+            <p class="visualizer-disclaimer">@Lang.T("Hiệu ứng phổ mô phỏng — nguồn YouTube không cung cấp dữ liệu âm thanh cho trang này.")</p>
             <div class="now-playing-progress">
                 <span>@FormatTime(DisplayTime)</span>
                 <input type="range" min="0" max="@Inv(SliderMax)" step="any" value="@Inv(Math.Clamp(DisplayTime, 0, SliderMax))" aria-label="@Lang.T("Thanh tiến trình bài hát")" disabled="@(PlayerState.Duration <= 0)" @oninput="OnSeekInput" @onchange="OnSeekCommitAsync" />
+                <span class="seek-preview" aria-hidden="true" style="left:@Inv(PlayerState.Duration > 0 ? Math.Clamp(DisplayTime / PlayerState.Duration * 100, 0, 100) : 0)%">@FormatTime(DisplayTime)</span>
                 <span>@FormatTime(PlayerState.Duration)</span>
             </div>
             <div class="now-playing-controls">
@@ -159,11 +183,44 @@
             </div>
             <div class="now-playing-bottom">
                 <button class="icon-button @(IsCurrentFavorite ? "is-favorite" : null)" title="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")" aria-label="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")" @onclick="ToggleCurrentFavoriteAsync"><Icon Name="@(IsCurrentFavorite ? "heart-filled" : "heart")" Size="20" /></button>
-                <button class="icon-button motion-toggle" title="@Lang.T(_motionEnabled ? "Tắt hiệu ứng" : "Bật hiệu ứng")" aria-label="@Lang.T(_motionEnabled ? "Tắt hiệu ứng" : "Bật hiệu ứng")" aria-pressed="@_motionEnabled" @onclick="ToggleMotionAsync"><Icon Name="sparkles" Size="18" /></button>
+                <label class="motion-level-picker">@Lang.T("Hiệu ứng")
+                    <select value="@_motionLevel" @onchange="ChangeMotionLevelAsync" aria-label="@Lang.T("Mức hiệu ứng")">
+                        <option value="off">@Lang.T("Tắt")</option><option value="light">@Lang.T("Nhẹ")</option><option value="full">@Lang.T("Đầy đủ")</option>
+                    </select>
+                </label>
                 <Icon Name="@(PlayerState.Volume == 0 ? "volume-mute" : "volume")" Size="18" />
                 <input type="range" min="0" max="100" value="@PlayerState.Volume" aria-label="@Lang.T("Âm lượng")" @oninput="OnVolumeChangedAsync" />
             </div>
-            <p class="now-playing-motion-status" aria-live="polite">@Lang.T(_motionEnabled && _systemReducedMotion ? "Hiệu ứng: Giảm theo thiết bị" : _motionEnabled ? "Hiệu ứng: Bật" : "Hiệu ứng: Tắt")</p>
+            @if (_systemReducedMotion) { <p class="now-playing-motion-status" aria-live="polite">@Lang.T("Thiết bị đang giảm chuyển động.")</p> }
+            <div class="stage-lyrics">
+                <h3>@Lang.T("Lời bài hát")</h3>
+                @if (_lyrics?.Lines.Count > 0)
+                {
+                    @if (!_lyricsAutoScroll) { <button class="button-secondary" @onclick="ResumeLyrics">@Lang.T("Theo lời đang hát")</button> }
+                    <div class="lyrics-scroll" @onwheel="PauseLyricsScroll" @ontouchstart="PauseLyricsScroll">
+                        @for (var i = 0; i < _lyrics.Lines.Count; i++)
+                        {
+                            var line = _lyrics.Lines[i];
+                            <p id="lyric-line-@i" class="lyric-line @(i == ActiveLyricIndex ? "active" : null)">
+                                @if (line.Words.Count > 0)
+                                {
+                                    @foreach (var word in line.Words)
+                                    {
+                                        <span class="@(PlayerState.CurrentTime * 1000 >= word.StartMs && PlayerState.CurrentTime * 1000 < word.EndMs ? "active-word" : null)">@word.Text </span>
+                                    }
+                                }
+                                else { @line.Text }
+                            </p>
+                        }
+                    </div>
+                }
+                else if (!string.IsNullOrWhiteSpace(_lyrics?.Text))
+                {
+                    <p class="lyrics-static">@_lyrics.Text</p>
+                }
+                else { <p>@Lang.T("Chưa có lời bài hát được cấp cho bài này.")</p> }
+            </div>
+            <a class="button-secondary stage-queue-link" href="queue" @onclick="CloseNowPlaying">@Lang.T("Mở hàng đợi")</a>
         </section>
     </div>
 }
@@ -178,16 +235,30 @@
     private bool _videoVisible = true;
     private bool _nowPlayingOpen;
     private bool _pendingModalFocus;
-    private bool _motionEnabled = true;
+    private string _motionLevel = "full";
     private bool _systemReducedMotion;
+    private bool _stageOpen;
+    private bool _vinylMode;
+    private string _visualizerMode = "ring";
+    private string _stageTheme = "neon";
+    private LyricDocument? _lyrics;
+    private bool _lyricsAutoScroll = true;
+    private int _lastLyricIndex = -1;
+    private bool? _lastVisualizerPlaying;
+    private string? _lastVisualizerMode;
     private string _visualState = "is-idle";
 
     // YT.PlayerState
     private const int StateEnded = 0;
     private const int StatePlaying = 1;
     private const int StatePaused = 2;
+    private const int StateBuffering = 3;
 
     private double DisplayTime => _isSeeking ? _seekValue : PlayerState.CurrentTime;
+    private int ActiveLyricIndex => _lyrics?.Lines.Count > 0
+        ? _lyrics.Lines.FindLastIndex(line => line.StartMs <= PlayerState.CurrentTime * 1000) : -1;
+    private void PauseLyricsScroll() => _lyricsAutoScroll = false;
+    private void ResumeLyrics() { _lyricsAutoScroll = true; _lastLyricIndex = -1; }
 
     private string RepeatTitle => PlayerState.RepeatMode switch
     {
@@ -212,21 +283,52 @@
 
     private async Task OpenNowPlaying()
     {
+        await JS.InvokeVoidAsync("anhTanEffects.beginCoverTransition");
         _nowPlayingOpen = true;
         _pendingModalFocus = true;
+        _lastVisualizerPlaying = null;
     }
 
     private async Task CloseNowPlaying()
     {
         _nowPlayingOpen = false;
+        _stageOpen = false;
+        _lastVisualizerPlaying = null;
+        await JS.InvokeVoidAsync("anhTanStage.stop");
+        await JS.InvokeVoidAsync("anhTanStage.detachPanel");
+        await JS.InvokeVoidAsync("anhTanStage.exitFullscreen");
         await JS.InvokeVoidAsync("anhTanEffects.closeModal");
     }
 
-    private async Task ToggleMotionAsync()
+    private void ToggleVinyl() => _vinylMode = !_vinylMode;
+
+    private void ToggleVisualizerMode() => _visualizerMode = _visualizerMode == "ring" ? "bars" : "ring";
+
+    private async Task ToggleStageAsync()
     {
-        _motionEnabled = !_motionEnabled;
-        await JS.InvokeVoidAsync("anhTanEffects.setEnabled", _motionEnabled);
-        Toasts.ShowInfo(Lang.T(_motionEnabled && _systemReducedMotion ? "Thiết bị đang giảm chuyển động." : _motionEnabled ? "Đã bật hiệu ứng chuyển động." : "Đã tắt hiệu ứng chuyển động."));
+        if (_stageOpen)
+        {
+            _stageOpen = false;
+            await JS.InvokeVoidAsync("anhTanStage.exitFullscreen");
+        }
+        else
+        {
+            _ = await JS.InvokeAsync<bool>("anhTanStage.enterFullscreen");
+            _stageOpen = true;
+        }
+    }
+
+    private async Task ChangeStageThemeAsync(ChangeEventArgs e)
+    {
+        _stageTheme = e.Value?.ToString() switch { "rain" => "rain", "vinyl" => "vinyl", _ => "neon" };
+        await JS.InvokeVoidAsync("anhTanStage.setTheme", _stageTheme);
+    }
+
+    private async Task ChangeMotionLevelAsync(ChangeEventArgs e)
+    {
+        _motionLevel = e.Value?.ToString() switch { "off" => "off", "light" => "light", _ => "full" };
+        await JS.InvokeVoidAsync("anhTanEffects.setLevel", _motionLevel);
+        await JS.InvokeVoidAsync("anhTanStage.refresh");
     }
 
     private async Task ToggleCurrentFavoriteAsync()
@@ -247,8 +349,10 @@
     {
         if (firstRender)
         {
-            _motionEnabled = await JS.InvokeAsync<bool>("anhTanEffects.getEnabled");
+            _motionLevel = await JS.InvokeAsync<string>("anhTanEffects.getLevel");
             _systemReducedMotion = await JS.InvokeAsync<bool>("anhTanEffects.prefersReducedMotion");
+            _stageTheme = await JS.InvokeAsync<string>("anhTanStage.getTheme");
+            await InvokeAsync(StateHasChanged);
             _dotNetRef = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("vietmusicPlayer.initializePlayer", "youtube-player-host", _dotNetRef);
         }
@@ -256,6 +360,19 @@
         {
             _pendingModalFocus = false;
             await JS.InvokeVoidAsync("anhTanEffects.openModal", "now-playing");
+            await JS.InvokeVoidAsync("anhTanEffects.endCoverTransition", ".now-playing-art");
+            await JS.InvokeVoidAsync("anhTanStage.attachPanel", "now-playing-panel", _dotNetRef);
+        }
+        if (_nowPlayingOpen && (_lastVisualizerPlaying != PlayerState.IsPlaying || _lastVisualizerMode != _visualizerMode))
+        {
+            _lastVisualizerPlaying = PlayerState.IsPlaying;
+            _lastVisualizerMode = _visualizerMode;
+            await JS.InvokeVoidAsync("anhTanStage.mount", "stage-visualizer", _visualizerMode, PlayerState.IsPlaying);
+        }
+        if (_nowPlayingOpen && _lyricsAutoScroll && ActiveLyricIndex >= 0 && ActiveLyricIndex != _lastLyricIndex)
+        {
+            _lastLyricIndex = ActiveLyricIndex;
+            await JS.InvokeVoidAsync("anhTanStage.scrollLyric", $"lyric-line-{_lastLyricIndex}");
         }
     }
 
@@ -269,7 +386,13 @@
         _ = InvokeAsync(async () =>
         {
             _visualState = "is-loading";
+            _lastVisualizerPlaying = null;
+            _lyrics = null;
+            _lyricsAutoScroll = true;
+            _lastLyricIndex = -1;
             await LoadTrackAsync(track);
+            _lyrics = await Lyrics.GetAsync(track.VideoId);
+            StateHasChanged();
             _ = JS.InvokeVoidAsync("anhTanEffects.setArtworkColor", track.ThumbnailUrl);
             _ = Recent.AddAsync(track);
         });
@@ -398,6 +521,13 @@
     }
 
     [JSInvokable]
+    public Task OnStageFullscreenExited()
+    {
+        _stageOpen = false;
+        return InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
     public async Task OnPlayerReady()
     {
         _playerReady = true;
@@ -422,6 +552,10 @@
                 break;
             case StatePaused:
                 _visualState = "is-paused";
+                PlayerState.SetPlaying(false);
+                break;
+            case StateBuffering:
+                _visualState = "is-loading";
                 PlayerState.SetPlaying(false);
                 break;
             case StateEnded:
@@ -480,6 +614,7 @@
         if (_nowPlayingOpen)
         {
             try { await JS.InvokeVoidAsync("anhTanEffects.closeModal"); } catch (JSException) { }
+            try { await JS.InvokeVoidAsync("anhTanStage.stop"); await JS.InvokeVoidAsync("anhTanStage.detachPanel"); } catch (JSException) { }
         }
         PlayerState.OnChange -= HandleStateChanged;
         PlayerState.OnTrackChanged -= HandleTrackChanged;

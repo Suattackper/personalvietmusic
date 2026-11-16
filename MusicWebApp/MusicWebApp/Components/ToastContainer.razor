@@ -5,7 +5,15 @@
     @foreach (var toast in _toasts)
     {
         <div class="toast toast-@toast.Level.ToString().ToLowerInvariant()" role="alert">
+            @if (!string.IsNullOrEmpty(toast.ThumbnailUrl))
+            {
+                <img class="toast-thumb" src="@toast.ThumbnailUrl" alt="" />
+            }
             <span class="toast-message">@toast.Message</span>
+            @if (toast.Undo is not null)
+            {
+                <button class="toast-undo" @onclick="() => Undo(toast)">@Lang.T("Hoàn tác")</button>
+            }
             <button class="toast-close" title="@Lang.T("Đóng thông báo")" aria-label="@Lang.T("Đóng thông báo")"
                     @onclick="() => Remove(toast.Id)">
                 <Icon Name="close" Size="16" />
@@ -47,6 +55,12 @@
         {
             StateHasChanged();
         }
+    }
+
+    private void Undo(ToastMessage toast)
+    {
+        toast.Undo?.Invoke();
+        Remove(toast.Id);
     }
 
     public void Dispose()

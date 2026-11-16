@@ -12,6 +12,8 @@ public class ToastMessage
     public Guid Id { get; } = Guid.NewGuid();
     public string Message { get; init; } = string.Empty;
     public ToastLevel Level { get; init; } = ToastLevel.Info;
+    public string? ThumbnailUrl { get; init; }
+    public Action? Undo { get; init; }
 }
 
 /// <summary>
@@ -24,6 +26,8 @@ public class ToastService
     public void ShowInfo(string message) => Show(message, ToastLevel.Info);
     public void ShowSuccess(string message) => Show(message, ToastLevel.Success);
     public void ShowError(string message) => Show(message, ToastLevel.Error);
+    public void ShowUndo(string message, string? thumbnailUrl, Action undo)
+        => OnToast?.Invoke(new ToastMessage { Message = message, Level = ToastLevel.Success, ThumbnailUrl = thumbnailUrl, Undo = undo });
 
     private void Show(string message, ToastLevel level)
     {

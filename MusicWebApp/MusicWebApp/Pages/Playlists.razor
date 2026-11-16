@@ -1,5 +1,6 @@
 @page "/playlists"
 @inject PlaylistService PlaylistSvc
+@inject PersonalPlaylistService Personal
 
 <PageTitle>@Lang.T("Playlist") - AnhTanMusic</PageTitle>
 
@@ -24,6 +25,12 @@
     }
     else
     {
+        <h2 class="section-heading">@Lang.T("Playlist của tôi")</h2>
+        <a class="playlist-card personal-playlist-card" href="my-playlist">
+            <span class="playlist-card-art" aria-hidden="true"><span class="playlist-card-art-emoji">💜</span></span>
+            <span class="playlist-card-body"><span class="playlist-card-name">@Lang.T("Playlist của tôi")</span><span class="playlist-card-desc">@Lang.T("Bộ sưu tập bài hát bạn đã lưu trên thiết bị này.")</span></span>
+            <span class="playlist-card-count">@Lang.F("{0} bài", Personal.Tracks.Count)</span>
+        </a>
         <h2 class="section-heading">@Lang.T("🌍 Chọn nhạc theo ngôn ngữ")</h2>
         <div class="playlist-grid country-playlist-grid">
             @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("country-")))
@@ -61,6 +68,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await Personal.InitializeAsync();
         _playlists = await PlaylistSvc.GetPlaylistsAsync();
     }
 }

@@ -1,5 +1,6 @@
 @inject MusicPlayerState PlayerState
 @inject ToastService Toasts
+@inject IJSRuntime JS
 @implements IDisposable
 
 <ul class="queue-list">
@@ -9,12 +10,13 @@
         var track = PlayerState.Queue[i];
         var isCurrent = PlayerState.CurrentTrack?.VideoId == track.VideoId && PlayerState.CurrentIndex == index;
 
-        <li class="queue-item @(isCurrent ? "active" : null)" @key="@($"{track.VideoId}-{index}")">
+        <li class="queue-item @(isCurrent ? "active" : null) @(isCurrent && PlayerState.IsPlaying ? "is-playing" : null)" @key="track"
+            draggable="true" @ondragstart="() => BeginDrag(index)" @ondragover:preventDefault="true" @ondrop="() => DropAtAsync(index)" @ondragend="EndDrag">
             <span class="queue-item-index" aria-hidden="true">
                 @if (isCurrent)
                 {
                     <span class="eq-bars" aria-hidden="true">
-                        <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+                        <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
                     </span>
                 }
                 else
@@ -31,6 +33,8 @@
                 <span class="queue-item-artist" title="@track.Artist">@track.Artist</span>
             </div>
             <div class="queue-item-actions">
+                <button class="icon-button" disabled="@(index == 0)" title="@Lang.T("Đưa lên")" aria-label="@Lang.F("Đưa {0} lên", track.Title)" @onclick="() => Move(index, index - 1)"><Icon Name="chevron-up" Size="16" /></button>
+                <button class="icon-button" disabled="@(index == PlayerState.Queue.Count - 1)" title="@Lang.T("Đưa xuống")" aria-label="@Lang.F("Đưa {0} xuống", track.Title)" @onclick="() => Move(index, index + 1)"><Icon Name="chevron-down" Size="16" /></button>
                 <button class="icon-button"
                         title="@Lang.T("Phát bài này")"
                         aria-label="@Lang.F("Phát {0}", track.Title)"
@@ -40,7 +44,7 @@
                 <button class="icon-button"
                         title="@Lang.T("Xóa khỏi hàng đợi")"
                         aria-label="@Lang.F("Xóa {0} khỏi hàng đợi", track.Title)"
-                        @onclick="() => Remove(track)">
+                        @onclick="() => Remove(index)">
                     <Icon Name="close" Size="16" />
                 </button>
             </div>
@@ -49,6 +53,28 @@
 </ul>
 
 @code {
+    private int? _dragFrom;
+    private bool _animateQueue;
+
+    private void BeginDrag(int index) => _dragFrom = index;
+    private async Task DropAtAsync(int index)
+    {
+        if (_dragFrom is int from) await Move(from, index);
+        _dragFrom = null;
+    }
+    private void EndDrag() => _dragFrom = null;
+    private async Task Move(int from, int to)
+    {
+        await JS.InvokeVoidAsync("anhTanStage.captureQueue", from, to);
+        _animateQueue = true;
+        PlayerState.MoveQueueItem(from, to);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!_animateQueue) return;
+        _animateQueue = false;
+        await JS.InvokeVoidAsync("anhTanStage.animateQueue");
+    }
     protected override void OnInitialized()
     {
         PlayerState.OnChange += HandleChanged;
@@ -56,10 +82,12 @@
 
     private void HandleChanged() => _ = InvokeAsync(StateHasChanged);
 
-    private void Remove(MusicTrack track)
+    private void Remove(int index)
     {
-        PlayerState.RemoveFromQueue(track.VideoId);
-        Toasts.ShowInfo(Lang.F("Đã xóa \"{0}\" khỏi hàng đợi.", track.Title));
+        var track = PlayerState.RemoveQueueItemAt(index);
+        if (track is null) return;
+        Toasts.ShowUndo(Lang.F("Đã xóa \"{0}\" khỏi hàng đợi.", track.Title), track.ThumbnailUrl,
+            () => PlayerState.RestoreQueueItemAt(index, track));
     }
 
     public void Dispose()

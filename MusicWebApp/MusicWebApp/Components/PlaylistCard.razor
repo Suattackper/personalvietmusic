@@ -4,7 +4,13 @@
         title="@Lang.T(IsCountryCollection ? "Mở danh sách" : "Phát playlist") @Lang.T(Playlist.Name)"
         aria-label="@Lang.T(IsCountryCollection ? "Mở danh sách" : "Phát playlist") @Lang.T(Playlist.Name) (@Lang.F("{0} bài", Playlist.Tracks.Count))"
         @onclick="Open">
-    <span class="playlist-card-icon" aria-hidden="true">@Playlist.Emoji</span>
+    <span class="playlist-card-art" aria-hidden="true">
+        @foreach (var track in Playlist.Tracks.Take(3))
+        {
+            <span class="playlist-card-art-layer" style="background-image:url('https://i.ytimg.com/vi/@track.VideoId/hqdefault.jpg')"></span>
+        }
+        <span class="playlist-card-art-emoji">@Playlist.Emoji</span>
+    </span>
     <span class="playlist-card-body">
         <span class="playlist-card-name">@Lang.T(Playlist.Name)</span>
         <span class="playlist-card-desc">@Lang.T(Playlist.Description)</span>

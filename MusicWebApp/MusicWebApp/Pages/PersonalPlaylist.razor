@@ -1,0 +1,59 @@
+@page "/my-playlist"
+@inject PersonalPlaylistService Personal
+@inject MusicPlayerState PlayerState
+@inject ToastService Toasts
+@implements IDisposable
+
+<PageTitle>@Lang.T("Playlist của tôi") - AnhTanMusic</PageTitle>
+
+<section class="page-section">
+    <div class="page-heading-row">
+        <h1 class="page-heading"><span class="page-heading-icon" aria-hidden="true"><Icon Name="disc" Size="22" /></span>@Lang.T("Playlist của tôi")</h1>
+        <button class="button-primary" disabled="@(Personal.Tracks.Count == 0)" @onclick="PlayAll"><Icon Name="play" Size="16" />@Lang.T("Phát tất cả")</button>
+    </div>
+    @if (!_loaded)
+    {
+        <div class="skeleton-grid" role="status" aria-label="@Lang.T("Đang tải playlist...")"><div class="skeleton skeleton-track"></div></div>
+    }
+    else if (Personal.Tracks.Count == 0)
+    {
+        <EmptyState IconName="disc" Title="Playlist của tôi đang trống" Description="Thêm bài từ các danh sách bằng nút hình đĩa." />
+    }
+    else
+    {
+        <p class="page-subtitle">@Lang.F("{0} bài", Personal.Tracks.Count)</p>
+        <div class="personal-playlist-list">
+            @foreach (var track in Personal.Tracks.ToList())
+            {
+                <div class="personal-playlist-item" @key="track.VideoId">
+                    <TrackCard Track="track" OnPlay="PlayTrack" />
+                    <button class="button-secondary" aria-label="@Lang.F("Xóa {0} khỏi playlist của tôi", track.Title)" @onclick="() => RemoveAsync(track)">@Lang.T("Xóa")</button>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+@code {
+    private bool _loaded;
+    protected override async Task OnInitializedAsync()
+    {
+        Personal.OnChange += Changed;
+        await Personal.InitializeAsync();
+        _loaded = true;
+    }
+    private void Changed() => _ = InvokeAsync(StateHasChanged);
+    private void PlayAll() => PlayerState.SetQueue(Personal.Tracks, 0);
+    private void PlayTrack(MusicTrack track)
+    {
+        var index = Personal.Tracks.ToList().FindIndex(t => t.VideoId == track.VideoId);
+        if (index >= 0) PlayerState.SetQueue(Personal.Tracks, index);
+    }
+    private async Task RemoveAsync(MusicTrack track)
+    {
+        await Personal.RemoveAsync(track.VideoId);
+        Toasts.ShowUndo(Lang.F("Đã xóa \"{0}\" khỏi playlist của tôi.", track.Title), track.ThumbnailUrl,
+            () => _ = Personal.AddAsync(track));
+    }
+    public void Dispose() => Personal.OnChange -= Changed;
+}

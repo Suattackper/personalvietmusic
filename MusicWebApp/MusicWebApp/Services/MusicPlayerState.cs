@@ -127,11 +127,17 @@ public class MusicPlayerState
     public void RemoveFromQueue(string videoId)
     {
         var index = Queue.FindIndex(t => t.VideoId == videoId);
-        if (index < 0)
+        RemoveQueueItemAt(index);
+    }
+
+    public MusicTrack? RemoveQueueItemAt(int index)
+    {
+        if (index < 0 || index >= Queue.Count)
         {
-            return;
+            return null;
         }
 
+        var removed = Queue[index];
         Queue.RemoveAt(index);
 
         if (index < CurrentIndex)
@@ -150,6 +156,36 @@ public class MusicPlayerState
             CurrentIndex = -1;
         }
 
+        PersistQueue();
+        NotifyChanged();
+        return removed;
+    }
+
+    public void RemoveQueueItem(MusicTrack track)
+    {
+        var index = Queue.FindIndex(t => ReferenceEquals(t, track));
+        RemoveQueueItemAt(index);
+    }
+
+    public void RestoreQueueItemAt(int index, MusicTrack track)
+    {
+        index = Math.Clamp(index, 0, Queue.Count);
+        Queue.Insert(index, track);
+        if (ReferenceEquals(track, CurrentTrack)) CurrentIndex = index;
+        else if (CurrentIndex >= index) CurrentIndex++;
+        PersistQueue();
+        NotifyChanged();
+    }
+
+    public void MoveQueueItem(int from, int to)
+    {
+        if (from < 0 || from >= Queue.Count || to < 0 || to >= Queue.Count || from == to) return;
+        var item = Queue[from];
+        Queue.RemoveAt(from);
+        Queue.Insert(to, item);
+        if (CurrentIndex == from) CurrentIndex = to;
+        else if (from < CurrentIndex && to >= CurrentIndex) CurrentIndex--;
+        else if (from > CurrentIndex && to <= CurrentIndex) CurrentIndex++;
         PersistQueue();
         NotifyChanged();
     }

@@ -1,22 +1,38 @@
 // Visual-only helpers. Playback stays exclusively in youtubePlayer.js.
 window.anhTanEffects = (() => {
-    const key = "anhtan_motion_enabled";
-    let enabled = true;
+    const key = "anhtan_motion_level";
+    let level = "full";
     let modal = null;
     let previousFocus = null;
     let colorRequest = 0;
+    let coverGhost = null;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function apply() {
-        document.documentElement.dataset.motion = enabled && !reduced.matches ? "on" : "off";
+        document.documentElement.dataset.motion = level === "full" && !reduced.matches ? "on" : "off";
+        document.documentElement.dataset.motionLevel = reduced.matches ? "off" : level;
     }
-    try { enabled = localStorage.getItem(key) !== "false"; } catch { }
+    try {
+        const saved = localStorage.getItem(key);
+        level = ["off", "light", "full"].includes(saved) ? saved : localStorage.getItem("anhtan_motion_enabled") === "false" ? "off" : "full";
+    } catch { }
     apply();
     document.documentElement.dataset.tabVisible = document.hidden ? "false" : "true";
     reduced.addEventListener("change", apply);
     document.addEventListener("visibilitychange", () => {
         document.documentElement.dataset.tabVisible = document.hidden ? "false" : "true";
     });
+    document.addEventListener("pointermove", event => {
+        const slider = event.target.closest?.('.player-progress input[type="range"], .now-playing-progress input[type="range"]');
+        if (!slider || slider.disabled) return;
+        const preview = slider.parentElement?.querySelector('.seek-preview');
+        if (!preview) return;
+        const rect = slider.getBoundingClientRect();
+        const fraction = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+        const seconds = Math.floor(Number(slider.max) * fraction);
+        preview.textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+        preview.style.left = `${rect.left - slider.parentElement.getBoundingClientRect().left + fraction * rect.width}px`;
+    }, { passive: true });
 
     function onKeyDown(event) {
         if (!modal) return;
@@ -33,11 +49,38 @@ window.anhTanEffects = (() => {
     }
 
     return {
-        getEnabled: () => enabled,
+        beginCoverTransition() {
+            coverGhost?.remove(); coverGhost = null;
+            if (document.documentElement.dataset.motionLevel !== "full") return;
+            const source = document.querySelector(".player-thumb:not(.player-thumb-placeholder)");
+            if (!source) return;
+            const rect = source.getBoundingClientRect();
+            coverGhost = source.cloneNode(true);
+            Object.assign(coverGhost.style, { position: "fixed", left: `${rect.left}px`, top: `${rect.top}px`, width: `${rect.width}px`, height: `${rect.height}px`, zIndex: "10001", borderRadius: "12px", objectFit: "cover", pointerEvents: "none" });
+            document.body.appendChild(coverGhost);
+        },
+        endCoverTransition(selector) {
+            const ghost = coverGhost; coverGhost = null;
+            const target = document.querySelector(selector);
+            if (!ghost || !target) { ghost?.remove(); return; }
+            const from = ghost.getBoundingClientRect(), to = target.getBoundingClientRect();
+            if (!to.width || !to.height) { ghost.remove(); return; }
+            ghost.animate([
+                { transform: "translate(0,0) scale(1)", opacity: .95 },
+                { transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${to.width / from.width}, ${to.height / from.height})`, opacity: .2 }
+            ], { duration: 270, easing: "cubic-bezier(.22,1,.36,1)" }).finished.finally(() => ghost.remove());
+        },
+        getEnabled: () => level !== "off",
+        getLevel: () => level,
         prefersReducedMotion: () => reduced.matches,
         setEnabled(value) {
-            enabled = !!value;
-            try { localStorage.setItem(key, String(enabled)); } catch { }
+            level = value ? "full" : "off";
+            try { localStorage.setItem(key, level); } catch { }
+            apply();
+        },
+        setLevel(value) {
+            level = ["off", "light", "full"].includes(value) ? value : "full";
+            try { localStorage.setItem(key, level); } catch { }
             apply();
         },
         openModal(id) {

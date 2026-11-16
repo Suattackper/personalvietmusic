@@ -34,6 +34,7 @@ window.anhTanEffects = (() => {
 
     return {
         getEnabled: () => enabled,
+        prefersReducedMotion: () => reduced.matches,
         setEnabled(value) {
             enabled = !!value;
             try { localStorage.setItem(key, String(enabled)); } catch { }

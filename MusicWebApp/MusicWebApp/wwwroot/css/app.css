@@ -545,10 +545,6 @@ button {
     margin-bottom: 8px;
 }
 
-.country-playlist-grid .playlist-card {
-    border-color: var(--primary);
-}
-
 .playlist-find {
     display: flex;
     align-items: center;
@@ -1771,6 +1767,7 @@ input[type="range"]:disabled {
 .player-bar.is-error { border-top-color: var(--danger); }
 .now-open-button { color: var(--primary); }
 .motion-toggle[aria-pressed="false"] { opacity: .5; }
+.motion-toggle[aria-pressed="true"] { color: var(--primary); }
 input[type="range"] { min-height: 28px; }
 .player-progress input[type="range"] { min-width: 50px; }
 
@@ -1802,6 +1799,8 @@ input[type="range"] { min-height: 28px; }
 .now-playing-controls .play-button { width: 58px; height: 58px; }
 .now-playing-bottom { display: flex; align-items: center; justify-content: center; gap: 12px; }
 .now-playing-bottom input { width: 120px; }
+.now-playing-motion-status { margin: 8px 0 0; color: var(--text-muted); font-size: .76rem; }
+:root[data-motion="on"][data-tab-visible="true"] .now-playing-panel .now-playing-glow { animation: artwork-glow 7s ease-in-out infinite alternate; }
 
 .skeleton-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin: 16px 0 25px; }
 .skeleton-playlist { height: 90px; border-radius: 15px; }
@@ -1813,6 +1812,7 @@ input[type="range"] { min-height: 28px; }
 @keyframes now-enter { from { opacity: .4; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
 @keyframes hero-flow { 50% { background-position: 100% 50%; } }
 @keyframes glow-drift { 50% { transform: translate(30px, 16px); } }
+@keyframes artwork-glow { from { opacity: .08; transform: scale(1); } to { opacity: .22; transform: scale(1.08); } }
 :root[data-motion="on"][data-tab-visible="true"] .home-hero { animation: hero-flow 18s ease-in-out infinite alternate; }
 :root[data-motion="on"][data-tab-visible="true"] .home-hero::before { animation: glow-drift 13s ease-in-out infinite alternate; }
 :root[data-motion="on"][data-tab-visible="true"] .home-hero::after { animation: glow-drift 17s ease-in-out infinite alternate-reverse; }

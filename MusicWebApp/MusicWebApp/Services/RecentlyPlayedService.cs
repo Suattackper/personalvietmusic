@@ -3,7 +3,7 @@ using MusicWebApp.Models;
 namespace MusicWebApp.Services;
 
 /// <summary>
-/// Lịch sử nghe gần đây: tối đa 50 bài, không lưu trùng liên tiếp cùng một bài,
+/// Lịch sử nghe gần đây: tối đa 50 bài khác nhau, bài nghe mới nhất đứng đầu,
 /// lưu trong localStorage.
 /// </summary>
 public class RecentlyPlayedService
@@ -35,11 +35,16 @@ public class RecentlyPlayedService
         {
             _history = saved
                 .Where(t => !string.IsNullOrEmpty(t.VideoId))
+                .DistinctBy(t => t.VideoId)
                 .Take(MaxItems)
                 .ToList();
             foreach (var track in _history)
             {
                 track.IsPlaying = false;
+            }
+            if (_history.Count != saved.Count)
+            {
+                await _storage.SetItemAsync(StorageKeys.RecentlyPlayed, _history);
             }
         }
 
@@ -49,11 +54,8 @@ public class RecentlyPlayedService
 
     public async Task AddAsync(MusicTrack track)
     {
-        // Không lưu trùng liên tiếp: bài mới nhất trong lịch sử trùng với bài vừa phát thì bỏ qua.
-        if (_history.Count > 0 && _history[0].VideoId == track.VideoId)
-        {
-            return;
-        }
+        // Đưa lượt nghe mới lên đầu và bỏ mọi bản cũ của cùng video.
+        _history.RemoveAll(t => t.VideoId == track.VideoId);
 
         _history.Insert(0, new MusicTrack
         {

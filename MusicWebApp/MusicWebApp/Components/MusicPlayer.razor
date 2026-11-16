@@ -163,6 +163,7 @@
                 <Icon Name="@(PlayerState.Volume == 0 ? "volume-mute" : "volume")" Size="18" />
                 <input type="range" min="0" max="100" value="@PlayerState.Volume" aria-label="@Lang.T("Âm lượng")" @oninput="OnVolumeChangedAsync" />
             </div>
+            <p class="now-playing-motion-status" aria-live="polite">@Lang.T(_motionEnabled && _systemReducedMotion ? "Hiệu ứng: Giảm theo thiết bị" : _motionEnabled ? "Hiệu ứng: Bật" : "Hiệu ứng: Tắt")</p>
         </section>
     </div>
 }
@@ -178,6 +179,7 @@
     private bool _nowPlayingOpen;
     private bool _pendingModalFocus;
     private bool _motionEnabled = true;
+    private bool _systemReducedMotion;
     private string _visualState = "is-idle";
 
     // YT.PlayerState
@@ -224,6 +226,7 @@
     {
         _motionEnabled = !_motionEnabled;
         await JS.InvokeVoidAsync("anhTanEffects.setEnabled", _motionEnabled);
+        Toasts.ShowInfo(Lang.T(_motionEnabled && _systemReducedMotion ? "Thiết bị đang giảm chuyển động." : _motionEnabled ? "Đã bật hiệu ứng chuyển động." : "Đã tắt hiệu ứng chuyển động."));
     }
 
     private async Task ToggleCurrentFavoriteAsync()
@@ -245,6 +248,7 @@
         if (firstRender)
         {
             _motionEnabled = await JS.InvokeAsync<bool>("anhTanEffects.getEnabled");
+            _systemReducedMotion = await JS.InvokeAsync<bool>("anhTanEffects.prefersReducedMotion");
             _dotNetRef = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("vietmusicPlayer.initializePlayer", "youtube-player-host", _dotNetRef);
         }

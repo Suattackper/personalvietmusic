@@ -25,6 +25,7 @@ public class MusicPlayerState
     public double CurrentTime { get; private set; }
     public double Duration { get; private set; }
     public int Volume { get; private set; } = 100;
+    public string LastTransitionReason { get; private set; } = "unknown";
 
     /// <summary>State thay đổi — component nên re-render.</summary>
     public event Action? OnChange;
@@ -82,6 +83,7 @@ public class MusicPlayerState
         }
 
         CurrentIndex = Math.Clamp(selectedIndex, 0, Queue.Count - 1);
+        LastTransitionReason = "playlist_start";
         StartTrack(Queue[CurrentIndex]);
         PersistQueue();
     }
@@ -98,6 +100,7 @@ public class MusicPlayerState
         }
 
         CurrentIndex = index;
+        LastTransitionReason = "manual_track_selection";
         StartTrack(Queue[index]);
     }
 
@@ -110,6 +113,7 @@ public class MusicPlayerState
         }
 
         CurrentIndex = index;
+        LastTransitionReason = "queue_track_selection";
         StartTrack(Queue[index]);
     }
 
@@ -253,7 +257,7 @@ public class MusicPlayerState
     }
 
     /// <summary>Chuyển sang bài kế tiếp. Trả về false nếu không có bài nào.</summary>
-    public bool PlayNext()
+    public bool PlayNext(string reason = "manual_next")
     {
         var next = GetNextTrack();
         if (next is null)
@@ -262,6 +266,7 @@ public class MusicPlayerState
         }
 
         CurrentIndex = Queue.FindIndex(t => t.VideoId == next.VideoId);
+        LastTransitionReason = reason;
         StartTrack(next);
         return true;
     }
@@ -276,6 +281,7 @@ public class MusicPlayerState
         }
 
         CurrentIndex = Queue.FindIndex(t => t.VideoId == prev.VideoId);
+        LastTransitionReason = "manual_previous";
         StartTrack(prev);
         return true;
     }

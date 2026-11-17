@@ -2008,3 +2008,15 @@ input[type="range"] { min-height: 28px; }
     .now-playing-panel.stage-mode .now-playing-controls { margin: 10px 0; }
     .now-playing-panel.stage-mode .stage-lyrics { margin: 8px 0; }
 }
+
+/* Opt-in diagnostics panel. It does not replace or cover the YouTube player. */
+.ytdebug-toggle { position: fixed; z-index: 290; right: 12px; top: 72px; padding: 8px 12px; border: 1px solid #a678ef; border-radius: 10px; background: #191826; color: #fff; cursor: pointer; }
+.ytdebug-panel { position: fixed; z-index: 291; right: 12px; top: 115px; width: min(690px, calc(100vw - 24px)); max-height: min(70dvh, 700px); overflow: auto; padding: 14px; border: 1px solid #a678ef; border-radius: 14px; background: #171824; color: #f7f4fa; box-shadow: 0 16px 45px #0009; font: 13px/1.4 system-ui, sans-serif; }
+.ytdebug-panel[hidden] { display: none; }
+.ytdebug-panel h2 { display: inline-block; margin: 0 12px 8px 0; font-size: 17px; }
+.ytdebug-status { margin: 6px 0 10px; color: #d9c6fa; }
+.ytdebug-controls { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.ytdebug-panel button { min-height: 34px; padding: 5px 9px; border: 1px solid #77708d; border-radius: 7px; background: #282638; color: #fff; cursor: pointer; }
+.ytdebug-panel button:hover, .ytdebug-panel button:focus-visible, .ytdebug-toggle:focus-visible { border-color: #bd84ff; outline: 2px solid #bd84ff; outline-offset: 2px; }
+.ytdebug-timeline { max-height: 40dvh; overflow: auto; border-top: 1px solid #424053; font: 11px/1.45 ui-monospace, monospace; }
+.ytdebug-row { padding: 5px 0; border-bottom: 1px solid #333141; overflow-wrap: anywhere; }

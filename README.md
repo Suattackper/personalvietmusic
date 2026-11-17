@@ -4,6 +4,8 @@
 
 ## Trải nghiệm nghe nhạc
 
+Để đo hành vi YouTube IFrame Player và các lần chuyển bài mà không thay đổi luồng phát, xem [README_DIAGNOSTICS.md](README_DIAGNOSTICS.md). Bảng đo chỉ bật khi thêm `?ytdebug=1` vào URL.
+
 - Now Playing có Sân khấu, đĩa vinyl, hai visualizer mô phỏng và ba không gian nghe. Nguồn YouTube vẫn phát bằng iframe hiện có; visualizer không đọc được phổ âm thanh thật của iframe.
 - Mặc định Now Playing dùng đĩa vinyl và phổ ngang, Sân khấu đóng. Mini player dùng đĩa vinyl và phổ vòng trang trí; cả hai dừng hiệu ứng khi tạm dừng. Bấm thẻ playlist sẽ bắt đầu phát ngay rồi mở danh sách.
 - Hiệu ứng giao diện luôn ở mức **Đầy đủ**. Không gian nghe được lưu ở trình duyệt; các hiệu ứng theo nhạc dừng khi tạm dừng và vòng vẽ dừng khi tab bị ẩn.

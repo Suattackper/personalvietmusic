@@ -226,6 +226,7 @@
     private bool _playerReady;
     private string? _loadedVideoId;
     private string? _pendingVideoId;
+    private string? _pendingTransitionReason;
     private bool _isSeeking;
     private double _seekValue;
     private bool _videoVisible = true;
@@ -389,6 +390,7 @@
             _lyrics = null;
             _lyricsAutoScroll = true;
             _lastLyricIndex = -1;
+            await JS.InvokeVoidAsync("vietmusicPlayer.noteTransition", track.VideoId, PlayerState.LastTransitionReason);
             await LoadTrackAsync(track);
             _lyrics = await Lyrics.GetAsync(track.VideoId);
             StateHasChanged();
@@ -415,6 +417,7 @@
         {
             // Player chưa sẵn sàng — ghi nhớ để nạp khi onReady.
             _pendingVideoId = track.VideoId;
+            _pendingTransitionReason = PlayerState.LastTransitionReason;
             return;
         }
 
@@ -426,7 +429,7 @@
         }
 
         _loadedVideoId = track.VideoId;
-        await JS.InvokeVoidAsync("vietmusicPlayer.loadVideo", track.VideoId);
+        await JS.InvokeVoidAsync("vietmusicPlayer.loadVideo", track.VideoId, PlayerState.LastTransitionReason);
     }
 
     private async Task TogglePlayPause()
@@ -536,7 +539,8 @@
         {
             _loadedVideoId = _pendingVideoId;
             _pendingVideoId = null;
-            await JS.InvokeVoidAsync("vietmusicPlayer.loadVideo", _loadedVideoId);
+            await JS.InvokeVoidAsync("vietmusicPlayer.loadVideo", _loadedVideoId, _pendingTransitionReason);
+            _pendingTransitionReason = null;
         }
     }
 
@@ -569,12 +573,12 @@
     {
         if (PlayerState.RepeatMode == RepeatMode.One)
         {
-            await JS.InvokeVoidAsync("vietmusicPlayer.seekTo", 0d);
+            await JS.InvokeVoidAsync("vietmusicPlayer.seekTo", 0d, "repeat_one_after_end");
             await JS.InvokeVoidAsync("vietmusicPlayer.playVideo");
             return;
         }
 
-        if (!PlayerState.PlayNext())
+        if (!PlayerState.PlayNext("auto_after_end"))
         {
             PlayerState.SetPlaying(false);
         }
@@ -596,7 +600,7 @@
         Toasts.ShowError(trackTitle is null ? message : $"{message} ({trackTitle})");
 
         // Tự chuyển bài tiếp theo nếu có.
-        if (!PlayerState.PlayNext())
+        if (!PlayerState.PlayNext("auto_after_player_error"))
         {
             PlayerState.SetPlaying(false);
         }

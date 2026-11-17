@@ -14,6 +14,10 @@ window.vietmusicPlayer = (function () {
     let dotNetRef = null;
     let apiReadyPromise = null;
     let progressTimer = null;
+    let lastProgressCallback = null;
+    const diagnostics = window.anhTanYtDiagnostics;
+    diagnostics.setPlayerProvider?.(() => player);
+    function observe(type, detail) { diagnostics.record(type, detail); }
 
     // Chống việc trình duyệt (nhất là mobile) tự pause khi tab bị ẩn:
     // chỉ tự phát lại khi KHÔNG phải người dùng chủ động pause.
@@ -25,6 +29,7 @@ window.vietmusicPlayer = (function () {
     function tryResume() {
         if (player && playerReady && !userPaused) {
             try {
+                observe("api_call", { method: "playVideo", reason: "hidden_pause_recovery" });
                 player.playVideo();
             } catch (e) { }
         }
@@ -41,6 +46,7 @@ window.vietmusicPlayer = (function () {
             pausedWhileHidden = false;
             try {
                 if (player && playerReady && player.getPlayerState() === YT.PlayerState.PAUSED) {
+                    observe("api_call", { method: "playVideo", reason: "visible_resume_recovery" });
                     player.playVideo();
                 }
             } catch (e) { }
@@ -73,13 +79,18 @@ window.vietmusicPlayer = (function () {
 
     function startProgressTimer() {
         stopProgressTimer();
+        lastProgressCallback = null;
         progressTimer = setInterval(function () {
+            const now = performance.now();
+            const intervalMs = lastProgressCallback === null ? null : Math.round((now - lastProgressCallback) * 100) / 100;
+            lastProgressCallback = now;
             if (!player || !playerReady || !dotNetRef) {
                 return;
             }
             try {
                 const current = player.getCurrentTime() || 0;
                 const duration = player.getDuration() || 0;
+                diagnostics.tick(intervalMs, current, duration);
                 dotNetRef.invokeMethodAsync("OnPlayerProgress", current, duration);
             } catch (e) {
                 // Player đang bị hủy — bỏ qua.
@@ -92,6 +103,7 @@ window.vietmusicPlayer = (function () {
             clearInterval(progressTimer);
             progressTimer = null;
         }
+        lastProgressCallback = null;
     }
 
     function notify(methodName, ...args) {
@@ -110,6 +122,7 @@ window.vietmusicPlayer = (function () {
             if (player) {
                 return;
             }
+            observe("api_call", { method: "YT.Player", reason: "initialize" });
             player = new YT.Player(elementId, {
                 width: "100%",
                 height: "100%",
@@ -121,12 +134,14 @@ window.vietmusicPlayer = (function () {
                 events: {
                     onReady: function () {
                         playerReady = true;
+                        observe("player_ready");
                         try {
                             player.setPlaybackQuality(PREFERRED_QUALITY);
                         } catch (e) { }
                         notify("OnPlayerReady");
                     },
                     onStateChange: function (event) {
+                        observe("player_state", { stateCode: event.data });
                         if (window.YT && event.data === YT.PlayerState.PLAYING) {
                             // Nhắc lại chất lượng thấp mỗi khi bắt đầu phát,
                             // vì YouTube có thể tự nâng chất lượng khi đổi video.
@@ -157,6 +172,7 @@ window.vietmusicPlayer = (function () {
                         notify("OnPlayerStateChanged", event.data);
                     },
                     onError: function (event) {
+                        observe("player_error", { errorCode: event.data });
                         stopProgressTimer();
                         notify("OnPlayerError", event.data);
                     }
@@ -164,11 +180,12 @@ window.vietmusicPlayer = (function () {
             });
         },
 
-        loadVideo: function (videoId) {
+        loadVideo: function (videoId, reason) {
             if (player && playerReady && videoId) {
                 userPaused = false;
                 pausedWhileHidden = false;
                 backgroundResumeAttempts = 0;
+                observe("api_call", { method: "loadVideoById", videoId: videoId, reason: reason || "unspecified" });
                 player.loadVideoById({
                     videoId: videoId,
                     suggestedQuality: PREFERRED_QUALITY
@@ -176,10 +193,15 @@ window.vietmusicPlayer = (function () {
             }
         },
 
+        noteTransition: function (videoId, reason) {
+            observe("transition", { reason: reason || "unspecified", toVideoId: videoId });
+        },
+
         playVideo: function () {
             if (player && playerReady) {
                 userPaused = false;
                 pausedWhileHidden = false;
+                observe("api_call", { method: "playVideo", reason: "app_request" });
                 player.playVideo();
             }
         },
@@ -187,6 +209,7 @@ window.vietmusicPlayer = (function () {
         pauseVideo: function () {
             if (player && playerReady) {
                 userPaused = true;
+                observe("api_call", { method: "pauseVideo", reason: "app_request" });
                 player.pauseVideo();
             }
         },
@@ -194,12 +217,14 @@ window.vietmusicPlayer = (function () {
         stopVideo: function () {
             if (player && playerReady) {
                 userPaused = true;
+                observe("api_call", { method: "stopVideo", reason: "app_request" });
                 player.stopVideo();
             }
         },
 
-        seekTo: function (seconds) {
+        seekTo: function (seconds, reason) {
             if (player && playerReady) {
+                observe("api_call", { method: "seekTo", seconds: seconds, reason: reason || "user_seek" });
                 player.seekTo(seconds, true);
             }
         },
@@ -227,6 +252,8 @@ window.vietmusicPlayer = (function () {
         },
 
         destroyPlayer: function () {
+            observe("api_call", { method: "destroy", reason: "component_dispose" });
+            diagnostics.stop();
             stopProgressTimer();
             if (player) {
                 try {

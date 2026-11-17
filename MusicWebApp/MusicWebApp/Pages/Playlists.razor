@@ -17,6 +17,7 @@
     @if (MyPlaylist.Tracks.Count > 0)
     {
         <h2 class="section-heading">@Lang.T("Playlist của tôi")</h2>
+        <div class="playlist-grid my-playlist-grid">
         <button class="playlist-card my-playlist-card" @onclick="OpenMyPlaylist" aria-label="@Lang.T("Phát playlist") @Lang.T("Playlist của tôi") (@Lang.F("{0} bài", MyPlaylist.Tracks.Count))">
             <span class="playlist-card-art" aria-hidden="true">
                 @foreach (var track in MyPlaylist.Tracks.Take(3))
@@ -29,6 +30,7 @@
             <span class="playlist-card-count">@Lang.F("{0} bài", MyPlaylist.Tracks.Count)</span>
             <span class="playlist-card-play" aria-hidden="true"><Icon Name="play" Size="18" /></span>
         </button>
+        </div>
     }
 
     @if (_playlists is null)

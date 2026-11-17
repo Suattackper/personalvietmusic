@@ -79,6 +79,8 @@ public sealed class LanguageService
         ["Mở hàng đợi"] = "Open queue",
         ["Hoàn tác"] = "Undo",
         ["Đưa lên"] = "Move up",
+        ["Đưa lên đầu"] = "Move to top",
+        ["Đưa {0} lên đầu"] = "Move {0} to top",
         ["Đưa xuống"] = "Move down",
         ["Đưa {0} lên"] = "Move {0} up",
         ["Đưa {0} xuống"] = "Move {0} down",

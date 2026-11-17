@@ -33,6 +33,7 @@
                 <span class="queue-item-artist" title="@track.Artist">@track.Artist</span>
             </div>
             <div class="queue-item-actions">
+                <button class="icon-button" disabled="@(index == 0)" title="@Lang.T("Đưa lên đầu")" aria-label="@Lang.F("Đưa {0} lên đầu", track.Title)" @onclick="() => Move(index, 0)"><Icon Name="chevrons-up" Size="16" /></button>
                 <button class="icon-button" disabled="@(index == 0)" title="@Lang.T("Đưa lên")" aria-label="@Lang.F("Đưa {0} lên", track.Title)" @onclick="() => Move(index, index - 1)"><Icon Name="chevron-up" Size="16" /></button>
                 <button class="icon-button" disabled="@(index == PlayerState.Queue.Count - 1)" title="@Lang.T("Đưa xuống")" aria-label="@Lang.F("Đưa {0} xuống", track.Title)" @onclick="() => Move(index, index + 1)"><Icon Name="chevron-down" Size="16" /></button>
                 <button class="icon-button"

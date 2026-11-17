@@ -16,7 +16,7 @@
 - 🏠 Trang chủ với các nhóm thể loại đề xuất (Nhạc Việt mới, V-Pop, Ballad Việt, Rap Việt...)
 - 🔍 Tìm kiếm bài hát (Enter hoặc nút Tìm), tải thêm kết quả bằng `nextPageToken`
 - ▶️ Trình phát cố định cuối màn hình: Play/Pause, Previous/Next, Repeat (None/All/One), Shuffle, thanh tiến trình (seek được), âm lượng
-- 📃 Hàng đợi phát (Queue): phát, xóa từng bài, xóa tất cả — lưu và khôi phục qua localStorage
+- 📃 Hàng đợi phát (Queue): phát, xóa, kéo sắp xếp hoặc đưa bài lên đầu bằng nút hai mũi tên — lưu và khôi phục qua localStorage
 - ❤️ Yêu thích (Favorites) — không trùng lặp, lưu localStorage
 - 💜 Playlist của tôi — danh sách cá nhân lưu trên thiết bị, tách khỏi Yêu thích
 - 🕘 Nghe gần đây (Recently Played) — tối đa 50 bài, có nút xóa lịch sử

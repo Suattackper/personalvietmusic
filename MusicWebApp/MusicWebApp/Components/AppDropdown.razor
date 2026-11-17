@@ -1,0 +1,90 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="app-dropdown @AdditionalClass" @ref="_root">
+    <button type="button" class="app-dropdown-trigger" aria-label="@Label" aria-haspopup="listbox" aria-expanded="@_open" @onclick="ToggleAsync" @onkeydown="OnKeyDown">
+        <span>@(Options.FirstOrDefault(option => option.Value == Value)?.ShortLabel ?? Options.FirstOrDefault(option => option.Value == Value)?.Label ?? Value)</span>
+        <Icon Name="chevron-down" Size="16" />
+    </button>
+    @if (_open)
+    {
+        <div class="app-dropdown-menu" role="listbox" aria-label="@Label" @onkeydown="OnKeyDown">
+            @foreach (var option in Options)
+            {
+                <button type="button" role="option" class="app-dropdown-option" aria-selected="@(option.Value == Value)" @key="option.Value" @onclick="() => SelectAsync(option.Value)">@option.Label</button>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public string Label { get; set; } = "";
+    [Parameter, EditorRequired] public string Value { get; set; } = "";
+    [Parameter, EditorRequired] public IReadOnlyList<DropdownOption> Options { get; set; } = [];
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public string AdditionalClass { get; set; } = "";
+
+    private ElementReference _root;
+    private DotNetObjectReference<AppDropdown>? _reference;
+    private bool _open;
+    private bool _focusSelected;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _reference = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("anhTanDropdown.register", _root, _reference);
+        }
+        if (_focusSelected)
+        {
+            _focusSelected = false;
+            await JS.InvokeVoidAsync("anhTanDropdown.focusSelected", _root);
+        }
+    }
+
+    private Task ToggleAsync() => SetOpenAsync(!_open);
+
+    private Task SetOpenAsync(bool open)
+    {
+        _open = open;
+        _focusSelected = open;
+        return Task.CompletedTask;
+    }
+
+    private async Task SelectAsync(string value)
+    {
+        _open = false;
+        await ValueChanged.InvokeAsync(value);
+        await JS.InvokeVoidAsync("anhTanDropdown.focusTrigger", _root);
+    }
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key is "ArrowDown" or "ArrowUp" or "Home" or "End")
+        {
+            if (!_open) await SetOpenAsync(true);
+            else await JS.InvokeVoidAsync("anhTanDropdown.moveFocus", _root, e.Key);
+        }
+        else if (e.Key == "Escape" && _open)
+        {
+            _open = false;
+            await JS.InvokeVoidAsync("anhTanDropdown.focusTrigger", _root);
+        }
+    }
+
+    [JSInvokable]
+    public Task CloseFromOutside()
+    {
+        _open = false;
+        return InvokeAsync(StateHasChanged);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try { await JS.InvokeVoidAsync("anhTanDropdown.unregister", _root); }
+        catch (JSException) { }
+        catch (JSDisconnectedException) { }
+        _reference?.Dispose();
+    }
+}

@@ -6,7 +6,7 @@
 
 - Now Playing có Sân khấu, đĩa vinyl, hai visualizer mô phỏng và ba không gian nghe. Nguồn YouTube vẫn phát bằng iframe hiện có; visualizer không đọc được phổ âm thanh thật của iframe.
 - Mặc định Now Playing dùng đĩa vinyl và phổ ngang, Sân khấu đóng. Mini player dùng đĩa vinyl và phổ vòng trang trí; cả hai dừng hiệu ứng khi tạm dừng. Bấm thẻ playlist sẽ bắt đầu phát ngay rồi mở danh sách.
-- Chọn mức hiệu ứng **Tắt / Nhẹ / Đầy đủ** trong player. Lựa chọn và không gian nghe được lưu ở trình duyệt. Thiết lập giảm chuyển động của hệ điều hành được ưu tiên.
+- Hiệu ứng giao diện luôn ở mức **Đầy đủ**. Không gian nghe được lưu ở trình duyệt; các hiệu ứng theo nhạc dừng khi tạm dừng và vòng vẽ dừng khi tab bị ẩn.
 - Trang Playlist chỉ hiện mục **Yêu thích** khi đã có bài được lưu. Nút dấu cộng trên thẻ bài hát thêm vào hàng đợi và thông báo có nút hoàn tác.
 - Lời bài hát chỉ hiển thị khi có dữ liệu hợp lệ trong `MusicWebApp/MusicWebApp/wwwroot/data/lyrics.json`. File hiện là `{}`. Để bổ sung nội dung được phép sử dụng, đặt VideoId làm khóa; giá trị có `text` cho lời tĩnh hoặc `lines` gồm `startMs`, `text`, và tùy chọn `words` (`startMs`, `endMs`, `text`) để đồng bộ theo dòng hoặc từ. Không tạo lời hoặc thời gian giả.
 - Hiệu ứng dùng CSS, JavaScript thuần và Canvas, không thêm dependency animation mới. `stageExperience.js` quản lý một vòng vẽ và dừng khi ẩn tab hoặc đóng Now Playing.
@@ -25,7 +25,7 @@
 - 🌐 Giao diện tiếng Việt (mặc định) và tiếng Anh, ghi nhớ lựa chọn trong trình duyệt
 - 🎼 Bốn bộ sưu tập nhạc Việt, Anh, Nhật, Trung; tìm bài trong từng danh sách
 - 🔥 Bốn playlist TikTok/Douyin riêng theo ngôn ngữ, 100 bài mỗi danh sách; nguồn tuyển chọn ghi trong `music-candidates/README.md`
-- ✨ Hiệu ứng CSS và JavaScript thuần, chế độ Now Playing, màu nền theo ảnh bìa; có nút tắt hiệu ứng và hỗ trợ `prefers-reduced-motion`
+- ✨ Hiệu ứng CSS và JavaScript thuần, chế độ Now Playing, màu nền theo ảnh bìa
 
 ## Tác giả và thời gian
 

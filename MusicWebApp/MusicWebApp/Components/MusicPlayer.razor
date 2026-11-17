@@ -124,11 +124,6 @@
     </div>
 
     <div class="player-extras">
-        <label class="motion-level-picker">@Lang.T("Hiệu ứng")
-            <select value="@_motionLevel" @onchange="ChangeMotionLevelAsync" aria-label="@Lang.T("Mức hiệu ứng")">
-                <option value="off">@Lang.T("Tắt")</option><option value="light">@Lang.T("Nhẹ")</option><option value="full">@Lang.T("Đầy đủ")</option>
-            </select>
-        </label>
         <span class="volume-icon" aria-hidden="true">
             <Icon Name="@(PlayerState.Volume == 0 ? "volume-mute" : "volume")" Size="18" />
         </span>
@@ -169,11 +164,9 @@
                 <button class="button-secondary" @onclick="ToggleVisualizerMode">@Lang.T(_visualizerMode == "ring" ? "Phổ vòng" : "Phổ ngang")</button>
                 <button class="button-secondary" @onclick="ToggleStageAsync" aria-pressed="@_stageOpen">@Lang.T(_stageOpen ? "Thu gọn sân khấu" : "Mở sân khấu")</button>
             </div>
-            <label class="stage-theme-picker">@Lang.T("Không gian nghe")
-                <select value="@_stageTheme" @onchange="ChangeStageThemeAsync">
-                    <option value="neon">Neon City</option><option value="rain">@Lang.T("Mưa đêm")</option><option value="vinyl">@Lang.T("Phòng đĩa than")</option>
-                </select>
-            </label>
+            <div class="stage-theme-picker"><span>@Lang.T("Không gian nghe")</span>
+                <AppDropdown Label="@Lang.T("Không gian nghe")" Value="@_stageTheme" Options="@StageThemeOptions" ValueChanged="ChangeStageThemeAsync" AdditionalClass="stage-theme-menu" />
+            </div>
             <p class="visualizer-disclaimer">@Lang.T("Hiệu ứng phổ mô phỏng — nguồn YouTube không cung cấp dữ liệu âm thanh cho trang này.")</p>
             <div class="now-playing-progress">
                 <span>@FormatTime(DisplayTime)</span>
@@ -188,15 +181,9 @@
             </div>
             <div class="now-playing-bottom">
                 <button class="icon-button @(IsCurrentFavorite ? "is-favorite" : null)" title="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")" aria-label="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")" @onclick="ToggleCurrentFavoriteAsync"><Icon Name="@(IsCurrentFavorite ? "heart-filled" : "heart")" Size="20" /></button>
-                <label class="motion-level-picker">@Lang.T("Hiệu ứng")
-                    <select value="@_motionLevel" @onchange="ChangeMotionLevelAsync" aria-label="@Lang.T("Mức hiệu ứng")">
-                        <option value="off">@Lang.T("Tắt")</option><option value="light">@Lang.T("Nhẹ")</option><option value="full">@Lang.T("Đầy đủ")</option>
-                    </select>
-                </label>
                 <Icon Name="@(PlayerState.Volume == 0 ? "volume-mute" : "volume")" Size="18" />
                 <input type="range" min="0" max="100" value="@PlayerState.Volume" aria-label="@Lang.T("Âm lượng")" @oninput="OnVolumeChangedAsync" />
             </div>
-            @if (_systemReducedMotion) { <p class="now-playing-motion-status" aria-live="polite">@Lang.T("Thiết bị đang giảm chuyển động.")</p> }
             <div class="stage-lyrics">
                 <h3>@Lang.T("Lời bài hát")</h3>
                 @if (_lyrics?.Lines.Count > 0)
@@ -240,12 +227,16 @@
     private bool _videoVisible = true;
     private bool _nowPlayingOpen;
     private bool _pendingModalFocus;
-    private string _motionLevel = "full";
-    private bool _systemReducedMotion;
     private bool _stageOpen;
     private bool _vinylMode = true;
     private string _visualizerMode = "bars";
     private string _stageTheme = "neon";
+    private IReadOnlyList<DropdownOption> StageThemeOptions =>
+    [
+        new("neon", "Neon City"),
+        new("rain", Lang.T("Mưa đêm")),
+        new("vinyl", Lang.T("Phòng đĩa than"))
+    ];
     private LyricDocument? _lyrics;
     private bool _lyricsAutoScroll = true;
     private int _lastLyricIndex = -1;
@@ -323,17 +314,10 @@
         }
     }
 
-    private async Task ChangeStageThemeAsync(ChangeEventArgs e)
+    private async Task ChangeStageThemeAsync(string value)
     {
-        _stageTheme = e.Value?.ToString() switch { "rain" => "rain", "vinyl" => "vinyl", _ => "neon" };
+        _stageTheme = value switch { "rain" => "rain", "vinyl" => "vinyl", _ => "neon" };
         await JS.InvokeVoidAsync("anhTanStage.setTheme", _stageTheme);
-    }
-
-    private async Task ChangeMotionLevelAsync(ChangeEventArgs e)
-    {
-        _motionLevel = e.Value?.ToString() switch { "off" => "off", "light" => "light", _ => "full" };
-        await JS.InvokeVoidAsync("anhTanEffects.setLevel", _motionLevel);
-        await JS.InvokeVoidAsync("anhTanStage.refresh");
     }
 
     private async Task ToggleCurrentFavoriteAsync()
@@ -354,8 +338,6 @@
     {
         if (firstRender)
         {
-            _motionLevel = await JS.InvokeAsync<string>("anhTanEffects.getLevel");
-            _systemReducedMotion = await JS.InvokeAsync<bool>("anhTanEffects.prefersReducedMotion");
             _stageTheme = await JS.InvokeAsync<string>("anhTanStage.getTheme");
             await InvokeAsync(StateHasChanged);
             _dotNetRef = DotNetObjectReference.Create(this);

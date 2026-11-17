@@ -15,7 +15,7 @@
 13. [x] Sliding nav marker, one-shot favorite burst, queue toast/undo, search/route transitions and existing loading/empty/error states.
 14. [x] Home uses real recent tracks and curated playlists; media frame behavior unchanged.
 15. [x] CSS/JavaScript/Canvas modules; no new library or lockfile change.
-16. [x] Off/Light/Full persisted, reduced motion respected, hidden-tab drawing stopped, DPR capped, focus/mobile support.
+16. [x] Full effects fixed, hidden-tab drawing stopped, DPR capped, focus/mobile support; scrollbars hidden without disabling scrolling.
 17. [x] Debug build, Release publish, desktop and 390px browser checks, playback, seek, volume, favorite, theme, vinyl, visualizer, queue buttons/undo and console checked. Pages base-href workflow inspected. Automated browser coverage for touch swipe, native drag, actual fullscreen and network failure was not available in this run.
 
 Limits: the YouTube iframe does not expose audio samples to this page. Lyrics need licensed/owned data; none is present. The shared cover transition is limited to mini player and Now Playing because this project has no album cover model.

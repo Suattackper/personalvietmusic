@@ -1,24 +1,14 @@
 // Visual-only helpers. Playback stays exclusively in youtubePlayer.js.
 window.anhTanEffects = (() => {
-    const key = "anhtan_motion_level";
-    let level = "full";
     let modal = null;
     let previousFocus = null;
+    let previousHtmlOverflow = "";
+    let previousBodyOverflow = "";
     let colorRequest = 0;
     let coverGhost = null;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    function apply() {
-        document.documentElement.dataset.motion = level === "full" && !reduced.matches ? "on" : "off";
-        document.documentElement.dataset.motionLevel = reduced.matches ? "off" : level;
-    }
-    try {
-        const saved = localStorage.getItem(key);
-        level = ["off", "light", "full"].includes(saved) ? saved : localStorage.getItem("anhtan_motion_enabled") === "false" ? "off" : "full";
-    } catch { }
-    apply();
+    document.documentElement.dataset.motion = "on";
+    document.documentElement.dataset.motionLevel = "full";
     document.documentElement.dataset.tabVisible = document.hidden ? "false" : "true";
-    reduced.addEventListener("change", apply);
     document.addEventListener("visibilitychange", () => {
         document.documentElement.dataset.tabVisible = document.hidden ? "false" : "true";
     });
@@ -70,30 +60,21 @@ window.anhTanEffects = (() => {
                 { transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${to.width / from.width}, ${to.height / from.height})`, opacity: .2 }
             ], { duration: 270, easing: "cubic-bezier(.22,1,.36,1)" }).finished.finally(() => ghost.remove());
         },
-        getEnabled: () => level !== "off",
-        getLevel: () => level,
-        prefersReducedMotion: () => reduced.matches,
-        setEnabled(value) {
-            level = value ? "full" : "off";
-            try { localStorage.setItem(key, level); } catch { }
-            apply();
-        },
-        setLevel(value) {
-            level = ["off", "light", "full"].includes(value) ? value : "full";
-            try { localStorage.setItem(key, level); } catch { }
-            apply();
-        },
         openModal(id) {
             modal = document.getElementById(id);
             if (!modal) return;
             previousFocus = document.activeElement;
+            previousHtmlOverflow = document.documentElement.style.overflow;
+            previousBodyOverflow = document.body.style.overflow;
+            document.documentElement.style.overflow = "hidden";
             document.body.style.overflow = "hidden";
             document.addEventListener("keydown", onKeyDown);
             modal.querySelector("[data-now-close]")?.focus();
         },
         closeModal() {
             document.removeEventListener("keydown", onKeyDown);
-            document.body.style.overflow = "";
+            document.documentElement.style.overflow = previousHtmlOverflow;
+            document.body.style.overflow = previousBodyOverflow;
             modal = null;
             previousFocus?.focus?.();
             previousFocus = null;

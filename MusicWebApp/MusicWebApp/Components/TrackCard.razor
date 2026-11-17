@@ -1,7 +1,6 @@
 @inject MusicPlayerState PlayerState
 @inject FavoritesService Favorites
 @inject ToastService Toasts
-@inject PersonalPlaylistService PersonalPlaylist
 
 <div class="track-card @(IsActive ? "active" : null) @(IsActive && PlayerState.IsPlaying ? "is-playing" : null)"
      role="button"
@@ -54,9 +53,6 @@
                 aria-label="@Lang.T("Thêm vào hàng đợi")"
                 @onclick="AddToQueue">
             <Icon Name="plus" Size="18" />
-        </button>
-        <button class="icon-button" title="@Lang.T("Thêm vào playlist của tôi")" aria-label="@Lang.F("Thêm {0} vào playlist của tôi", Track.Title)" @onclick="AddToPersonalPlaylistAsync">
-            <Icon Name="disc" Size="18" />
         </button>
         <a class="icon-button"
            href="https://www.youtube.com/watch?v=@Track.VideoId"
@@ -119,14 +115,4 @@
             () => PlayerState.RemoveQueueItem(queuedTrack));
     }
 
-    private async Task AddToPersonalPlaylistAsync()
-    {
-        if (!await PersonalPlaylist.AddAsync(Track))
-        {
-            Toasts.ShowInfo(Lang.T("Bài hát đã có trong playlist của tôi."));
-            return;
-        }
-        Toasts.ShowUndo(Lang.F("Đã thêm \"{0}\" vào playlist của tôi.", Track.Title), Track.ThumbnailUrl,
-            () => _ = PersonalPlaylist.RemoveAsync(Track.VideoId));
-    }
 }

@@ -27,12 +27,7 @@
             @if (!string.IsNullOrEmpty(PlayerState.CurrentTrack.ThumbnailUrl))
             {
                 <div class="mini-vinyl @(_visualState == "is-playing" ? "is-playing" : null)">
-                    <span class="mini-vinyl-spectrum" aria-hidden="true">
-                        @for (var bar = 0; bar < 16; bar++)
-                        {
-                            <span style="--bar-index:@bar"></span>
-                        }
-                    </span>
+                    <span class="mini-vinyl-spectrum" aria-hidden="true"></span>
                     <span class="mini-vinyl-disc">
                         <img class="player-thumb"
                              src="@PlayerState.CurrentTrack.ThumbnailUrl"

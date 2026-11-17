@@ -9,6 +9,8 @@ namespace MusicWebApp.Services;
 public static class StorageKeys
 {
     public const string Favorites = "vietmusic_favorites";
+    // Reuse the key from the original personal-playlist feature so saved songs survive the restoration.
+    public const string MyPlaylist = "anhtan_personal_playlist";
     public const string Queue = "vietmusic_queue";
     public const string RecentlyPlayed = "vietmusic_recently_played";
     public const string Theme = "vietmusic_theme";

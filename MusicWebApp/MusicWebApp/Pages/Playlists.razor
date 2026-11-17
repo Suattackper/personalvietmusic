@@ -1,6 +1,6 @@
 @page "/playlists"
 @inject PlaylistService PlaylistSvc
-@inject FavoritesService Favorites
+@inject MyPlaylistService MyPlaylist
 @inject MusicPlayerState PlayerState
 @inject NavigationManager Nav
 @implements IDisposable
@@ -13,6 +13,23 @@
         @Lang.T("Playlist có sẵn")
     </h1>
     <p class="page-subtitle">@Lang.T("Chọn một bộ sưu tập theo ngôn ngữ, tìm bài yêu thích rồi phát. Các playlist quen thuộc vẫn có bên dưới.")</p>
+
+    @if (MyPlaylist.Tracks.Count > 0)
+    {
+        <h2 class="section-heading">@Lang.T("Playlist của tôi")</h2>
+        <button class="playlist-card my-playlist-card" @onclick="OpenMyPlaylist" aria-label="@Lang.T("Phát playlist") @Lang.T("Playlist của tôi") (@Lang.F("{0} bài", MyPlaylist.Tracks.Count))">
+            <span class="playlist-card-art" aria-hidden="true">
+                @foreach (var track in MyPlaylist.Tracks.Take(3))
+                {
+                    <span class="playlist-card-art-layer" style="background-image:url('@track.ThumbnailUrl')"></span>
+                }
+                <span class="playlist-card-art-emoji">💜</span>
+            </span>
+            <span class="playlist-card-body"><span class="playlist-card-name">@Lang.T("Playlist của tôi")</span><span class="playlist-card-desc">@Lang.T("Bộ sưu tập bài hát bạn đã lưu trên thiết bị này.")</span></span>
+            <span class="playlist-card-count">@Lang.F("{0} bài", MyPlaylist.Tracks.Count)</span>
+            <span class="playlist-card-play" aria-hidden="true"><Icon Name="play" Size="18" /></span>
+        </button>
+    }
 
     @if (_playlists is null)
     {
@@ -28,22 +45,6 @@
     }
     else
     {
-        @if (Favorites.Favorites.Count > 0)
-        {
-            <h2 class="section-heading">@Lang.T("Yêu thích")</h2>
-            <button class="playlist-card favorites-playlist-card" @onclick="OpenFavorites">
-                <span class="playlist-card-art" aria-hidden="true">
-                    @foreach (var track in Favorites.Favorites.Take(3))
-                    {
-                        <span class="playlist-card-art-layer" style="background-image:url('@track.ThumbnailUrl')"></span>
-                    }
-                    <span class="playlist-card-art-emoji">💜</span>
-                </span>
-                <span class="playlist-card-body"><span class="playlist-card-name">@Lang.T("Yêu thích")</span><span class="playlist-card-desc">@Lang.T("Bài hát bạn đã lưu trong Yêu thích.")</span></span>
-                <span class="playlist-card-count">@Lang.F("{0} bài", Favorites.Favorites.Count)</span>
-                <span class="playlist-card-play" aria-hidden="true"><Icon Name="play" Size="18" /></span>
-            </button>
-        }
         <h2 class="section-heading">@Lang.T("🌍 Chọn nhạc theo ngôn ngữ")</h2>
         <div class="playlist-grid country-playlist-grid">
             @foreach (var playlist in _playlists.Where(p => p.Id.StartsWith("country-")))
@@ -81,18 +82,18 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Favorites.OnChange += RefreshFavorites;
-        await Favorites.InitializeAsync();
+        MyPlaylist.OnChange += RefreshMyPlaylist;
+        await MyPlaylist.InitializeAsync();
         _playlists = await PlaylistSvc.GetPlaylistsAsync();
     }
 
-    private void RefreshFavorites() => _ = InvokeAsync(StateHasChanged);
+    private void RefreshMyPlaylist() => _ = InvokeAsync(StateHasChanged);
 
-    private void OpenFavorites()
+    private void OpenMyPlaylist()
     {
-        if (Favorites.Favorites.Count > 0) PlayerState.SetQueue(Favorites.Favorites, 0);
-        Nav.NavigateTo("favorites");
+        if (MyPlaylist.Tracks.Count > 0) PlayerState.SetQueue(MyPlaylist.Tracks, 0);
+        Nav.NavigateTo("my-playlist");
     }
 
-    public void Dispose() => Favorites.OnChange -= RefreshFavorites;
+    public void Dispose() => MyPlaylist.OnChange -= RefreshMyPlaylist;
 }

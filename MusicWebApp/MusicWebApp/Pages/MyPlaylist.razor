@@ -1,0 +1,40 @@
+@page "/my-playlist"
+@inject MyPlaylistService MyPlaylistSvc
+@inject MusicPlayerState PlayerState
+@implements IDisposable
+
+<PageTitle>@Lang.T("Playlist của tôi") - AnhTanMusic</PageTitle>
+
+<section class="page-section">
+    <div class="page-heading-row">
+        <h1 class="page-heading"><span class="page-heading-icon" aria-hidden="true"><Icon Name="disc" Size="22" /></span>@Lang.T("Playlist của tôi")</h1>
+        @if (MyPlaylistSvc.Tracks.Count > 0)
+        {
+            <div class="playlist-actions">
+                <button class="button-primary" @onclick="PlayAll"><Icon Name="play" Size="16" />@Lang.T("Phát tất cả")</button>
+                <button class="button-secondary" @onclick="PlayShuffled"><Icon Name="shuffle" Size="16" />@Lang.T("Phát ngẫu nhiên")</button>
+            </div>
+        }
+    </div>
+    @if (MyPlaylistSvc.Tracks.Count == 0)
+    {
+        <EmptyState IconName="disc" Title="Playlist của tôi đang trống" Description="Bấm biểu tượng playlist trên bài hát để lưu vào đây." />
+    }
+    else
+    {
+        <p class="page-subtitle">@Lang.F("{0} bài", MyPlaylistSvc.Tracks.Count)</p>
+        <TrackList Tracks="MyPlaylistSvc.Tracks" />
+    }
+</section>
+
+@code {
+    protected override void OnInitialized() => MyPlaylistSvc.OnChange += Refresh;
+    private void Refresh() => _ = InvokeAsync(StateHasChanged);
+    private void PlayAll() => PlayerState.SetQueue(MyPlaylistSvc.Tracks, 0);
+    private void PlayShuffled()
+    {
+        if (!PlayerState.IsShuffle) PlayerState.ToggleShuffle();
+        PlayerState.SetQueue(MyPlaylistSvc.Tracks, Random.Shared.Next(MyPlaylistSvc.Tracks.Count));
+    }
+    public void Dispose() => MyPlaylistSvc.OnChange -= Refresh;
+}

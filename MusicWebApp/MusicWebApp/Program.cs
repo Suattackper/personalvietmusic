@@ -18,6 +18,7 @@ builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
 builder.Services.AddScoped<LanguageService>();
 builder.Services.AddScoped<MusicPlayerState>();
 builder.Services.AddScoped<FavoritesService>();
+builder.Services.AddScoped<MyPlaylistService>();
 builder.Services.AddScoped<RecentlyPlayedService>();
 builder.Services.AddScoped<LyricsService>();
 builder.Services.AddScoped<ToastService>();

@@ -1,6 +1,7 @@
 @inherits LayoutComponentBase
 @inject MusicPlayerState PlayerState
 @inject FavoritesService Favorites
+@inject MyPlaylistService MyPlaylist
 @inject RecentlyPlayedService Recent
 @inject NavigationManager Nav
 @implements IDisposable
@@ -43,6 +44,7 @@
 
         // Khôi phục dữ liệu người dùng từ localStorage khi app khởi động.
         await Favorites.InitializeAsync();
+        await MyPlaylist.InitializeAsync();
         await Recent.InitializeAsync();
         await PlayerState.InitializeAsync();
     }

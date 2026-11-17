@@ -145,6 +145,7 @@
             <div class="now-playing-glow" style="background-image:url('@PlayerState.CurrentTrack.ThumbnailUrl')" aria-hidden="true"></div>
             <div class="stage-aurora" aria-hidden="true"></div>
             <button class="icon-button now-close" data-now-close title="@Lang.T("Đóng chế độ nghe tập trung")" aria-label="@Lang.T("Đóng chế độ nghe tập trung")" @onclick="CloseNowPlaying"><Icon Name="close" Size="22" /></button>
+            <div class="now-playing-main">
             <p class="now-playing-eyebrow">@Lang.T("Đang phát")</p>
             <div class="stage-art-wrap @(_vinylMode ? "vinyl-mode" : null) @(_visualState == "is-playing" ? "is-playing" : null)" @key="PlayerState.CurrentTrack.VideoId">
                 <canvas id="stage-visualizer" class="stage-visualizer" aria-hidden="true"></canvas>
@@ -183,6 +184,7 @@
                 <button class="icon-button @(IsCurrentFavorite ? "is-favorite" : null)" title="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")" aria-label="@Lang.T(IsCurrentFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")" @onclick="ToggleCurrentFavoriteAsync"><Icon Name="@(IsCurrentFavorite ? "heart-filled" : "heart")" Size="20" /></button>
                 <Icon Name="@(PlayerState.Volume == 0 ? "volume-mute" : "volume")" Size="18" />
                 <input type="range" min="0" max="100" value="@PlayerState.Volume" aria-label="@Lang.T("Âm lượng")" @oninput="OnVolumeChangedAsync" />
+            </div>
             </div>
             <div class="stage-lyrics">
                 <h3>@Lang.T("Lời bài hát")</h3>
@@ -329,9 +331,10 @@
         }
 
         var added = await Favorites.ToggleFavoriteAsync(track);
-        Toasts.ShowSuccess(added
+        Toasts.ShowUndo(added
             ? Lang.F("Đã thêm \"{0}\" vào yêu thích.", track.Title)
-            : Lang.F("Đã xóa \"{0}\" khỏi yêu thích.", track.Title));
+            : Lang.F("Đã xóa \"{0}\" khỏi yêu thích.", track.Title), track.ThumbnailUrl,
+            async () => { if (Favorites.IsFavorite(track.VideoId) == added) await Favorites.ToggleFavoriteAsync(track); });
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

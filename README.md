@@ -7,7 +7,7 @@
 - Now Playing có Sân khấu, đĩa vinyl, hai visualizer mô phỏng và ba không gian nghe. Nguồn YouTube vẫn phát bằng iframe hiện có; visualizer không đọc được phổ âm thanh thật của iframe.
 - Mặc định Now Playing dùng đĩa vinyl và phổ ngang, Sân khấu đóng. Mini player dùng đĩa vinyl và phổ vòng trang trí; cả hai dừng hiệu ứng khi tạm dừng. Bấm thẻ playlist sẽ bắt đầu phát ngay rồi mở danh sách.
 - Hiệu ứng giao diện luôn ở mức **Đầy đủ**. Không gian nghe được lưu ở trình duyệt; các hiệu ứng theo nhạc dừng khi tạm dừng và vòng vẽ dừng khi tab bị ẩn.
-- Trang Playlist chỉ hiện mục **Yêu thích** khi đã có bài được lưu. Nút dấu cộng trên thẻ bài hát thêm vào hàng đợi và thông báo có nút hoàn tác.
+- Trang Playlist chỉ hiện **Playlist của tôi** khi đã lưu bài trên thiết bị. Yêu thích có trang riêng; hai danh sách độc lập. Nút đĩa trên thẻ bài hát đánh dấu bài đã lưu, và toast thêm/xóa có ảnh bìa cùng nút hoàn tác.
 - Lời bài hát chỉ hiển thị khi có dữ liệu hợp lệ trong `MusicWebApp/MusicWebApp/wwwroot/data/lyrics.json`. File hiện là `{}`. Để bổ sung nội dung được phép sử dụng, đặt VideoId làm khóa; giá trị có `text` cho lời tĩnh hoặc `lines` gồm `startMs`, `text`, và tùy chọn `words` (`startMs`, `endMs`, `text`) để đồng bộ theo dòng hoặc từ. Không tạo lời hoặc thời gian giả.
 - Hiệu ứng dùng CSS, JavaScript thuần và Canvas, không thêm dependency animation mới. `stageExperience.js` quản lý một vòng vẽ và dừng khi ẩn tab hoặc đóng Now Playing.
 
@@ -18,6 +18,7 @@
 - ▶️ Trình phát cố định cuối màn hình: Play/Pause, Previous/Next, Repeat (None/All/One), Shuffle, thanh tiến trình (seek được), âm lượng
 - 📃 Hàng đợi phát (Queue): phát, xóa từng bài, xóa tất cả — lưu và khôi phục qua localStorage
 - ❤️ Yêu thích (Favorites) — không trùng lặp, lưu localStorage
+- 💜 Playlist của tôi — danh sách cá nhân lưu trên thiết bị, tách khỏi Yêu thích
 - 🕘 Nghe gần đây (Recently Played) — tối đa 50 bài, có nút xóa lịch sử
 - 🌙 Dark mode mặc định, chuyển dark/light, ghi nhớ lựa chọn
 - 📱 Responsive: sidebar cố định (desktop) → thu gọn icon (tablet) → drawer (mobile)

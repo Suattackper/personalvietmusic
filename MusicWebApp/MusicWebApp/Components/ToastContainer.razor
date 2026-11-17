@@ -57,10 +57,10 @@
         }
     }
 
-    private void Undo(ToastMessage toast)
+    private async Task Undo(ToastMessage toast)
     {
-        toast.Undo?.Invoke();
         Remove(toast.Id);
+        if (toast.Undo is not null) await toast.Undo();
     }
 
     public void Dispose()

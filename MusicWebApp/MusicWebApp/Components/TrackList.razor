@@ -1,5 +1,6 @@
 @inject MusicPlayerState PlayerState
 @inject FavoritesService Favorites
+@inject MyPlaylistService MyPlaylist
 @implements IDisposable
 
 <div class="track-grid">
@@ -23,6 +24,7 @@
     {
         PlayerState.OnChange += HandleChanged;
         Favorites.OnChange += HandleChanged;
+        MyPlaylist.OnChange += HandleChanged;
     }
 
     private void HandleChanged() => _ = InvokeAsync(StateHasChanged);
@@ -55,5 +57,6 @@
     {
         PlayerState.OnChange -= HandleChanged;
         Favorites.OnChange -= HandleChanged;
+        MyPlaylist.OnChange -= HandleChanged;
     }
 }

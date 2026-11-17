@@ -13,7 +13,7 @@ public class ToastMessage
     public string Message { get; init; } = string.Empty;
     public ToastLevel Level { get; init; } = ToastLevel.Info;
     public string? ThumbnailUrl { get; init; }
-    public Action? Undo { get; init; }
+    public Func<Task>? Undo { get; init; }
 }
 
 /// <summary>
@@ -27,6 +27,9 @@ public class ToastService
     public void ShowSuccess(string message) => Show(message, ToastLevel.Success);
     public void ShowError(string message) => Show(message, ToastLevel.Error);
     public void ShowUndo(string message, string? thumbnailUrl, Action undo)
+        => ShowUndo(message, thumbnailUrl, () => { undo(); return Task.CompletedTask; });
+
+    public void ShowUndo(string message, string? thumbnailUrl, Func<Task> undo)
         => OnToast?.Invoke(new ToastMessage { Message = message, Level = ToastLevel.Success, ThumbnailUrl = thumbnailUrl, Undo = undo });
 
     private void Show(string message, ToastLevel level)

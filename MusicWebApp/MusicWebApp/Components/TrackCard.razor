@@ -1,5 +1,6 @@
 @inject MusicPlayerState PlayerState
 @inject FavoritesService Favorites
+@inject MyPlaylistService MyPlaylist
 @inject ToastService Toasts
 
 <div class="track-card @(IsActive ? "active" : null) @(IsActive && PlayerState.IsPlaying ? "is-playing" : null)"
@@ -54,6 +55,13 @@
                 @onclick="AddToQueue">
             <Icon Name="plus" Size="18" />
         </button>
+        <button class="icon-button @(IsInMyPlaylist ? "is-in-playlist" : null)"
+                aria-pressed="@IsInMyPlaylist"
+                title="@Lang.T(IsInMyPlaylist ? "Xóa khỏi Playlist của tôi" : "Thêm vào Playlist của tôi")"
+                aria-label="@Lang.T(IsInMyPlaylist ? "Xóa khỏi Playlist của tôi" : "Thêm vào Playlist của tôi")"
+                @onclick="ToggleMyPlaylistAsync">
+            <Icon Name="disc" Size="18" />
+        </button>
         <a class="icon-button"
            href="https://www.youtube.com/watch?v=@Track.VideoId"
            target="_blank"
@@ -75,6 +83,7 @@
     private bool IsActive => PlayerState.CurrentTrack?.VideoId == Track.VideoId;
 
     private bool IsFavorite => Favorites.IsFavorite(Track.VideoId);
+    private bool IsInMyPlaylist => MyPlaylist.Contains(Track.VideoId);
 
     private Task PlayAsync()
     {
@@ -95,9 +104,19 @@
     private async Task ToggleFavoriteAsync()
     {
         var added = await Favorites.ToggleFavoriteAsync(Track);
-        Toasts.ShowSuccess(added
+        Toasts.ShowUndo(added
             ? Lang.F("Đã thêm \"{0}\" vào yêu thích.", Track.Title)
-            : Lang.F("Đã xóa \"{0}\" khỏi yêu thích.", Track.Title));
+            : Lang.F("Đã xóa \"{0}\" khỏi yêu thích.", Track.Title), Track.ThumbnailUrl,
+            async () => { if (Favorites.IsFavorite(Track.VideoId) == added) await Favorites.ToggleFavoriteAsync(Track); });
+    }
+
+    private async Task ToggleMyPlaylistAsync()
+    {
+        var added = await MyPlaylist.ToggleAsync(Track);
+        Toasts.ShowUndo(added
+            ? Lang.F("Đã thêm \"{0}\" vào Playlist của tôi.", Track.Title)
+            : Lang.F("Đã xóa \"{0}\" khỏi Playlist của tôi.", Track.Title), Track.ThumbnailUrl,
+            async () => { if (MyPlaylist.Contains(Track.VideoId) == added) await MyPlaylist.ToggleAsync(Track); });
     }
 
     private void AddToQueue()

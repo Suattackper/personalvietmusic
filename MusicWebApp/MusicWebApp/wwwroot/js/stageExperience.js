@@ -150,6 +150,7 @@ window.anhTanStage = (() => {
             canvas = context = null;
         },
         refresh: schedule,
+        resetScroll() { stagePanel?.querySelector('.now-playing-scroll')?.scrollTo({ top: 0, behavior: 'instant' }); },
         attachPanel(id, reference) {
             const next = document.getElementById(id);
             if (stagePanel === next) return;

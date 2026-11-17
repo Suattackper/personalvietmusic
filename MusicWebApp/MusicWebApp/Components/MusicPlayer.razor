@@ -145,6 +145,7 @@
             <div class="now-playing-glow" style="background-image:url('@PlayerState.CurrentTrack.ThumbnailUrl')" aria-hidden="true"></div>
             <div class="stage-aurora" aria-hidden="true"></div>
             <button class="icon-button now-close" data-now-close title="@Lang.T("Đóng chế độ nghe tập trung")" aria-label="@Lang.T("Đóng chế độ nghe tập trung")" @onclick="CloseNowPlaying"><Icon Name="close" Size="22" /></button>
+            <div class="now-playing-scroll">
             <div class="now-playing-main">
             <p class="now-playing-eyebrow">@Lang.T("Đang phát")</p>
             <div class="stage-art-wrap @(_vinylMode ? "vinyl-mode" : null) @(_visualState == "is-playing" ? "is-playing" : null)" @key="PlayerState.CurrentTrack.VideoId">
@@ -215,6 +216,7 @@
                 else { <p>@Lang.T("Chưa có lời bài hát được cấp cho bài này.")</p> }
             </div>
             <a class="button-secondary stage-queue-link" href="queue" @onclick="CloseNowPlaying">@Lang.T("Mở hàng đợi")</a>
+            </div>
         </section>
     </div>
 }
@@ -229,6 +231,7 @@
     private bool _videoVisible = true;
     private bool _nowPlayingOpen;
     private bool _pendingModalFocus;
+    private bool _pendingStageScrollReset;
     private bool _stageOpen;
     private bool _vinylMode = true;
     private string _visualizerMode = "bars";
@@ -304,6 +307,7 @@
 
     private async Task ToggleStageAsync()
     {
+        _pendingStageScrollReset = true;
         if (_stageOpen)
         {
             _stageOpen = false;
@@ -352,6 +356,11 @@
             await JS.InvokeVoidAsync("anhTanEffects.openModal", "now-playing");
             await JS.InvokeVoidAsync("anhTanEffects.endCoverTransition", ".now-playing-art");
             await JS.InvokeVoidAsync("anhTanStage.attachPanel", "now-playing-panel", _dotNetRef);
+        }
+        if (_pendingStageScrollReset)
+        {
+            _pendingStageScrollReset = false;
+            await JS.InvokeVoidAsync("anhTanStage.resetScroll");
         }
         if (_nowPlayingOpen && (_lastVisualizerPlaying != (_visualState == "is-playing") || _lastVisualizerMode != _visualizerMode))
         {

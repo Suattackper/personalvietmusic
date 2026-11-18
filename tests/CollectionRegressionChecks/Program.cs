@@ -25,7 +25,18 @@ var restoredPlaylist = new MyPlaylistService(storage);
 await restoredPlaylist.InitializeAsync();
 Check(restoredPlaylist.Tracks.Select(t => t.VideoId), "first", "last");
 
-Console.WriteLine("Collection regression checks passed: one removal preserved the other tracks and persisted correctly.");
+var under5 = new SearchFilters(Duration: "under5");
+var from5to20 = new SearchFilters(Duration: "from5to20");
+var over20 = new SearchFilters(Duration: "over20");
+if (!under5.MatchesDuration(new MusicTrack { DurationSeconds = 299 })
+    || under5.MatchesDuration(new MusicTrack { DurationSeconds = 300 })
+    || !from5to20.MatchesDuration(new MusicTrack { DurationSeconds = 300 })
+    || !from5to20.MatchesDuration(new MusicTrack { DurationSeconds = 1200 })
+    || from5to20.MatchesDuration(new MusicTrack { DurationSeconds = 1201 })
+    || !over20.MatchesDuration(new MusicTrack { DurationSeconds = 1201 }))
+    throw new InvalidOperationException("Duration filters failed at the 5/20-minute boundaries.");
+
+Console.WriteLine("Collection and duration regression checks passed.");
 
 static void Check(IEnumerable<string> actual, params string[] expected)
 {

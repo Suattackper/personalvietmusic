@@ -16,6 +16,7 @@
         if (!active) return;
         nav.style.setProperty("--marker-y", `${active.offsetTop + active.offsetHeight * .225}px`);
         nav.style.setProperty("--marker-height", `${active.offsetHeight * .55}px`);
+        nav.style.setProperty("--marker-x", `${active.offsetLeft}px`);
     }
     function schedule() {
         if (!pending) { pending = true; requestAnimationFrame(update); }

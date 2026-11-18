@@ -29,6 +29,7 @@ public class YouTubeMusicService : IYouTubeMusicService
 
     public async Task<YouTubeSearchResult> SearchAsync(
         string keyword,
+        SearchFilters filters,
         string? pageToken = null,
         CancellationToken cancellationToken = default)
     {
@@ -43,7 +44,7 @@ public class YouTubeMusicService : IYouTubeMusicService
                 _language.T("YouTube API key chưa được cấu hình. Hãy điền API key vào wwwroot/appsettings.json (xem hướng dẫn trong README)."));
         }
 
-        var url = BuildSearchUrl(keyword.Trim(), pageToken);
+        var url = BuildSearchUrl(keyword.Trim(), filters, pageToken);
 
         HttpResponseMessage response;
         try
@@ -89,7 +90,11 @@ public class YouTubeMusicService : IYouTubeMusicService
             .ToList();
 
         // Bổ sung thời lượng qua endpoint videos (1 quota unit cho cả trang kết quả).
-        await EnrichDurationsAsync(tracks, cancellationToken);
+        await EnrichDurationsAsync(tracks, filters.Duration != "any", cancellationToken);
+        if (filters.Duration != "any")
+        {
+            tracks = tracks.Where(filters.MatchesDuration).ToList();
+        }
 
         return new YouTubeSearchResult
         {
@@ -100,7 +105,7 @@ public class YouTubeMusicService : IYouTubeMusicService
         };
     }
 
-    private async Task EnrichDurationsAsync(List<MusicTrack> tracks, CancellationToken cancellationToken)
+    private async Task EnrichDurationsAsync(List<MusicTrack> tracks, bool required, CancellationToken cancellationToken)
     {
         if (tracks.Count == 0)
         {
@@ -117,6 +122,7 @@ public class YouTubeMusicService : IYouTubeMusicService
             var response = await _httpClient.GetAsync(url, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
+                if (required) throw new YouTubeApiException(_language.T("Không lấy được thời lượng để áp dụng bộ lọc. Hãy thử lại."));
                 return; // Thời lượng chỉ là thông tin phụ — không chặn kết quả tìm kiếm.
             }
 
@@ -124,6 +130,7 @@ public class YouTubeMusicService : IYouTubeMusicService
             var data = JsonSerializer.Deserialize<YouTubeVideosResponse>(body, JsonOptions);
             if (data?.Items is null)
             {
+                if (required) throw new YouTubeApiException(_language.T("Không lấy được thời lượng để áp dụng bộ lọc. Hãy thử lại."));
                 return;
             }
 
@@ -143,8 +150,13 @@ public class YouTubeMusicService : IYouTubeMusicService
         {
             throw;
         }
+        catch (YouTubeApiException)
+        {
+            throw;
+        }
         catch (Exception)
         {
+            if (required) throw new YouTubeApiException(_language.T("Không lấy được thời lượng để áp dụng bộ lọc. Hãy thử lại."));
             // Lỗi mạng/JSON khi lấy thời lượng — bỏ qua, kết quả tìm kiếm vẫn dùng được.
         }
     }
@@ -169,15 +181,23 @@ public class YouTubeMusicService : IYouTubeMusicService
         return hours * 3600 + minutes * 60 + seconds;
     }
 
-    private string BuildSearchUrl(string keyword, string? pageToken)
+    private string BuildSearchUrl(string keyword, SearchFilters filters, string? pageToken)
     {
         var url = SearchEndpoint
             + "?part=snippet"
             + "&type=video"
             + "&videoCategoryId=10"
-            + "&maxResults=20"
+            + "&maxResults=50"
             + "&q=" + Uri.EscapeDataString(keyword)
             + "&key=" + Uri.EscapeDataString(_options.ApiKey);
+
+        if (filters.Sort != "relevance") url += "&order=" + Uri.EscapeDataString(filters.Sort);
+        if (filters.Period == "year") url += "&publishedAfter=" + Uri.EscapeDataString(DateTime.UtcNow.AddMonths(-12).ToString("yyyy-MM-ddTHH:mm:ssZ"));
+        if (filters.Period == "since2025") url += "&publishedAfter=2025-01-01T00%3A00%3A00Z";
+        if (filters.Language != "any") url += "&relevanceLanguage=" + Uri.EscapeDataString(filters.Language);
+        if (filters.EmbeddableOnly) url += "&videoEmbeddable=true";
+        if (filters.Duration == "from5to20") url += "&videoDuration=medium";
+        if (filters.Duration == "over20") url += "&videoDuration=long";
 
         if (!string.IsNullOrEmpty(pageToken))
         {

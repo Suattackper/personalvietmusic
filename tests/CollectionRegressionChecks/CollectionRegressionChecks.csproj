@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../MusicWebApp/MusicWebApp/Models/MusicTrack.cs" Link="MusicTrack.cs" />
+    <Compile Include="../../MusicWebApp/MusicWebApp/Models/SearchFilters.cs" Link="SearchFilters.cs" />
     <Compile Include="../../MusicWebApp/MusicWebApp/Services/ILocalStorageService.cs" Link="ILocalStorageService.cs" />
     <Compile Include="../../MusicWebApp/MusicWebApp/Services/LocalStorageService.cs" Link="LocalStorageService.cs" />
     <Compile Include="../../MusicWebApp/MusicWebApp/Services/FavoritesService.cs" Link="FavoritesService.cs" />

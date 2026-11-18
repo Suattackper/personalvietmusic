@@ -1,6 +1,7 @@
 @page "/search"
 @inject IYouTubeMusicService YouTube
 @inject ToastService Toasts
+@inject NavigationManager Nav
 @implements IDisposable
 
 <PageTitle>@Lang.T("Tìm kiếm") - AnhTanMusic</PageTitle>
@@ -23,6 +24,34 @@
             @Lang.F("Kết quả cho \"{0}\"", _currentKeyword)
         </h1>
 
+        <div class="search-filter-toolbar">
+            <button class="button-secondary search-filter-toggle" type="button" aria-expanded="@_filtersOpen" aria-controls="search-filter-panel" @onclick="() => _filtersOpen = !_filtersOpen">
+                <Icon Name="filter" Size="18" /> @Lang.T("Bộ lọc")@(_applied.IsDefault ? "" : $" ({ActiveFilterCount})")
+            </button>
+            @if (!_applied.IsDefault)
+            {
+                <span class="search-filter-applied">@Lang.T("Đang áp dụng bộ lọc")</span>
+                <button class="search-filter-clear" type="button" @onclick="ResetFilters">@Lang.T("Đặt lại")</button>
+            }
+        </div>
+        @if (_filtersOpen)
+        {
+            <div id="search-filter-panel" class="search-filter-panel">
+                <div class="search-filter-fields">
+                    <div class="search-filter-field"><span>@Lang.T("Sắp xếp")</span><AppDropdown Label="@Lang.T("Sắp xếp")" Value="@_draft.Sort" Options="@SortOptions" ValueChanged="OnSortChanged" AdditionalClass="search-filter-dropdown" /></div>
+                    <div class="search-filter-field"><span>@Lang.T("Ngày đăng")</span><AppDropdown Label="@Lang.T("Ngày đăng")" Value="@_draft.Period" Options="@PeriodOptions" ValueChanged="OnPeriodChanged" AdditionalClass="search-filter-dropdown" /></div>
+                    <div class="search-filter-field"><span>@Lang.T("Độ dài")</span><AppDropdown Label="@Lang.T("Độ dài")" Value="@_draft.Duration" Options="@DurationOptions" ValueChanged="OnDurationChanged" AdditionalClass="search-filter-dropdown" /></div>
+                    <div class="search-filter-field"><span>@Lang.T("Ưu tiên ngôn ngữ")</span><AppDropdown Label="@Lang.T("Ưu tiên ngôn ngữ")" Value="@_draft.Language" Options="@LanguageOptions" ValueChanged="OnLanguageChanged" AdditionalClass="search-filter-dropdown" /></div>
+                </div>
+                <label class="search-filter-check"><input type="checkbox" @bind="_draftEmbeddable" /> @Lang.T("Chỉ tìm video cho phép nhúng")</label>
+                <p class="search-filter-note">@Lang.T("Ngôn ngữ chỉ được ưu tiên; video cho phép nhúng vẫn có thể không phát được. Độ dài được lọc theo thời lượng thật của video.")</p>
+                <div class="search-filter-actions">
+                    <button class="button-primary" type="button" @onclick="ApplyFilters">@Lang.T("Áp dụng")</button>
+                    <button class="button-secondary" type="button" @onclick="ResetFilters">@Lang.T("Đặt lại")</button>
+                </div>
+            </div>
+        }
+
         @if (_isLoading)
         {
             <div class="skeleton-grid" aria-label="@Lang.T("Đang tìm kiếm...")" role="status">
@@ -39,25 +68,18 @@
         {
             <EmptyState IconName="search"
                         Title="Không tìm thấy kết quả"
-                        Description="Không có bài hát nào khớp với từ khóa. Hãy thử từ khóa khác." />
+                        Description="@(_nextPageToken is null ? Lang.T("Không có bài hát nào khớp với từ khóa. Hãy thử từ khóa khác.") : Lang.T("Trang kết quả này chưa có bài phù hợp. Bạn có thể tải thêm."))" />
         }
         else
         {
             <TrackList Tracks="_tracks" />
-
-            @if (_nextPageToken is not null)
-            {
-                <div class="load-more">
-                    @if (_isLoadingMore)
-                    {
-                        <LoadingIndicator Text="Đang tải thêm..." />
-                    }
-                    else
-                    {
-                        <button class="button-secondary" @onclick="LoadMoreAsync">@Lang.T("Tải thêm kết quả")</button>
-                    }
-                </div>
-            }
+        }
+        @if (!_isLoading && _errorMessage is null && _nextPageToken is not null)
+        {
+            <div class="load-more">
+                @if (_isLoadingMore) { <LoadingIndicator Text="Đang tải thêm..." /> }
+                else { <button class="button-secondary" @onclick="LoadMoreAsync">@Lang.T("Tải thêm kết quả")</button> }
+            </div>
         }
     }
 </section>
@@ -65,6 +87,11 @@
 @code {
     [SupplyParameterFromQuery(Name = "q")]
     public string? Query { get; set; }
+    [SupplyParameterFromQuery(Name = "sort")] public string? SortQuery { get; set; }
+    [SupplyParameterFromQuery(Name = "period")] public string? PeriodQuery { get; set; }
+    [SupplyParameterFromQuery(Name = "duration")] public string? DurationQuery { get; set; }
+    [SupplyParameterFromQuery(Name = "lang")] public string? LanguageQuery { get; set; }
+    [SupplyParameterFromQuery(Name = "embed")] public bool? EmbedQuery { get; set; }
 
     private readonly List<MusicTrack> _tracks = new();
     private string _currentKeyword = string.Empty;
@@ -72,21 +99,44 @@
     private string? _errorMessage;
     private bool _isLoading;
     private bool _isLoadingMore;
+    private bool _filtersOpen;
+    private SearchFilters _applied = new();
+    private SearchFilters _draft = new();
+    private bool _draftEmbeddable = true;
     private CancellationTokenSource? _cts;
+
+    private IReadOnlyList<DropdownOption> SortOptions => [
+        new("relevance", Lang.T("Liên quan")), new("date", Lang.T("Mới nhất")), new("viewCount", Lang.T("Xem nhiều"))];
+    private IReadOnlyList<DropdownOption> PeriodOptions => [
+        new("any", Lang.T("Mọi lúc")), new("year", Lang.T("12 tháng qua")), new("since2025", Lang.T("Từ năm 2025"))];
+    private IReadOnlyList<DropdownOption> DurationOptions => [
+        new("any", Lang.T("Bất kỳ")), new("under5", Lang.T("Dưới 5 phút")),
+        new("from5to20", Lang.T("5–20 phút")), new("over20", Lang.T("Trên 20 phút"))];
+    private IReadOnlyList<DropdownOption> LanguageOptions => [
+        new("any", Lang.T("Bất kỳ")), new("vi", Lang.T("Tiếng Việt")),
+        new("en", Lang.T("Tiếng Anh")), new("ja", Lang.T("Tiếng Nhật")),
+        new("zh-Hans", Lang.T("Tiếng Trung"))];
+    private int ActiveFilterCount => (_applied.Sort != "relevance" ? 1 : 0) + (_applied.Period != "any" ? 1 : 0)
+        + (_applied.Duration != "any" ? 1 : 0) + (_applied.Language != "any" ? 1 : 0) + (_applied.EmbeddableOnly ? 0 : 1);
 
     protected override async Task OnParametersSetAsync()
     {
         var keyword = Query?.Trim() ?? string.Empty;
-        if (keyword == _currentKeyword)
+        var filters = SearchFilters.Normalize(SortQuery, PeriodQuery, DurationQuery, LanguageQuery, EmbedQuery);
+        if (keyword == _currentKeyword && filters == _applied)
         {
             return;
         }
 
         _currentKeyword = keyword;
+        _applied = filters;
+        _draft = filters;
+        _draftEmbeddable = filters.EmbeddableOnly;
         if (!string.IsNullOrEmpty(keyword))
         {
             await SearchAsync();
         }
+        else { _cts?.Cancel(); _tracks.Clear(); _nextPageToken = null; }
     }
 
     private async Task SearchAsync()
@@ -96,13 +146,14 @@
         var token = _cts.Token;
 
         _isLoading = true;
+        _isLoadingMore = false;
         _errorMessage = null;
         _tracks.Clear();
         _nextPageToken = null;
 
         try
         {
-            var result = await YouTube.SearchAsync(_currentKeyword, cancellationToken: token);
+            var result = await YouTube.SearchAsync(_currentKeyword, _applied, cancellationToken: token);
             if (token.IsCancellationRequested)
             {
                 return;
@@ -117,8 +168,11 @@
         }
         catch (YouTubeApiException ex)
         {
-            _errorMessage = ex.Message;
-            Toasts.ShowError(ex.Message);
+            if (!token.IsCancellationRequested)
+            {
+                _errorMessage = ex.Message;
+                Toasts.ShowError(ex.Message);
+            }
         }
         finally
         {
@@ -141,7 +195,7 @@
 
         try
         {
-            var result = await YouTube.SearchAsync(_currentKeyword, _nextPageToken, token);
+            var result = await YouTube.SearchAsync(_currentKeyword, _applied, _nextPageToken, token);
             if (token.IsCancellationRequested)
             {
                 return;
@@ -158,7 +212,7 @@
         }
         catch (YouTubeApiException ex)
         {
-            Toasts.ShowError(ex.Message);
+            if (!token.IsCancellationRequested) Toasts.ShowError(ex.Message);
         }
         finally
         {
@@ -167,6 +221,25 @@
     }
 
     private Task RetryAsync() => SearchAsync();
+
+    private void OnSortChanged(string value) => _draft = _draft with { Sort = value };
+    private void OnPeriodChanged(string value) => _draft = _draft with { Period = value };
+    private void OnDurationChanged(string value) => _draft = _draft with { Duration = value };
+    private void OnLanguageChanged(string value) => _draft = _draft with { Language = value };
+    private void ApplyFilters() => NavigateWith(_draft with { EmbeddableOnly = _draftEmbeddable });
+    private void ResetFilters() { _draft = new(); _draftEmbeddable = true; NavigateWith(_draft); }
+
+    private void NavigateWith(SearchFilters filters)
+    {
+        _filtersOpen = false;
+        var parts = new List<string> { "q=" + Uri.EscapeDataString(_currentKeyword) };
+        if (filters.Sort != "relevance") parts.Add("sort=" + Uri.EscapeDataString(filters.Sort));
+        if (filters.Period != "any") parts.Add("period=" + Uri.EscapeDataString(filters.Period));
+        if (filters.Duration != "any") parts.Add("duration=" + Uri.EscapeDataString(filters.Duration));
+        if (filters.Language != "any") parts.Add("lang=" + Uri.EscapeDataString(filters.Language));
+        if (!filters.EmbeddableOnly) parts.Add("embed=false");
+        Nav.NavigateTo("search?" + string.Join("&", parts));
+    }
 
     public void Dispose()
     {

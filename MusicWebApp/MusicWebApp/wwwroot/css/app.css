@@ -346,6 +346,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar { display
     align-items: center;
     gap: 8px;
     flex: 1;
+    min-width: 0;
     max-width: 480px;
     margin-inline: auto;
     background: var(--surface);

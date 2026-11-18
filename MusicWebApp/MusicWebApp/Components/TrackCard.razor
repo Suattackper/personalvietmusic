@@ -44,6 +44,7 @@
     </div>
     <div class="track-card-actions" @onclick:stopPropagation="true">
         <button class="icon-button @(IsFavorite ? "is-favorite" : null)"
+                disabled="@_favoriteBusy"
                 title="@Lang.T(IsFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
                 aria-label="@Lang.T(IsFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích")"
                 @onclick="ToggleFavoriteAsync">
@@ -56,6 +57,7 @@
             <Icon Name="plus" Size="18" />
         </button>
         <button class="icon-button @(IsInMyPlaylist ? "is-in-playlist" : null)"
+                disabled="@_playlistBusy"
                 aria-pressed="@IsInMyPlaylist"
                 title="@Lang.T(IsInMyPlaylist ? "Xóa khỏi Playlist của tôi" : "Thêm vào Playlist của tôi")"
                 aria-label="@Lang.T(IsInMyPlaylist ? "Xóa khỏi Playlist của tôi" : "Thêm vào Playlist của tôi")"
@@ -84,6 +86,8 @@
 
     private bool IsFavorite => Favorites.IsFavorite(Track.VideoId);
     private bool IsInMyPlaylist => MyPlaylist.Contains(Track.VideoId);
+    private bool _favoriteBusy;
+    private bool _playlistBusy;
 
     private Task PlayAsync()
     {
@@ -103,20 +107,34 @@
 
     private async Task ToggleFavoriteAsync()
     {
-        var added = await Favorites.ToggleFavoriteAsync(Track);
-        Toasts.ShowUndo(added
-            ? Lang.F("Đã thêm \"{0}\" vào yêu thích.", Track.Title)
-            : Lang.F("Đã xóa \"{0}\" khỏi yêu thích.", Track.Title), Track.ThumbnailUrl,
-            async () => { if (Favorites.IsFavorite(Track.VideoId) == added) await Favorites.ToggleFavoriteAsync(Track); });
+        if (_favoriteBusy) return;
+        _favoriteBusy = true;
+        var track = Track;
+        try
+        {
+            var added = await Favorites.ToggleFavoriteAsync(track);
+            Toasts.ShowUndo(added
+                ? Lang.F("Đã thêm \"{0}\" vào yêu thích.", track.Title)
+                : Lang.F("Đã xóa \"{0}\" khỏi yêu thích.", track.Title), track.ThumbnailUrl,
+                async () => { if (Favorites.IsFavorite(track.VideoId) == added) await Favorites.ToggleFavoriteAsync(track); });
+        }
+        finally { _favoriteBusy = false; }
     }
 
     private async Task ToggleMyPlaylistAsync()
     {
-        var added = await MyPlaylist.ToggleAsync(Track);
-        Toasts.ShowUndo(added
-            ? Lang.F("Đã thêm \"{0}\" vào Playlist của tôi.", Track.Title)
-            : Lang.F("Đã xóa \"{0}\" khỏi Playlist của tôi.", Track.Title), Track.ThumbnailUrl,
-            async () => { if (MyPlaylist.Contains(Track.VideoId) == added) await MyPlaylist.ToggleAsync(Track); });
+        if (_playlistBusy) return;
+        _playlistBusy = true;
+        var track = Track;
+        try
+        {
+            var added = await MyPlaylist.ToggleAsync(track);
+            Toasts.ShowUndo(added
+                ? Lang.F("Đã thêm \"{0}\" vào Playlist của tôi.", track.Title)
+                : Lang.F("Đã xóa \"{0}\" khỏi Playlist của tôi.", track.Title), track.ThumbnailUrl,
+                async () => { if (MyPlaylist.Contains(track.VideoId) == added) await MyPlaylist.ToggleAsync(track); });
+        }
+        finally { _playlistBusy = false; }
     }
 
     private void AddToQueue()

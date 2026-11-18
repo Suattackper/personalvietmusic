@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../MusicWebApp/MusicWebApp/Models/MusicTrack.cs" Link="MusicTrack.cs" />
+    <Compile Include="../../MusicWebApp/MusicWebApp/Services/ILocalStorageService.cs" Link="ILocalStorageService.cs" />
+    <Compile Include="../../MusicWebApp/MusicWebApp/Services/LocalStorageService.cs" Link="LocalStorageService.cs" />
+    <Compile Include="../../MusicWebApp/MusicWebApp/Services/FavoritesService.cs" Link="FavoritesService.cs" />
+    <Compile Include="../../MusicWebApp/MusicWebApp/Services/MyPlaylistService.cs" Link="MyPlaylistService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

@@ -7,7 +7,7 @@
     @for (var i = 0; i < Tracks.Count; i++)
     {
         var track = Tracks[i];
-        <TrackCard Track="track" OnPlay="HandlePlay" @key="(track.VideoId, i)" />
+        <TrackCard Track="track" OnPlay="HandlePlay" @key="track" />
     }
 </div>
 

@@ -257,7 +257,7 @@ button {
     color: var(--text);
 }
 
-.sidebar-link.active {
+.sidebar-link.active, .sidebar-link.active-derived {
     background: var(--surface-active);
     color: var(--primary);
 }
@@ -275,8 +275,10 @@ button {
 }
 
 .sidebar-nav { position: relative; }
-.sidebar-active-marker { position: absolute; left: 0; top: var(--marker-y, 10px); height: var(--marker-height, 23px); width: 3px; border-radius: 3px; background: var(--accent-gradient); pointer-events: none; z-index: 2; transition: top .24s ease, height .24s ease; }
+.sidebar-active-marker { position: absolute; left: 0; top: var(--marker-y, 10px); height: var(--marker-height, 23px); width: 3px; border-radius: 3px; background: var(--accent-gradient); pointer-events: none; z-index: 2; opacity: 0; transition: top .24s ease, height .24s ease, opacity .15s ease; }
+.sidebar-nav.has-active .sidebar-active-marker { opacity: 1; }
 .sidebar-link.active::before { display: none; }
+.sidebar-link.active-derived::before { display: none; }
 @media (prefers-reduced-motion: reduce) { .sidebar-active-marker { transition: none; } }
 
 .sidebar-link .icon {
@@ -1446,41 +1448,59 @@ input[type="range"]:disabled {
 .app-boot-loading {
     position: fixed;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--background);
+    z-index: 300;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 24px;
+    background: radial-gradient(ellipse 55% 48% at 20% 25%, rgba(139, 92, 246, .2), transparent),
+        radial-gradient(ellipse 48% 45% at 78% 75%, rgba(236, 72, 153, .15), transparent), var(--background);
 }
 
-.loading-progress {
-    display: block;
-    width: 8rem;
-    height: 8rem;
-}
-
-.loading-progress circle {
-    fill: none;
-    stroke: var(--surface-hover);
-    stroke-width: 0.6rem;
-    transform-origin: 50% 50%;
-    transform: rotate(-90deg);
-}
-
-.loading-progress circle:last-child {
-    stroke: var(--primary);
-    stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
-    transition: stroke-dasharray 0.05s ease-in-out;
-}
-
-.loading-progress-text {
-    position: absolute;
+.boot-card {
+    width: min(100%, 360px);
+    padding: 36px 30px 30px;
+    border: 1px solid color-mix(in srgb, var(--primary) 32%, var(--border));
+    border-radius: 26px;
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
+    box-shadow: 0 22px 70px #0005;
     text-align: center;
-    font-weight: 600;
-    color: var(--text-muted);
 }
 
-.loading-progress-text:after {
-    content: var(--blazor-load-percentage-text, "Đang tải");
+.boot-disc {
+    display: grid;
+    place-items: center;
+    width: 94px;
+    height: 94px;
+    margin: 0 auto 22px;
+    border: 8px solid #141318;
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle, #25242a 0 2px, #111115 3px 5px, #333139 6px 7px);
+    box-shadow: 0 16px 30px #0005, 0 0 32px rgba(168, 85, 247, .22);
+    animation: vinyl-spin 8s linear infinite;
+}
+
+.boot-disc span {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 4px solid #17131b;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    color: white;
+    font-size: 26px;
+}
+
+.boot-brand { color: var(--text); font-size: 1.55rem; font-weight: 800; letter-spacing: -.03em; }
+.boot-caption { margin: 7px 0 22px; color: var(--text-muted); font-size: .9rem; }
+.boot-progress { height: 7px; overflow: hidden; border-radius: 999px; background: var(--surface-hover); }
+.boot-progress span { display: block; width: var(--blazor-load-percentage, 0%); height: 100%; border-radius: inherit; background: var(--accent-gradient); transition: width .15s ease; }
+.loading-progress-text { margin-top: 9px; color: var(--text-muted); font-size: .8rem; font-variant-numeric: tabular-nums; }
+.loading-progress-text:after { content: var(--blazor-load-percentage-text, "Đang tải…"); }
+@media (prefers-reduced-motion: reduce) {
+    .boot-disc { animation: none; }
+    .boot-progress span { transition: none; }
 }
 
 #blazor-error-ui {

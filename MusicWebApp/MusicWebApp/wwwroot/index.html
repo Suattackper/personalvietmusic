@@ -42,11 +42,13 @@
 <body>
     <div id="app">
         <div class="app-boot-loading">
-            <svg class="loading-progress">
-                <circle r="40%" cx="50%" cy="50%" />
-                <circle r="40%" cx="50%" cy="50%" />
-            </svg>
-            <div class="loading-progress-text"></div>
+            <div class="boot-card" role="status" aria-live="polite" aria-label="Đang tải AnhTanMusic">
+                <div class="boot-disc" aria-hidden="true"><span>♫</span></div>
+                <div class="boot-brand">AnhTanMusic</div>
+                <div class="boot-caption">Đang chuẩn bị không gian nghe nhạc</div>
+                <div class="boot-progress" aria-hidden="true"><span></span></div>
+                <div class="loading-progress-text"></div>
+            </div>
         </div>
     </div>
 
